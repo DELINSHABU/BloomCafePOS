@@ -1,0 +1,18 @@
+{
+  "lastUpdated": "2025-07-26T08:52:11.799Z",
+  "items": {
+    "122": {
+      "available": false
+    },
+    "001": {
+      "price": "10",
+      "available": true
+    },
+    "012": {
+      "available": true
+    },
+    "010": {
+      "available": true
+    }
+  }
+}

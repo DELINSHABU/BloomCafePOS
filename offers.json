@@ -1,0 +1,33 @@
+{
+  "offers": [
+    {
+      "id": "1753521176011",
+      "itemId": "091",
+      "itemName": "HOT & SPICY ALFAHAM (QTR)",
+      "itemType": "menu",
+      "originalPrice": 140,
+      "offerPrice": 120,
+      "discountPercentage": 14,
+      "isActive": true,
+      "startDate": "",
+      "endDate": "",
+      "createdAt": "2025-07-26T09:12:56.011Z",
+      "updatedAt": "2025-07-26T09:12:56.011Z"
+    },
+    {
+      "id": "1753521431303",
+      "itemId": "1",
+      "itemName": "Al Faham",
+      "itemType": "special",
+      "originalPrice": 220,
+      "offerPrice": 110,
+      "discountPercentage": 50,
+      "isActive": true,
+      "startDate": "",
+      "endDate": "",
+      "createdAt": "2025-07-26T09:17:11.304Z",
+      "updatedAt": "2025-07-26T10:51:06.127Z"
+    }
+  ],
+  "lastUpdated": "2025-07-26T10:51:06.127Z"
+}

@@ -1,0 +1,59 @@
+{
+  "combos": [
+    {
+      "id": "1753528480652",
+      "name": "Simple Breakfast ",
+      "description": "3 APPAM + EGG CURRY",
+      "items": [
+        {
+          "itemId": "001",
+          "itemName": "APPAM",
+          "quantity": 3,
+          "originalPrice": 10
+        },
+        {
+          "itemId": "011",
+          "itemName": "EGG CURRY",
+          "quantity": 1,
+          "originalPrice": 40
+        }
+      ],
+      "originalTotal": 70,
+      "comboPrice": 55,
+      "discountAmount": 15,
+      "discountPercentage": 21,
+      "isActive": true,
+      "category": "Combo Special",
+      "createdAt": "2025-07-26T11:14:40.652Z",
+      "updatedAt": "2025-07-26T11:14:40.652Z"
+    },
+    {
+      "id": "1753536315159",
+      "name": "Alfaham special Combo ",
+      "description": "Half Alfaham + 3  KUBBOS",
+      "items": [
+        {
+          "itemId": "080",
+          "itemName": "ALFAHAM  (HALF)",
+          "quantity": 1,
+          "originalPrice": 220
+        },
+        {
+          "itemId": "046",
+          "itemName": "KUBBOS",
+          "quantity": 2,
+          "originalPrice": 10
+        }
+      ],
+      "originalTotal": 240,
+      "comboPrice": 210,
+      "discountAmount": 30,
+      "discountPercentage": 13,
+      "isActive": true,
+      "category": "Combo Special",
+      "createdAt": "2025-07-26T13:25:15.159Z",
+      "updatedAt": "2025-07-26T13:25:15.159Z"
+    }
+  ],
+  "lastUpdated": "2025-07-26T13:25:15.159Z"
+}

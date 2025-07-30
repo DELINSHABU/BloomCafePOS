@@ -1,0 +1,1467 @@
+{
+    "menu": [{
+            "category": "Breakfast",
+            "products": [{
+                    "itemNo": "001",
+                    "name": "APPAM",
+                    "rate": "10"
+                },
+                {
+                    "itemNo": "002",
+                    "name": "DOSA",
+                    "rate": "10"
+                },
+                {
+                    "itemNo": "003",
+                    "name": "PUTTU",
+                    "rate": "40"
+                },
+                {
+                    "itemNo": "004",
+                    "name": "PLAIN DOSA",
+                    "rate": "70"
+                },
+                {
+                    "itemNo": "005",
+                    "name": "MASALA DOSA",
+                    "rate": "80"
+                },
+                {
+                    "itemNo": "006",
+                    "name": "GHEE DOSA",
+                    "rate": "70"
+                },
+                {
+                    "itemNo": "007",
+                    "name": "ONION UTHAPAM",
+                    "rate": "40"
+                },
+                {
+                    "itemNo": "008",
+                    "name": "POORI BAJI",
+                    "rate": "80"
+                },
+                {
+                    "itemNo": "009",
+                    "name": "MIX VEG CURRY",
+                    "rate": "80"
+                },
+                {
+                    "itemNo": "010",
+                    "name": "KADALA CURRY",
+                    "rate": "70"
+                },
+                {
+                    "itemNo": "011",
+                    "name": "EGG CURRY",
+                    "rate": "40"
+                },
+                {
+                    "itemNo": "012",
+                    "name": "EGG ROAST",
+                    "rate": "60"
+                }
+            ]
+        },
+        {
+            "category": "Starter",
+            "products": [{
+                    "itemNo": "013",
+                    "name": "FRENCH FRIES",
+                    "rate": "100"
+                },
+                {
+                    "itemNo": "014",
+                    "name": "CHESSY FRIES",
+                    "rate": "110"
+                }
+            ]
+        },
+        {
+            "category": "HOT BEVERAGE",
+            "products": [{
+                    "itemNo": "015",
+                    "name": "TEA ",
+                    "rate": "12"
+                },
+                {
+                    "itemNo": "016",
+                    "name": "COFFEE",
+                    "rate": "15"
+                },
+                {
+                    "itemNo": "017",
+                    "name": "BLACK TEA",
+                    "rate": "10"
+                },
+                {
+                    "itemNo": "018",
+                    "name": "LIME TEA",
+                    "rate": "10"
+                },
+                {
+                    "itemNo": "019",
+                    "name": "GINGER TEA",
+                    "rate": "15"
+                },
+                {
+                    "itemNo": "020",
+                    "name": "BOOST",
+                    "rate": "25"
+                },
+                {
+                    "itemNo": "021",
+                    "name": "HORLICS",
+                    "rate": "25"
+                },
+                {
+                    "itemNo": "022",
+                    "name": "BADAM MILK",
+                    "rate": "30"
+                }
+            ]
+        },
+        {
+            "category": "SOUP",
+            "products": [{
+                    "itemNo": "023",
+                    "name": "CREAM OF VEG",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "024",
+                    "name": "CREAM OF TOMATTO",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "025",
+                    "name": "CREAM OF MUSHROOM",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "026",
+                    "name": "CREAM OF CHICKEN",
+                    "rate": "160"
+                },
+                {
+                    "itemNo": "027",
+                    "name": "CREAM OF PRAWNS",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "028",
+                    "name": "CREAM OF TOMATTO",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "029",
+                    "name": "SWEET CORN VEG SOUP",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "031",
+                    "name": "SWEET CORN CHICKEN SOUP",
+                    "rate": "100"
+                },
+                {
+                    "itemNo": "031",
+                    "name": "HOT AND SOUR VEG",
+                    "rate": "100"
+                },
+                {
+                    "itemNo": "032",
+                    "name": "HOT AND SOUR CHICKEN",
+                    "rate": "110"
+                },
+                {
+                    "itemNo": "033",
+                    "name": "VEG NOODLES SOUP",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "034",
+                    "name": "CHICKEN NOODLES SOUP",
+                    "rate": "100"
+                },
+                {
+                    "itemNo": "035",
+                    "name": "VEG CLEAR SOUP",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "036",
+                    "name": "CHICKEN CLEAR SOUP",
+                    "rate": "100"
+                }
+            ]
+        },
+        {
+            "category": "SALADS",
+            "products": [{
+                    "itemNo": "037",
+                    "name": "GREEN SALAD",
+                    "rate": "80"
+                },
+                {
+                    "itemNo": "038",
+                    "name": "CARROT SALAD",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "039",
+                    "name": "CUCUMBER SALAD",
+                    "rate": "80"
+                },
+                {
+                    "itemNo": "040",
+                    "name": "RUSSIAN SALAD",
+                    "rate": "130"
+                },
+                {
+                    "itemNo": "041",
+                    "name": "TOSSED SALAD",
+                    "rate": "130"
+                },
+                {
+                    "itemNo": "042",
+                    "name": "SMOKED CHICKEN SALAD",
+                    "rate": "140"
+                }
+            ]
+        },
+        {
+            "category": "BREADS",
+            "products": [{
+                    "itemNo": "043",
+                    "name": "APPAM",
+                    "rate": "10"
+                },
+                {
+                    "itemNo": "044",
+                    "name": "CHAPPATHI",
+                    "rate": "12"
+                },
+                {
+                    "itemNo": "045",
+                    "name": "POROTTA",
+                    "rate": "12"
+                },
+                {
+                    "itemNo": "046",
+                    "name": "KUBBOS",
+                    "rate": "10"
+                },
+                {
+                    "itemNo": "047",
+                    "name": "CHIRATTAPUTTU",
+                    "rate": "35"
+                }
+            ]
+        },
+        {
+            "category": "NADANKOOTTU",
+            "products": [{
+                    "itemNo": "048",
+                    "name": "KAPPAMEEN MULAKITTATHU",
+                    "rate": "200"
+                },
+                {
+                    "itemNo": "049",
+                    "name": "KAPPA BIRIYANI ",
+                    "rate": "160"
+                },
+                {
+                    "itemNo": "050",
+                    "name": "KAPPA BIRIYANI CHICKEN",
+                    "rate": "160"
+                },
+                {
+                    "itemNo": "051",
+                    "name": "PALKAPPA BEEF",
+                    "rate": "200"
+                },
+                {
+                    "itemNo": "052",
+                    "name": "PALKAPPA CHICKEN 65",
+                    "rate": "200"
+                },
+                {
+                    "itemNo": "052",
+                    "name": "PALKAPPA PRAWNS",
+                    "rate": "320"
+                },
+                {
+                    "itemNo": "053",
+                    "name": "PALKAPPA KANAVAROAST",
+                    "rate": "320"
+                },
+                {
+                    "itemNo": "054",
+                    "name": "KIZHI POROTTA CHICKEN",
+                    "rate": "220"
+                },
+                {
+                    "itemNo": "055",
+                    "name": "KIZHI POROTTA BEEF",
+                    "rate": "220"
+                },
+                {
+                    "itemNo": "056",
+                    "name": "KIZHI POROTTA MIXED",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "056",
+                    "name": "KOTHU POROTTA CHICKEN",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "057",
+                    "name": "KOTHU POROTTA BEEF",
+                    "rate": "130"
+                },
+                {
+                    "itemNo": "058",
+                    "name": "KOTHU POROTTA MIXED",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "059",
+                    "name": "CHICKEN 65",
+                    "rate": "180"
+                }
+            ]
+        },
+        {
+            "category": "BIRIYANI",
+            "products": [{
+                    "itemNo": "60",
+                    "name": "VEG BIRIYANI",
+                    "rate": "110"
+                },
+                {
+                    "itemNo": "061",
+                    "name": "CHICKEN BIRIYANI",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "062",
+                    "name": "PRAWNS BIRIYANI",
+                    "rate": "300"
+                },
+                {
+                    "itemNo": "063",
+                    "name": "PRAWNS KIZHIPARATHA",
+                    "rate": "350"
+                },
+                {
+                    "itemNo": "064",
+                    "name": "BEEF POROTTA",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "065",
+                    "name": "FISH",
+                    "rate": "APS"
+                },
+                {
+                    "itemNo": "066",
+                    "name": "CHICKEN 65 BIRIYANI",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "067",
+                    "name": "EGG POROTTA",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "068",
+                    "name": "CHICKEN KIZHI BIRIYANI",
+                    "rate": "220"
+                }
+            ]
+        },
+        {
+            "category": "MEALS",
+            "products": [{
+                    "itemNo": "069",
+                    "name": "POTHICHORU VEG",
+                    "rate": "80"
+                },
+                {
+                    "itemNo": "070",
+                    "name": "POTHICHORU ",
+                    "rate": "130"
+                },
+                {
+                    "itemNo": "071",
+                    "name": "CHATTY CHORU",
+                    "rate": "230"
+                }
+            ]
+        },
+        {
+            "category": "INDIAN RICE",
+            "products": [{
+                    "itemNo": "072",
+                    "name": "VEG PULAO",
+                    "rate": "100"
+                },
+                {
+                    "itemNo": "073",
+                    "name": "MUSHROOM PULAO",
+                    "rate": "160"
+                },
+                {
+                    "itemNo": "074",
+                    "name": "KASHMIRI PULAO",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "075",
+                    "name": "GHEE RICE",
+                    "rate": "100"
+                },
+                {
+                    "itemNo": "076",
+                    "name": "JEERA RICE",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "077",
+                    "name": "STEAMED RICE",
+                    "rate": "70"
+                },
+                {
+                    "itemNo": "078",
+                    "name": "CASHEW PULAO",
+                    "rate": "120"
+                }
+            ]
+        },
+        {
+            "category": "AL FAHAM",
+            "products": [{
+                    "itemNo": "079",
+                    "name": "ALFAHAM (QTR)",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "080",
+                    "name": "ALFAHAM  (HALF)",
+                    "rate": "220"
+                },
+                {
+                    "itemNo": "081",
+                    "name": "ALFAHAM (FULL)",
+                    "rate": "440"
+                },
+                {
+                    "itemNo": "082",
+                    "name": "PERI PERI ALFAM (QTR)",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "083",
+                    "name": "PERI PERI  ALFAHAM  (HALF)",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "084",
+                    "name": "PERI PERI ALFAHAM (FULL)",
+                    "rate": "480"
+                },
+                {
+                    "itemNo": "085",
+                    "name": "PEPPER ALFAM (QTR)",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "086",
+                    "name": "PEPPER ALFAHAM  (HALF)",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "087",
+                    "name": "PEPPER ALFAHAM (FULL)",
+                    "rate": "480"
+                },
+                {
+                    "itemNo": "088",
+                    "name": "KANTHARI ALFAHAM (QTR)",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "089",
+                    "name": "KANTHARI ALFAHAM  (HALF)",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "090",
+                    "name": "KANTHARI ALFAHAM (FULL)",
+                    "rate": "480"
+                },
+                {
+                    "itemNo": "091",
+                    "name": "HOT & SPICY ALFAHAM (QTR)",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "092",
+                    "name": "HOT & SPICY ALFAHAM  (HALF)",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "093",
+                    "name": "HOT & SPICY ALFAHAM (FULL)",
+                    "rate": "480"
+                },
+                {
+                    "itemNo": "094",
+                    "name": "B.B.Q ALFAHAM (QTR)",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "091",
+                    "name": "B.B.Q ALFAHAM  (HALF)",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "096",
+                    "name": "B.B.Q ALFAHAM (FULL)",
+                    "rate": "480"
+                },
+                {
+                    "itemNo": "097",
+                    "name": "MEXICAN ALFAHAM (QTR)",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "098",
+                    "name": "MEXICAN ALFAHAM  (HALF)",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "099",
+                    "name": "MEXICAN ALFAHAM (FULL)",
+                    "rate": "480"
+                },
+                {
+                    "itemNo": "100",
+                    "name": "SZECHWAN ALFAHAM (QTR)",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "101",
+                    "name": "SZECHWAN ALFAHAM  (HALF)",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "102",
+                    "name": "SZECHWAN ALFAHAM (FULL)",
+                    "rate": "480"
+                },
+                {
+                    "itemNo": "103",
+                    "name": "HONEY GARLIC ALFAHAM (QTR)",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "104",
+                    "name": "HONEY GARLIC ALFAHAM  (HALF)",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "105",
+                    "name": "HONEY GARLIC ALFAHAM (FULL)",
+                    "rate": "480"
+                },
+                {
+                    "itemNo": "106",
+                    "name": "SWEET CHILLY ALFAHAM (QTR)",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "107",
+                    "name": "SWEET CHILLY ALFAHAM  (HALF)",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "108",
+                    "name": "SWEET CHILLY ALFAHAM (FULL)",
+                    "rate": "480"
+                }
+            ]
+        },
+        {
+            "category": "VEG CURRY",
+            "products": [{
+                    "itemNo": "109",
+                    "name": "MIX VEG CURRY",
+                    "rate": "80"
+                },
+                {
+                    "itemNo": "110",
+                    "name": "TOMATTO FRY",
+                    "rate": "70"
+                },
+                {
+                    "itemNo": "111",
+                    "name": "MUSHROOM MASALA",
+                    "rate": "170"
+                },
+                {
+                    "itemNo": "112",
+                    "name": "PANEER BUTTER MASALA",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "113",
+                    "name": "ALOO GOBI MASALA",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "114",
+                    "name": "MUSHROOM PEPPER FRY",
+                    "rate": "190"
+                }
+            ]
+        },
+        {
+            "category": "NON INDIAN",
+            "products": [{
+                    "itemNo": "115",
+                    "name": "CHICKEN CURRY",
+                    "rate": "150"
+                },
+                {
+                    "itemNo": "116",
+                    "name": "CHICKEN ROAST",
+                    "rate": "160"
+                },
+                {
+                    "itemNo": "117",
+                    "name": "PEPPER CHICKEN",
+                    "rate": "210"
+                }
+            ]
+        },
+        {
+            "category": "SANDWICH",
+            "products": [{
+                    "itemNo": "118",
+                    "name": "CHICKEN SANDWICH",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "119",
+                    "name": "VEG SANDWICH",
+                    "rate": "110"
+                }
+            ]
+        },
+        {
+            "category": "BEEF",
+            "products": [{
+                    "itemNo": "120",
+                    "name": "BEEF CHICKEN",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "121",
+                    "name": "BEEF CURRY",
+                    "rate": "150"
+                },
+                {
+                    "itemNo": "122",
+                    "name": "BEEF ROAST",
+                    "rate": "160"
+                },
+                {
+                    "itemNo": "123",
+                    "name": "BEEF ULARTH",
+                    "rate": "170"
+                },
+                {
+                    "itemNo": "124",
+                    "name": "BEEF PEPPER FRY",
+                    "rate": "180"
+                }
+            ]
+        },
+        {
+            "category": "SEAFOOD",
+            "products": [{
+                    "itemNo": "125",
+                    "name": "CRAB ROAST",
+                    "rate": "10"
+                },
+                {
+                    "itemNo": "126",
+                    "name": "PRAWNS FRY",
+                    "rate": "12"
+                },
+                {
+                    "itemNo": "127",
+                    "name": "PRAWNS ROAST",
+                    "rate": "12"
+                },
+                {
+                    "itemNo": "128",
+                    "name": "SQUID FRY",
+                    "rate": "10"
+                },
+                {
+                    "itemNo": "129",
+                    "name": "SQUID ROAST",
+                    "rate": "35"
+                },
+                {
+                    "itemNo": "130",
+                    "name": "KARIMEEN POLLICHATH",
+                    "rate": "APS"
+                },
+                {
+                    "itemNo": "131",
+                    "name": "KARIMEEN FRY",
+                    "rate": "none"
+                },
+                {
+                    "itemNo": "132",
+                    "name": "KARIMEEN MASALA",
+                    "rate": "none"
+                },
+                {
+                    "itemNo": "133",
+                    "name": "AVOLI MASALA",
+                    "rate": "none"
+                },
+                {
+                    "itemNo": "134",
+                    "name": "AVOLI FRY",
+                    "rate": "none"
+                },
+                {
+                    "itemNo": "135",
+                    "name": "AVOLI POLLICHATH",
+                    "rate": "none"
+                }
+            ]
+        },
+        {
+            "category": "GRILLED FISH",
+            "products": [{
+                    "itemNo": "136",
+                    "name": "GRILLED VAALA",
+                    "rate": "APS"
+                },
+                {
+                    "itemNo": "137",
+                    "name": "GRILLED AVOLI",
+                    "rate": "APS"
+                },
+                {
+                    "itemNo": "138",
+                    "name": "GRILLED CHEMPALLI",
+                    "rate": "APS"
+                }
+            ]
+        },
+        {
+            "category": "RICE AND NOODLES",
+            "products": [{
+                    "itemNo": "139",
+                    "name": "VEG FRIED RICE",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "140",
+                    "name": "MUSHROOM FRIEDRICE",
+                    "rate": "160"
+                },
+                {
+                    "itemNo": "141",
+                    "name": "PANEER FRIED RICE",
+                    "rate": "160"
+                },
+                {
+                    "itemNo": "142",
+                    "name": "CHICKEN FRIED RICE",
+                    "rate": "160"
+                },
+                {
+                    "itemNo": "143",
+                    "name": "EGG FRIED RICE",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "144",
+                    "name": "MIX FRIED RICE",
+                    "rate": "210"
+                },
+                {
+                    "itemNo": "145",
+                    "name": "SZECHWAN VEG FRIED RICE",
+                    "rate": "130"
+                },
+                {
+                    "itemNo": "146",
+                    "name": "SZECHWAN CHICKEN FRIED RICE",
+                    "rate": "170"
+                },
+                {
+                    "itemNo": "147",
+                    "name": "SZECHWAN MIX FRIED RICE",
+                    "rate": "240"
+                },
+                {
+                    "itemNo": "148",
+                    "name": "VEG NOODLES",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "149",
+                    "name": "PANEER NOODLES",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "150",
+                    "name": "MUSHROOM NOODLES",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "151",
+                    "name": "EGG NOODLES",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "152",
+                    "name": "CHICKEN NOODLES",
+                    "rate": "170"
+                },
+                {
+                    "itemNo": "153",
+                    "name": "MIX NOODLES",
+                    "rate": "220"
+                },
+                {
+                    "itemNo": "154",
+                    "name": "PRAWNS NOODLES",
+                    "rate": "190"
+                },
+                {
+                    "itemNo": "155",
+                    "name": "SZECHWAN VEG NOODLES",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "156",
+                    "name": "SZECHWAN CHICKEN NOODLES",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "157",
+                    "name": "SZECHWAN MIX NOODLES",
+                    "rate": "240"
+                }
+            ]
+        },
+        {
+            "category": "VEG CHINESE",
+            "products": [{
+                    "itemNo": "158",
+                    "name": "GOBI MANCHURIAN",
+                    "rate": "130"
+                },
+                {
+                    "itemNo": "159",
+                    "name": "CHILLY",
+                    "rate": "130"
+                },
+                {
+                    "itemNo": "160",
+                    "name": "CHILLY PANEER",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "161",
+                    "name": "CHILLY MUSHROOM",
+                    "rate": "180"
+                },
+                {
+                    "itemNo": "162",
+                    "name": "SZECHWAN GOBI",
+                    "rate": "160"
+                },
+                {
+                    "itemNo": "163",
+                    "name": "SZECHWAN PANEER ",
+                    "rate": "200"
+                }
+            ]
+        },
+        {
+            "category": "NON CHINESE",
+            "products": [{
+                    "itemNo": "164",
+                    "name": "CHILLY CHICKEN ",
+                    "rate": "190"
+                },
+                {
+                    "itemNo": "165",
+                    "name": "GARLIC CHICKEN",
+                    "rate": "190"
+                },
+                {
+                    "itemNo": "166",
+                    "name": "GINGER CHICKEN",
+                    "rate": "190"
+                },
+                {
+                    "itemNo": "167",
+                    "name": "SZECHWAN CHICKEN",
+                    "rate": "200"
+                },
+                {
+                    "itemNo": "169",
+                    "name": "DRAGON CHICKEN",
+                    "rate": "220"
+                },
+                {
+                    "itemNo": "170",
+                    "name": "CHILLY PANEER",
+                    "rate": "290"
+                },
+                {
+                    "itemNo": "171",
+                    "name": "GINGER PANEER",
+                    "rate": "290"
+                },
+                {
+                    "itemNo": "172",
+                    "name": "GARLIC PANEER",
+                    "rate": "290"
+                }
+            ]
+        },
+        {
+            "category": "BURGER",
+            "products": [{
+                    "itemNo": "173",
+                    "name": "VEG BURGER",
+                    "rate": "100"
+                },
+                {
+                    "itemNo": "174",
+                    "name": "CHICKEN BURGER",
+                    "rate": "130"
+                },
+                {
+                    "itemNo": "175",
+                    "name": "CLASSIC CHICKEN BURGER",
+                    "rate": "150"
+                },
+                {
+                    "itemNo": "176",
+                    "name": "BEEF BURGER",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "177",
+                    "name": "STACKED CHICKEN BURGER",
+                    "rate": "none"
+                },
+                {
+                    "itemNo": "178",
+                    "name": "STACKED BEEF BURGER",
+                    "rate": "none"
+                }
+            ]
+        },
+        {
+            "category": "SANDWICH",
+            "products": [{
+                    "itemNo": "179",
+                    "name": "CHICKEN SANDWICH",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "180",
+                    "name": "VEG SANDWICH",
+                    "rate": "100"
+                },
+                {
+                    "itemNo": "181",
+                    "name": "PANEER SANDWICH",
+                    "rate": "140"
+                },
+                {
+                    "itemNo": "182",
+                    "name": "CLUB SANDWICH",
+                    "rate": "150"
+                }
+            ]
+        },
+        {
+            "category": "MOJITTO",
+            "products": [{
+                    "itemNo": "183",
+                    "name": "BLUE CURACO",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "184",
+                    "name": "GREEN APPLE",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "185",
+                    "name": "PASSION FRUIT",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "186",
+                    "name": "MINT MOJITTO",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "187",
+                    "name": "PEACH MOJITTO",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "188",
+                    "name": "FIG AND HONEY",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "189",
+                    "name": "CANBERRY MOJITTO",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "190",
+                    "name": "JACKFRUIT",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "191",
+                    "name": "TENDER COCONUT",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "192",
+                    "name": "KESAR",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "193",
+                    "name": "BLUEBERRY",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "194",
+                    "name": "KHUSH",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "195",
+                    "name": "AVOCADO",
+                    "rate": "90"
+                }
+            ]
+        },
+        {
+            "category": "FLAVOR SODA",
+            "products": [{
+                    "itemNo": "196",
+                    "name": "STRAWBERRY SODA",
+                    "rate": "60"
+                },
+                {
+                    "itemNo": "197",
+                    "name": "BLUEBERRY SODA",
+                    "rate": "60"
+                },
+                {
+                    "itemNo": "198",
+                    "name": "AVOCADO SODA",
+                    "rate": "60"
+                },
+                {
+                    "itemNo": "199",
+                    "name": "PEACH SODA",
+                    "rate": "60"
+                },
+                {
+                    "itemNo": "200",
+                    "name": "CANBERRY SODA",
+                    "rate": "60"
+                },
+                {
+                    "itemNo": "201",
+                    "name": "GUA SODA",
+                    "rate": "60"
+                }
+            ]
+        },
+        {
+            "category": "SHARJA",
+            "products": [{
+                    "itemNo": "202",
+                    "name": "SHARJA",
+                    "rate": "70"
+                },
+                {
+                    "itemNo": "203",
+                    "name": "SPECIAL SHARJA",
+                    "rate": "100"
+                },
+                {
+                    "itemNo": "204",
+                    "name": "CHOCOLTE SHARJA",
+                    "rate": "90"
+                }
+            ]
+        },
+        {
+            "category": "SHAKES",
+            "products": [{
+                    "itemNo": "205",
+                    "name": "DRY FRUIT SHAKE",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "206",
+                    "name": "BUTTER SCOTCH",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "207",
+                    "name": "SPANISH DELIGHT",
+                    "rate": "100"
+                },
+                {
+                    "itemNo": "208",
+                    "name": "BLUEBERRY SHAKE",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "209",
+                    "name": "PISTA SHAKE",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "210",
+                    "name": "STRAWBERRY SHAKE",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "211",
+                    "name": "VANILLA SHAKE",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "212",
+                    "name": "KULFI SHAKE",
+                    "rate": "110"
+                },
+                {
+                    "itemNo": "213",
+                    "name": "MAJO SHAKE",
+                    "rate": "110"
+                },
+                {
+                    "itemNo": "214",
+                    "name": "CHOCOLATE SHAKE",
+                    "rate": "110"
+                },
+                {
+                    "itemNo": "215",
+                    "name": "TENDER COCONUT SHAKE",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "216",
+                    "name": "SAUDI SHAKE",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "217",
+                    "name": "OREO SHAKE",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "218",
+                    "name": "KITKAT SHAKE",
+                    "rate": "90"
+                }
+            ]
+        },
+
+        {
+            "category": "FALOODA",
+            "products": [{
+                    "itemNo": "219",
+                    "name": "ROYAL FALOODA",
+                    "rate": "160"
+                },
+                {
+                    "itemNo": "220",
+                    "name": "BLOOM SPECIAL",
+                    "rate": "200"
+                },
+                {
+                    "itemNo": "221",
+                    "name": "DRYFRUIT FALOODA",
+                    "rate": "220"
+                },
+                {
+                    "itemNo": "222",
+                    "name": "CLASSIC FALOODA",
+                    "rate": "170"
+                },
+                {
+                    "itemNo": "223",
+                    "name": "FANCY FALOODA",
+                    "rate": "160"
+                }
+            ]
+        },
+
+        {
+            "category": "SARBATH",
+            "products": [{
+                    "itemNo": "224",
+                    "name": "KULUKI SARBATH",
+                    "rate": "60"
+                },
+                {
+                    "itemNo": "225",
+                    "name": "MOHABATH KA SARBATH",
+                    "rate": "90"
+                }
+            ]
+        },
+
+        {
+            "category": "LESSI",
+            "products": [{
+                    "itemNo": "226",
+                    "name": "LESSI",
+                    "rate": "60"
+                },
+                {
+                    "itemNo": "227",
+                    "name": "MIXFRUIT LESSI",
+                    "rate": "80"
+                },
+                {
+                    "itemNo": "228",
+                    "name": "MANGO LESSI",
+                    "rate": "70"
+                },
+                {
+                    "itemNo": "229",
+                    "name": "STRAWBERRY LESSI",
+                    "rate": "70"
+                },
+                {
+                    "itemNo": "230",
+                    "name": "GRAPE LESSI",
+                    "rate": "70"
+                }
+            ]
+        },
+        {
+            "category": "FRESH JUICE",
+            "products": [{
+                    "itemNo": "231",
+                    "name": "FRESH LIME",
+                    "rate": "30"
+                },
+                {
+                    "itemNo": "232",
+                    "name": "SODA LIME",
+                    "rate": "35"
+                },
+                {
+                    "itemNo": "233",
+                    "name": "MINT LIME",
+                    "rate": "35"
+                },
+                {
+                    "itemNo": "234",
+                    "name": "GRAPE LIME",
+                    "rate": "35"
+                },
+                {
+                    "itemNo": "235",
+                    "name": "GINGER LIME",
+                    "rate": "35"
+                },
+                {
+                    "itemNo": "236",
+                    "name": "PINAPPLE LIME ",
+                    "rate": "35"
+                }
+            ]
+        },
+        {
+            "category": "DESSERT",
+            "products": [{
+                    "itemNo": "237",
+                    "name": "VANILLA",
+                    "rate": "40-80"
+                },
+                {
+                    "itemNo": "238",
+                    "name": "SRAWBERRY",
+                    "rate": "40-80"
+                },
+                {
+                    "itemNo": "239",
+                    "name": "CHOCOLATE",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "240",
+                    "name": "BUTTER SCOTCH",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "241",
+                    "name": "SPANISH DELIGHT",
+                    "rate": "100"
+                },
+                {
+                    "itemNo": "242",
+                    "name": "BLUE BERRY",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "243",
+                    "name": "KULFI",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "244",
+                    "name": "BLACK CURRENT",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "245",
+                    "name": "TENDER COCONUT",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "246",
+                    "name": "GUAVA",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "247",
+                    "name": "GUDBUD",
+                    "rate": "150"
+                },
+                {
+                    "itemNo": "248",
+                    "name": "SUNRISE",
+                    "rate": "150"
+                },
+                {
+                    "itemNo": "249",
+                    "name": "DEATH BY CHOCOLATE",
+                    "rate": "190"
+                }
+            ]
+        },
+        {
+            "category": "HEALTHY JUICE",
+            "products": [{
+                    "itemNo": "250",
+                    "name": "MINT ALL TIME JUICE",
+                    "rate": "10"
+                },
+                {
+                    "itemNo": "251",
+                    "name": "ORIENTAL JUICE",
+                    "rate": "12"
+                },
+                {
+                    "itemNo": "252",
+                    "name": "CUCUMBER COOLER",
+                    "rate": "12"
+                },
+                {
+                    "itemNo": "253",
+                    "name": "MANGO SURPRISE JUICE",
+                    "rate": "10"
+                },
+                {
+                    "itemNo": "254",
+                    "name": "ABC JUICE",
+                    "rate": "35"
+                },
+                {
+                    "itemNo": "255",
+                    "name": "CAP JUICE",
+                    "rate": "35"
+                },
+                {
+                    "itemNo": "256",
+                    "name": "CUCUMBER SPLASH JUICE",
+                    "rate": "35"
+                },
+                {
+                    "itemNo": "257",
+                    "name": "PINA PEPPER JUICE",
+                    "rate": "35"
+                },
+                {
+                    "itemNo": "258",
+                    "name": "AMALA IN EYES JUICE",
+                    "rate": "35"
+                }
+            ]
+        },
+        {
+            "category": "FALOODA",
+            "products": [{
+                    "itemNo": "259",
+                    "name": "LAILA MAJNU FALOODA",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "260",
+                    "name": "MOHABATH KA  SARBAT FALOODA",
+                    "rate": "120"
+                },
+                {
+                    "itemNo": "261",
+                    "name": "SUNRICE FALOODA",
+                    "rate": "90"
+                },
+                {
+                    "itemNo": "262",
+                    "name": "REDWELWET SHAKE FALOODA",
+                    "rate": "80"
+                }
+            ]
+        },
+        {
+            "category": "ROLLS",
+            "products": [{
+                    "itemNo": "263",
+                    "name": "CHICKEN SOMALI ROLL",
+                    "rate": "10"
+                },
+                {
+                    "itemNo": "264",
+                    "name": "CHICKEN POROTTA ROLL",
+                    "rate": "12"
+                }
+            ]
+        }
+    ]
+}

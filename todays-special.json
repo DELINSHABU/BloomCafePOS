@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Al Faham",
+    "price": 220,
+    "description": "Grilled chicken",
+    "category": "Main Course",
+    "isActive": true
+  },
+  {
+    "id": "2",
+    "name": "Chicken Biriyani",
+    "price": 180,
+    "description": "Fragrant rice dish",
+    "category": "Main Course",
+    "isActive": true
+  },
+  {
+    "id": "3",
+    "name": "Mint Mojito",
+    "price": 90,
+    "description": "Refreshing drink",
+    "category": "Beverages",
+    "isActive": true
+  },
+  {
+    "id": "4",
+    "name": "Dry Fruit Shake",
+    "price": 120,
+    "description": "Nutritious shake",
+    "category": "Beverages",
+    "isActive": true
+  },
+  {
+    "id": "1753472800368",
+    "name": "Mutton Biriyani",
+    "price": 350,
+    "description": "Fragrant rice dish",
+    "category": "Main Course",
+    "isActive": true
+  },
+  {
+    "id": "1753504275684",
+    "name": "Fish Biriyani",
+    "price": 280,
+    "description": "Fragrant rice dish\n\n",
+    "category": "Main Course",
+    "isActive": true
+  }
+]
