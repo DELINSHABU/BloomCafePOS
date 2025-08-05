@@ -293,7 +293,7 @@ export default function HomePage({
 
           {/* Today's Special Section Header */}
           <h2 className="text-white text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6">
-            Today's Special
+            Today's Specia
           </h2>
         </div>
       </div>
