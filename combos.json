@@ -53,7 +53,34 @@
       "category": "Combo Special",
       "createdAt": "2025-07-26T13:25:15.159Z",
       "updatedAt": "2025-07-26T13:25:15.159Z"
+    },
+    {
+      "id": "1754376219924",
+      "name": "Item01+item02",
+      "description": "Test text 03",
+      "items": [
+        {
+          "itemId": "001",
+          "itemName": "APPAM",
+          "quantity": 4,
+          "originalPrice": 10
+        },
+        {
+          "itemId": "081",
+          "itemName": "ALFAHAM (FULL)",
+          "quantity": 1,
+          "originalPrice": 440
+        }
+      ],
+      "originalTotal": 480,
+      "comboPrice": 300,
+      "discountAmount": 180,
+      "discountPercentage": 38,
+      "isActive": true,
+      "category": "Combo Special",
+      "createdAt": "2025-08-05T06:43:39.924Z",
+      "updatedAt": "2025-08-05T06:43:39.924Z"
     }
   ],
-  "lastUpdated": "2025-07-26T13:25:15.159Z"
+  "lastUpdated": "2025-08-05T06:43:39.924Z"
 }

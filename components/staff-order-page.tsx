@@ -214,7 +214,7 @@ export default function StaffOrderPage({
   const categories = ["All", ...menuData.map((cat) => cat.category)];
 
   return (
-    <div className="w-full bg-gray-50 min-h-screen">
+    <div className="w-full bg-gray-50 dark:bg-gray-900 min-h-screen">
       {/* Header */}
       <div className="bg-emerald-700 text-white p-4 sm:p-6">
         <div className="flex items-center justify-between mb-4">
@@ -315,6 +315,27 @@ export default function StaffOrderPage({
       </div>
 
       <div className="flex flex-col">
+        {/* Order Summary at Top */}
+        <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 sticky top-0 z-10">
+          <div className="flex justify-between items-center mb-4">
+            <span className="font-semibold text-gray-900 dark:text-gray-100">Total:</span>
+            <span className="font-bold text-xl text-emerald-600">
+              ₹{getTotalAmount().toFixed(2)}
+            </span>
+          </div>
+          <Button
+            onClick={placeOrder}
+            className="w-full bg-emerald-600 hover:bg-emerald-700 py-3"
+            disabled={
+              !selectedTable ||
+              !selectedStaff ||
+              cartItems.length === 0
+            }
+          >
+            Place Order
+          </Button>
+        </div>
+
         {/* Mobile Cart Summary Bar */}
         <div className="lg:hidden bg-white border-b border-gray-200 p-4 sticky top-0 z-10">
           <div className="flex items-center justify-between">
@@ -373,7 +394,7 @@ export default function StaffOrderPage({
             {/* Combos Section - Display first if available and "All" is selected */}
             {combos.length > 0 && selectedCategory === "All" && !searchTerm && (
               <div className="mb-8">
-                <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
                   <Package className="w-5 h-5 text-orange-500" />
                   Combo Specials
                   <Badge
@@ -392,13 +413,13 @@ export default function StaffOrderPage({
                       <CardContent className="p-4">
                         <div className="flex justify-between items-start mb-2">
                           <div className="flex-1">
-                            <h4 className="font-medium text-gray-900 text-sm mb-1">
+                            <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm mb-1">
                               {combo.name}
                             </h4>
-                            <p className="text-xs text-gray-500 mb-2">
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
                               {combo.description}
                             </p>
-                            <div className="text-xs text-gray-400 mb-2">
+                            <div className="text-xs text-gray-400 dark:text-gray-500 mb-2">
                               {combo.items.map((item, idx) => (
                                 <span key={idx}>
                                   {item.quantity}x {item.itemName}
@@ -420,7 +441,7 @@ export default function StaffOrderPage({
                             <span className="font-bold text-orange-600">
                               ₹{combo.comboPrice}
                             </span>
-                            <span className="text-xs text-gray-400 line-through">
+                            <span className="text-xs text-gray-400 dark:text-gray-500 line-through">
                               M.R.P: ₹{combo.originalTotal}
                             </span>
                           </div>
@@ -443,7 +464,7 @@ export default function StaffOrderPage({
             {/* Menu Items Grid */}
             <div className="mb-4">
               {(selectedCategory !== "All" || searchTerm) && (
-                <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
                   <ShoppingCart className="w-5 h-5 text-emerald-500" />
                   Menu Items
                   <Badge
@@ -469,10 +490,10 @@ export default function StaffOrderPage({
                       <CardContent className="p-4">
                         <div className="flex justify-between items-start mb-2">
                           <div className="flex-1">
-                            <h4 className="font-medium text-gray-900 text-sm mb-1">
+                            <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm mb-1">
                               {item.name}
                             </h4>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-gray-500 dark:text-gray-400">
                               #{item.itemNo} • {item.categoryName}
                             </p>
                           </div>
@@ -520,10 +541,10 @@ export default function StaffOrderPage({
           </div>
 
           {/* Desktop Cart Section */}
-          <div className="hidden lg:block w-96 bg-white border-l border-gray-200">
+          <div className="hidden lg:block w-96 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700">
             <div className="h-full flex flex-col">
-              <div className="p-6 border-b border-gray-200">
-                <h3 className="text-lg font-bold flex items-center gap-2">
+              <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 dark:text-gray-100">
                   <ShoppingCart className="w-5 h-5" />
                   Order Cart ({getTotalItems()})
                 </h3>
@@ -531,9 +552,9 @@ export default function StaffOrderPage({
 
               <div className="flex-1 overflow-hidden flex flex-col">
                 {cartItems.length === 0 ? (
-                  <div className="flex-1 flex items-center justify-center text-gray-500">
+                  <div className="flex-1 flex items-center justify-center text-gray-500 dark:text-gray-400">
                     <div className="text-center">
-                      <ShoppingCart className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+                      <ShoppingCart className="w-12 h-12 mx-auto mb-4 text-gray-300 dark:text-gray-600" />
                       <p>Cart is empty</p>
                       <p className="text-sm">Add items from the menu</p>
                     </div>
@@ -545,13 +566,13 @@ export default function StaffOrderPage({
                         {cartItems.map((item) => (
                           <div
                             key={item.id}
-                            className="flex items-center justify-between bg-gray-50 rounded-lg p-3"
+                            className="flex items-center justify-between bg-gray-50 dark:bg-gray-700 rounded-lg p-3"
                           >
                             <div className="flex-1 min-w-0">
-                              <h4 className="font-medium text-sm truncate">
+                              <h4 className="font-medium text-sm truncate text-gray-900 dark:text-gray-100">
                                 {item.name}
                               </h4>
-                              <p className="text-xs text-gray-500 truncate">
+                              <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
                                 {item.description}
                               </p>
                               <p className="font-semibold text-emerald-600">
@@ -569,7 +590,7 @@ export default function StaffOrderPage({
                               >
                                 <Minus className="w-3 h-3" />
                               </Button>
-                              <span className="w-8 text-center font-medium">
+                              <span className="w-8 text-center font-medium text-gray-900 dark:text-gray-100">
                                 {item.quantity}
                               </span>
                               <Button
@@ -588,26 +609,6 @@ export default function StaffOrderPage({
                       </div>
                     </div>
 
-                    <div className="border-t p-6">
-                      <div className="flex justify-between items-center mb-4">
-                        <span className="font-semibold">Total:</span>
-                        <span className="font-bold text-xl text-emerald-600">
-                          ₹{getTotalAmount().toFixed(2)}
-                        </span>
-                      </div>
-
-                      <Button
-                        onClick={placeOrder}
-                        className="w-full bg-emerald-600 hover:bg-emerald-700 py-3"
-                        disabled={
-                          !selectedTable ||
-                          !selectedStaff ||
-                          cartItems.length === 0
-                        }
-                      >
-                        Place Order
-                      </Button>
-                    </div>
                   </>
                 )}
               </div>

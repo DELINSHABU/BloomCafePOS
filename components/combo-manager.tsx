@@ -262,11 +262,11 @@ export default function ComboManager({ currentUser }: ComboManagerProps) {
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
             <Package className="w-6 h-6 text-orange-500" />
             Combo Management
           </h2>
-          <p className="text-gray-600 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
             Create and manage combo offers with multiple items at discounted prices
           </p>
         </div>
@@ -340,10 +340,10 @@ export default function ComboManager({ currentUser }: ComboManagerProps) {
                 <Label>Selected Items</Label>
                 <div className="space-y-2 mt-2">
                   {newCombo.items.map((item) => (
-                    <div key={item.itemId} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
+                    <div key={item.itemId} className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                       <div className="flex-1">
-                        <span className="font-medium">{item.itemName}</span>
-                        <span className="text-gray-500 ml-2">₹{item.originalPrice} each</span>
+                        <span className="font-medium text-gray-900 dark:text-gray-100">{item.itemName}</span>
+                        <span className="text-gray-500 dark:text-gray-400 ml-2">₹{item.originalPrice} each</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Button
@@ -380,7 +380,7 @@ export default function ComboManager({ currentUser }: ComboManagerProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
                 <Label>Original Total</Label>
-                <div className="text-2xl font-bold text-gray-600">₹{currentTotals.originalTotal}</div>
+                <div className="text-2xl font-bold text-gray-600 dark:text-gray-300">₹{currentTotals.originalTotal}</div>
               </div>
               <div>
                 <Label htmlFor="combo-price">Combo Price (₹) *</Label>
@@ -395,13 +395,13 @@ export default function ComboManager({ currentUser }: ComboManagerProps) {
             </div>
             
             {newCombo.comboPrice > 0 && currentTotals.originalTotal > 0 && (
-              <div className="mb-4 p-4 bg-orange-50 rounded-lg">
+              <div className="mb-4 p-4 bg-orange-50 dark:bg-gray-800 rounded-lg">
                 <div className="flex items-center gap-4">
                   <div className="text-2xl font-bold text-orange-600">
                     -{currentTotals.discountPercentage}%
                   </div>
                   <div className="text-2xl font-bold text-green-600">₹{newCombo.comboPrice}</div>
-                  <div className="text-sm text-gray-500 line-through">
+                  <div className="text-sm text-gray-500 dark:text-gray-400 line-through">
                     Original: ₹{currentTotals.originalTotal}
                   </div>
                   <div className="text-sm text-green-600 font-medium">
@@ -485,8 +485,8 @@ function ComboCard({
       <CardContent className="p-4">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h3 className="font-semibold text-lg text-gray-800">{combo.name}</h3>
-            <p className="text-sm text-gray-600">{combo.description}</p>
+            <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100">{combo.name}</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">{combo.description}</p>
             <Badge variant="outline" className="text-xs mt-1">
               {combo.category}
             </Badge>
@@ -503,7 +503,7 @@ function ComboCard({
           <Label className="text-sm font-medium">Items included:</Label>
           <div className="mt-2 space-y-1">
             {combo.items.map((item, index) => (
-              <div key={index} className="text-sm text-gray-600 flex justify-between">
+              <div key={index} className="text-sm text-gray-600 dark:text-gray-300 flex justify-between">
                 <span>{item.quantity}x {item.itemName}</span>
                 <span>₹{item.originalPrice * item.quantity}</span>
               </div>
@@ -512,14 +512,14 @@ function ComboCard({
         </div>
         
         {/* Pricing Display */}
-        <div className="bg-orange-50 rounded-lg p-4 mb-4">
+        <div className="bg-orange-50 dark:bg-gray-800 rounded-lg p-4 mb-4">
           <div className="flex items-center gap-4">
             <div className="text-2xl font-bold text-orange-600">
               -{combo.discountPercentage}%
             </div>
             <div className="text-2xl font-bold text-green-600">₹{combo.comboPrice}</div>
           </div>
-          <div className="text-sm text-gray-500 line-through mt-1">
+          <div className="text-sm text-gray-500 dark:text-gray-400 line-through mt-1">
             Original Total: ₹{combo.originalTotal}
           </div>
           <div className="text-sm text-green-600 font-medium">

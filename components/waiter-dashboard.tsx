@@ -15,6 +15,7 @@ import {
   LogOut,
   User,
 } from "lucide-react";
+import { SimpleThemeToggle } from "@/components/theme-toggle";
 import { useOrders } from "@/lib/order-context";
 import type { OrderStatus } from "@/app/page";
 
@@ -174,7 +175,7 @@ export default function WaiterDashboard({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
       <div className="bg-emerald-700 text-white p-4 sm:p-6">
         <div className="flex items-center justify-between">
@@ -212,6 +213,7 @@ export default function WaiterDashboard({
               <UserPlus className="w-4 h-4 mr-2" />
               Assist Order
             </Button>
+            <SimpleThemeToggle />
             <Button
               variant="outline"
               size="sm"

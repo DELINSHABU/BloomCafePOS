@@ -50,7 +50,7 @@ export default function QRGenerator({ onNavigate }: QRGeneratorProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
       <div className="bg-emerald-700 text-white p-4 sm:p-6">
         <div className="flex items-center gap-4 mb-4">

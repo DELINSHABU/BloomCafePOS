@@ -11,6 +11,7 @@ import { Switch } from "@/components/ui/switch"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ArrowLeft, Edit, Plus, Save, X, Search, AlertCircle, LogOut, User, Star } from "lucide-react"
+import { SimpleThemeToggle } from "@/components/theme-toggle"
 import { getMenuData, getMenuCategories, getCategoryIcon, updateItemAvailability, updateItemPrice } from "@/lib/menu-data"
 import TodaysSpecialManager from "@/components/todays-special-manager"
 import type { Page } from "@/app/page"
@@ -225,7 +226,7 @@ export default function AdminMenuPanel({ onNavigate, currentUser, onLogout }: Ad
   const stats = getAvailabilityStats()
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
       <div className="bg-emerald-700 text-white p-4 sm:p-6">
         <div className="flex items-center justify-between mb-4">
@@ -248,15 +249,18 @@ export default function AdminMenuPanel({ onNavigate, currentUser, onLogout }: Ad
               <User className="w-4 h-4" />
               <span className="text-sm">Welcome, {currentUser?.name || 'Admin User'}</span>
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-white hover:bg-emerald-800"
-              onClick={onLogout || (() => window.location.reload())}
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              Logout
-            </Button>
+            <div className="flex items-center gap-2">
+              <SimpleThemeToggle />
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-white hover:bg-emerald-800"
+                onClick={onLogout || (() => window.location.reload())}
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </div>

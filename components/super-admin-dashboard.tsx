@@ -16,6 +16,7 @@ import {
   Star,
   Percent,
 } from "lucide-react";
+import { SimpleThemeToggle } from "@/components/theme-toggle";
 import WaiterDashboard from "@/components/waiter-dashboard";
 import AdminMenuPanel from "@/components/admin-menu-panel";
 import QRGenerator from "@/components/qr-generator";
@@ -37,7 +38,7 @@ export default function SuperAdminDashboard({
   const [activeTab, setActiveTab] = useState("overview");
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
       <div className="bg-gradient-to-r from-purple-700 to-indigo-700 text-white p-4 sm:p-6">
         <div className="flex items-center justify-between">
@@ -59,15 +60,18 @@ export default function SuperAdminDashboard({
                 Welcome, {currentUser?.name || "Super Admin"}
               </span>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              className="bg-white text-purple-700 hover:bg-gray-50"
-              onClick={onLogout || (() => window.location.reload())}
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              Logout
-            </Button>
+            <div className="flex items-center gap-2">
+              <SimpleThemeToggle />
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-white text-purple-700 hover:bg-gray-50"
+                onClick={onLogout || (() => window.location.reload())}
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -130,7 +134,7 @@ export default function SuperAdminDashboard({
 
         {/* Navigation Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-7 bg-gray-400 gap-1 p-2 min-h-[80px] sm:min-h-[40px]">
+          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 bg-gray-400 dark:bg-gray-800 gap-1 p-2 min-h-[80px] sm:min-h-[40px]">
             <TabsTrigger
               value="overview"
               className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
@@ -160,12 +164,6 @@ export default function SuperAdminDashboard({
               className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
             >
               Admin View
-            </TabsTrigger>
-            <TabsTrigger
-              value="orders"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              Orders
             </TabsTrigger>
             <TabsTrigger
               value="qr"
@@ -225,26 +223,6 @@ export default function SuperAdminDashboard({
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <ShoppingCart className="w-5 h-5 text-orange-600" />
-                    Order Management
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-4">
-                    Staff-assisted ordering system for helping customers place
-                    orders at tables.
-                  </p>
-                  <Button
-                    onClick={() => setActiveTab("orders")}
-                    className="w-full bg-orange-600 hover:bg-orange-700"
-                  >
-                    Assist Customer Orders
-                  </Button>
-                </CardContent>
-              </Card>
 
               <Card>
                 <CardHeader>
@@ -345,14 +323,6 @@ export default function SuperAdminDashboard({
                     <div className="flex items-center gap-2">
                       <Badge
                         variant="secondary"
-                        className="bg-orange-100 text-orange-700"
-                      >
-                        ✓ Order Management
-                      </Badge>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Badge
-                        variant="secondary"
                         className="bg-indigo-100 text-indigo-700"
                       >
                         ✓ QR Code Generator
@@ -384,24 +354,6 @@ export default function SuperAdminDashboard({
             </div>
           </TabsContent>
 
-          <TabsContent value="orders" className="mt-6">
-            <div className="bg-white rounded-lg border">
-              <div className="p-6">
-                <Button
-                  onClick={() => onNavigate && onNavigate("orders")}
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 h-16"
-                >
-                  <ShoppingCart className="w-6 h-6 mr-3" />
-                  <div className="text-left">
-                    <div className="font-semibold">Staff Assisted Ordering</div>
-                    <div className="text-sm opacity-90">
-                      Help customers place their orders
-                    </div>
-                  </div>
-                </Button>
-              </div>
-            </div>
-          </TabsContent>
 
           <TabsContent value="specials" className="mt-6">
             <div className="bg-white rounded-lg border">

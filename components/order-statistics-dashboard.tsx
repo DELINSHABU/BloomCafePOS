@@ -23,6 +23,10 @@ import {
   TrendingDown,
   BarChart3,
   PieChart,
+  ChevronDown,
+  ChevronUp,
+  TrendingUp as TrendingUpIcon,
+  BarChart,
 } from "lucide-react";
 
 interface OrderStatistics {
@@ -60,9 +64,15 @@ interface OrderStatisticsResponse {
   statistics: OrderStatistics;
 }
 
-export default function OrderStatisticsDashboard() {
+interface OrderStatisticsDashboardProps {
+  onNavigateToDetailedAnalytics?: () => void;
+}
+
+export default function OrderStatisticsDashboard({ onNavigateToDetailedAnalytics }: OrderStatisticsDashboardProps = {}) {
   const [statistics, setStatistics] = useState<OrderStatistics | null>(null);
   const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState(false);
+  const [recentOrdersExpanded, setRecentOrdersExpanded] = useState(false);
   const [period, setPeriod] = useState("today");
   const [refreshing, setRefreshing] = useState(false);
 
@@ -166,8 +176,8 @@ export default function OrderStatisticsDashboard() {
       {/* Header with Period Selection */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-2xl font-bold text-gray-800">Order Statistics</h3>
-          <p className="text-gray-600">
+          <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Order Statistics</h3>
+          <p className="text-gray-600 dark:text-gray-400">
             Overview of {getPeriodLabel(period).toLowerCase()} performance
           </p>
         </div>
@@ -281,8 +291,8 @@ export default function OrderStatisticsDashboard() {
                       </Badge>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold">{count}</span>
-                      <span className="text-sm text-gray-500">
+                      <span className="font-semibold dark:text-gray-100">{count}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
                         (
                         {statistics.totalOrders > 0
                           ? Math.round((count / statistics.totalOrders) * 100)
@@ -357,7 +367,7 @@ export default function OrderStatisticsDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {statistics.popularItems.slice(0, 10).map((item, index) => (
+                {statistics.popularItems.slice(0, expanded ? statistics.popularItems.length : 2).map((item, index) => (
                   <tr key={item.name} className="border-b hover:bg-gray-50">
                     <td className="py-3">
                       <Badge variant={index < 3 ? "default" : "secondary"}>
@@ -380,6 +390,25 @@ export default function OrderStatisticsDashboard() {
               </tbody>
             </table>
           </div>
+          {statistics.popularItems.length > 2 && (
+            <Button 
+              onClick={() => setExpanded(!expanded)} 
+              className="mt-4 w-full"
+              variant="outline"
+            >
+              {expanded ? (
+                <>
+                  <ChevronUp className="w-4 h-4 mr-2" />
+                  Show Less
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="w-4 h-4 mr-2" />
+                  Show More ({statistics.popularItems.length - 2} more items)
+                </>
+              )}
+            </Button>
+          )}
         </CardContent>
       </Card>
 
@@ -393,17 +422,17 @@ export default function OrderStatisticsDashboard() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {statistics.recentOrders.map((order) => (
+            {statistics.recentOrders.slice(0, recentOrdersExpanded ? statistics.recentOrders.length : 2).map((order) => (
               <div
                 key={order.id}
-                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
               >
                 <div className="flex items-center gap-3">
                   <div>
-                    <p className="font-semibold text-sm">
+                    <p className="font-semibold text-sm dark:text-gray-100">
                       #{order.id.slice(-8)}
                     </p>
-                    <p className="text-xs text-gray-600">
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
                       {order.customerName}
                     </p>
                   </div>
@@ -429,8 +458,39 @@ export default function OrderStatisticsDashboard() {
               </div>
             ))}
           </div>
+          {statistics.recentOrders.length > 2 && (
+            <Button 
+              onClick={() => setRecentOrdersExpanded(!recentOrdersExpanded)} 
+              className="mt-4 w-full"
+              variant="outline"
+            >
+              {recentOrdersExpanded ? (
+                <>
+                  <ChevronUp className="w-4 h-4 mr-2" />
+                  Show Less
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="w-4 h-4 mr-2" />
+                  Show More ({statistics.recentOrders.length - 2} more orders)
+                </>
+              )}
+            </Button>
+          )}
         </CardContent>
       </Card>
+
+      {/* Detailed Analytics Button */}
+      <div className="flex justify-center mt-6">
+        <Button 
+          onClick={() => window.open('/detailed-analytics', '_blank')}
+          className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+          size="lg"
+        >
+          <BarChart className="w-5 h-5 mr-2" />
+          View Detailed Analytics
+        </Button>
+      </div>
     </div>
   );
 }

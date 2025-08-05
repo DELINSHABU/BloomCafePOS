@@ -197,14 +197,14 @@ export default function TodaysSpecialManager({
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-white dark:bg-gray-900">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
             <Star className="w-6 h-6 text-yellow-500" />
             Today's Special Management
           </h2>
-          <p className="text-gray-600 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
             Manage featured items that appear on the home page
           </p>
         </div>
@@ -219,9 +219,9 @@ export default function TodaysSpecialManager({
 
       {/* Add New Item Form */}
       {isAddingNew && (
-        <Card className="mb-6 border-emerald-200">
-          <CardHeader className="bg-emerald-50">
-            <CardTitle className="text-emerald-700">
+        <Card className="mb-6 border-emerald-200 bg-white dark:bg-gray-800">
+          <CardHeader className="bg-emerald-50 dark:bg-emerald-900">
+            <CardTitle className="text-emerald-700 dark:text-emerald-300">
               Add New Special Item
             </CardTitle>
           </CardHeader>
@@ -415,7 +415,7 @@ export default function TodaysSpecialManager({
                 <div>
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <h3 className="font-semibold text-lg text-gray-800">
+                      <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100">
                         {item.name}
                       </h3>
                       <p className="text-emerald-600 font-bold text-lg">
@@ -429,7 +429,7 @@ export default function TodaysSpecialManager({
                       <Badge variant="outline">{item.category}</Badge>
                     </div>
                   </div>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                     {item.description}
                   </p>
                   <div className="flex gap-2">

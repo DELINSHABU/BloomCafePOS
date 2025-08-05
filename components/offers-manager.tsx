@@ -270,14 +270,14 @@ export default function OffersManager({ currentUser }: OffersManagerProps) {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-white dark:bg-gray-900">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
             <Percent className="w-6 h-6 text-red-500" />
             Offers Management
           </h2>
-          <p className="text-gray-600 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
             Create and manage discount offers for menu items and today's specials
           </p>
         </div>
@@ -365,13 +365,13 @@ export default function OffersManager({ currentUser }: OffersManagerProps) {
             </div>
             
             {newOffer.originalPrice > 0 && newOffer.offerPrice > 0 && (
-              <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+              <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                 <div className="flex items-center gap-4">
                   <div className="text-2xl font-bold text-red-500">
                     -{calculateDiscount(newOffer.originalPrice, newOffer.offerPrice)}%
                   </div>
-                  <div className="text-2xl font-bold">₹{newOffer.offerPrice}</div>
-                  <div className="text-sm text-gray-500 line-through">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">₹{newOffer.offerPrice}</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 line-through">
                     M.R.P: ₹{newOffer.originalPrice}
                   </div>
                 </div>
@@ -409,7 +409,7 @@ export default function OffersManager({ currentUser }: OffersManagerProps) {
 
       {/* Offers List */}
       <Tabs defaultValue="all" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-4 bg-white dark:bg-gray-800">
           <TabsTrigger value="all">All Offers</TabsTrigger>
           <TabsTrigger value="menu">Menu Items</TabsTrigger>
           <TabsTrigger value="special">Today's Special</TabsTrigger>
@@ -555,7 +555,7 @@ function OfferCard({
           <div>
             <div className="flex items-center justify-between mb-3">
               <div>
-                <h3 className="font-semibold text-lg text-gray-800">{offer.itemName}</h3>
+                <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100">{offer.itemName}</h3>
                 <Badge variant="outline" className="text-xs">
                   {offer.itemType === 'menu' ? 'Menu Item' : "Today's Special"}
                 </Badge>
@@ -568,14 +568,14 @@ function OfferCard({
             </div>
             
             {/* Offer Display - Similar to your image */}
-            <div className="bg-gray-50 rounded-lg p-4 mb-4">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 mb-4">
               <div className="flex items-center gap-4">
                 <div className="text-2xl font-bold text-red-500">
                   -{offer.discountPercentage}%
                 </div>
-                <div className="text-2xl font-bold">₹{offer.offerPrice}</div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">₹{offer.offerPrice}</div>
               </div>
-              <div className="text-sm text-gray-500 line-through mt-1">
+              <div className="text-sm text-gray-500 dark:text-gray-400 line-through mt-1">
                 M.R.P: ₹{offer.originalPrice}
               </div>
             </div>
