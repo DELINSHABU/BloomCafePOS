@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   getActiveOffers,
   getOfferForItem,
@@ -55,10 +55,25 @@ export default function HomePage({
   const [combos, setCombos] = useState<any[]>([]);
   const [offers, setOffers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Load Today's Special items from API
   useEffect(() => {
     loadSpecialItems();
+  }, []);
+
+  // Ensure video autoplay on component mount
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      // Try to play the video programmatically
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.log("Video autoplay failed (browser policy):", error);
+        });
+      }
+    }
   }, []);
 
   const loadSpecialItems = async () => {
@@ -248,46 +263,35 @@ export default function HomePage({
             </div>
           )}
 
-          {/* Promotional Banner */}
-          <div className="bg-gradient-to-r from-yellow-100 to-orange-400 rounded-2xl p-4 sm:p-6 lg:p-8 mb-6 relative overflow-hidden shadow-lg">
-            <div className="flex items-center justify-between">
-              <div className="flex-1">
-                <div className="bg-yellow-100 rounded-lg p-3 sm:p-4 w-fit mb-3">
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
-                    20%
-                  </div>
-                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800">
-                    OFF
-                  </div>
-                </div>
-                <Button
-                  size="sm"
-                  className="bg-white text-gray-700 hover:bg-gray-50 text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-2 h-7 sm:h-8"
-                  onClick={() => onNavigate("menu")}
-                >
-                  Shop now ▶
-                </Button>
-              </div>
-              <div className="flex-1 flex flex-col items-center">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden mb-2">
-                  <Image
-                    src="/placeholder.svg?height=80&width=80"
-                    alt="Al Faham Mandi"
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="text-white font-bold text-sm sm:text-base text-center">
-                  Al Faham Mandi
-                </div>
-              </div>
-            </div>
-
-            {/* Dots indicator */}
-            <div className="flex justify-center mt-4 space-x-1">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <div className="w-2 h-2 bg-white/50 rounded-full"></div>
+          {/* Bloom Cafe Logo */}
+          <div className="flex justify-center mb-6">
+            <div className="w-[80vw] max-w-lg">
+              <video
+                ref={videoRef}
+                src="/BloomCafelogo.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                controls={false}
+                className="w-full h-auto object-contain"
+                style={{ maxWidth: '500px', maxHeight: '500px' }}
+                onLoadStart={() => console.log('Video loading started')}
+                onLoadedData={() => console.log('Video data loaded')}
+                onCanPlay={() => console.log('Video can play')}
+                onPlay={() => console.log('Video started playing')}
+                onError={(e) => {
+                  console.error('Video error:', e);
+                  console.error('Video error details:', e.currentTarget.error);
+                }}
+                onEnded={(e) => {
+                  e.currentTarget.currentTime = 0;
+                  e.currentTarget.play();
+                }}
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
 

@@ -33,6 +33,8 @@ import { getActiveCombos } from "@/lib/combo-utils";
 import { useOrders } from "@/lib/order-context";
 import { useEffect } from "react";
 import type { Page, CartItem, Order } from "@/app/page";
+import staffCredentials from '@/staff-credentials.json';
+import { StaffPasswordDrawer } from '@/components/StaffPasswordDrawer';
 
 interface StaffOrderPageProps {
   onNavigate?: (page: any) => void;
@@ -64,6 +66,9 @@ export default function StaffOrderPage({
   const [selectedStaff, setSelectedStaff] = useState<string>("");
   const [customerName, setCustomerName] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [pendingStaffSelection, setPendingStaffSelection] = useState<string>("");
+  const [showPasswordDrawer, setShowPasswordDrawer] = useState(false);
+  const [passwordError, setPasswordError] = useState<string>("");
 
   const { addOrder } = useOrders();
   const [menuData, setMenuData] = useState<any[]>([]);
@@ -88,6 +93,16 @@ export default function StaffOrderPage({
     };
     loadMenuData();
   }, []);
+
+  // Set default staff member to logged-in user
+  useEffect(() => {
+    if (currentUser && currentUser.role === 'waiter' && currentUser.name && !selectedStaff) {
+      // Check if the current user's name is in the STAFF_NAMES list
+      if (STAFF_NAMES.includes(currentUser.name)) {
+        setSelectedStaff(currentUser.name);
+      }
+    }
+  }, [currentUser, selectedStaff]);
 
   const addToCart = (itemNo: string, name: string, rate: string) => {
     const price = formatPrice(rate);
@@ -205,7 +220,10 @@ export default function StaffOrderPage({
     // Reset form
     setCartItems([]);
     setSelectedTable("");
-    setSelectedStaff("");
+    // Only reset staff member if current user is not a waiter
+    if (currentUser?.role !== 'waiter') {
+      setSelectedStaff("");
+    }
     setCustomerName("");
 
     alert("Order placed successfully!");
@@ -282,7 +300,17 @@ export default function StaffOrderPage({
             <Label htmlFor="staff" className="text-white">
               Staff Member *
             </Label>
-            <Select value={selectedStaff} onValueChange={setSelectedStaff}>
+        <Select
+          value={selectedStaff}
+          onValueChange={(staff) => {
+            // Always require password for staff selection (except initial auto-selection)
+            if (staff !== selectedStaff) {
+              setPendingStaffSelection(staff);
+              setPasswordError(""); // Clear any previous error
+              setShowPasswordDrawer(true);
+            }
+          }}
+        >
               <SelectTrigger className="bg-white text-gray-900">
                 <SelectValue placeholder="Select staff" />
               </SelectTrigger>
@@ -680,6 +708,31 @@ export default function StaffOrderPage({
           </div>
         )}
       </div>
+      
+      {/* Password Drawer */}
+      {showPasswordDrawer && (
+        <StaffPasswordDrawer 
+          isOpen={showPasswordDrawer}
+          staffName={pendingStaffSelection}
+          errorMessage={passwordError}
+          onPasswordSubmit={(password) => {
+            const user = staffCredentials.users.find((u) => u.name === pendingStaffSelection);
+            if (user && password === user.password) {
+              setSelectedStaff(pendingStaffSelection);
+              setShowPasswordDrawer(false);
+              setPendingStaffSelection("");
+              setPasswordError(""); // Clear error on success
+            } else {
+              setPasswordError('Incorrect password! Please try again.');
+            }
+          }}
+          onClose={() => {
+            setShowPasswordDrawer(false);
+            setPendingStaffSelection("");
+            setPasswordError(""); // Clear error on close
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -80,7 +80,28 @@
       "category": "Combo Special",
       "createdAt": "2025-08-05T06:43:39.924Z",
       "updatedAt": "2025-08-05T06:43:39.924Z"
+    },
+    {
+      "id": "1754402936233",
+      "name": "Large Amout",
+      "description": "Test text 04",
+      "items": [
+        {
+          "itemId": "093",
+          "itemName": "HOT & SPICY ALFAHAM (FULL)",
+          "quantity": 212,
+          "originalPrice": 480
+        }
+      ],
+      "originalTotal": 101760,
+      "comboPrice": 100000,
+      "discountAmount": 1760,
+      "discountPercentage": 2,
+      "isActive": true,
+      "category": "Combo Special",
+      "createdAt": "2025-08-05T14:08:56.233Z",
+      "updatedAt": "2025-08-05T14:08:56.233Z"
     }
   ],
-  "lastUpdated": "2025-08-05T06:43:39.924Z"
+  "lastUpdated": "2025-08-05T14:08:56.233Z"
 }

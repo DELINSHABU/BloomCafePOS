@@ -130,8 +130,11 @@ export default function SimpleStaffLogin({ onLogin }: SimpleStaffLoginProps) {
             <div className="space-y-1 text-xs text-gray-600 dark:text-gray-400">
               <div><strong>Super Admin:</strong> superadmin / super123</div>
               <div><strong>Admin:</strong> admin / admin123</div>
-              <div><strong>Waiter 1:</strong> waiter1 / waiter123</div>
-              <div><strong>Waiter 2:</strong> waiter2 / waiter456</div>
+              <div><strong>John Smith:</strong> john.smith / john123</div>
+              <div><strong>Sarah Johnson:</strong> sarah.johnson / sarah123</div>
+              <div><strong>Mike Wilson:</strong> mike.wilson / mike123</div>
+              <div><strong>Emily Davis:</strong> emily.davis / emily123</div>
+              <div>+ more waiters available...</div>
             </div>
           </div>
 

@@ -23,6 +23,7 @@ import QRGenerator from "@/components/qr-generator";
 import TodaysSpecialManager from "@/components/todays-special-manager";
 import OrderStatisticsDashboard from "@/components/order-statistics-dashboard";
 import OffersManager from "@/components/offers-manager";
+import UserCredentialsManager from "@/components/UserCredentialsManager";
 
 interface SuperAdminDashboardProps {
   onNavigate?: (page: any) => void;
@@ -134,7 +135,7 @@ export default function SuperAdminDashboard({
 
         {/* Navigation Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 bg-gray-400 dark:bg-gray-800 gap-1 p-2 min-h-[80px] sm:min-h-[40px]">
+        <TabsList className="grid w-full grid-cols-3 sm:grid-cols-7 bg-gray-400 dark:bg-gray-800 gap-1 p-2 min-h-[80px] sm:min-h-[40px]">
             <TabsTrigger
               value="overview"
               className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
@@ -170,6 +171,12 @@ export default function SuperAdminDashboard({
               className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
             >
               QR Codes
+            </TabsTrigger>
+            <TabsTrigger
+              value="users"
+              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
+            >
+              User Credentials
             </TabsTrigger>
           </TabsList>
 
@@ -287,6 +294,27 @@ export default function SuperAdminDashboard({
                 </CardContent>
               </Card>
 
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Users className="w-5 h-5 text-purple-600" />
+                    User Credentials
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Manage staff user accounts, passwords, and access levels.
+                    Create, edit, or delete user credentials.
+                  </p>
+                  <Button
+                    onClick={() => setActiveTab("users")}
+                    className="w-full bg-purple-600 hover:bg-purple-700"
+                  >
+                    Manage User Credentials
+                  </Button>
+                </CardContent>
+              </Card>
+
               <Card className="lg:col-span-2 xl:col-span-1">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -326,6 +354,14 @@ export default function SuperAdminDashboard({
                         className="bg-indigo-100 text-indigo-700"
                       >
                         ✓ QR Code Generator
+                      </Badge>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge
+                        variant="secondary"
+                        className="bg-purple-100 text-purple-700"
+                      >
+                        ✓ User Management
                       </Badge>
                     </div>
                   </div>
@@ -370,6 +406,12 @@ export default function SuperAdminDashboard({
           <TabsContent value="qr" className="mt-6">
             <div className="bg-white rounded-lg border">
               <QRGenerator onNavigate={onNavigate} />
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="users" className="mt-6">
+            <div className="bg-white rounded-lg border p-6">
+              <UserCredentialsManager currentUser={currentUser} />
             </div>
           </TabsContent>
         </Tabs>
