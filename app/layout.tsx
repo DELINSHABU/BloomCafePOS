@@ -3,6 +3,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AuthProvider } from '@/lib/auth-context'
+import { CustomerAuthProvider } from '@/lib/customer-auth-context'
 import ClientWrapper from '@/components/client-wrapper'
 import './globals.css'
 
@@ -32,9 +33,11 @@ html {
       <body suppressHydrationWarning={true}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <AuthProvider>
-            <ClientWrapper>
-              {children}
-            </ClientWrapper>
+            <CustomerAuthProvider>
+              <ClientWrapper>
+                {children}
+              </ClientWrapper>
+            </CustomerAuthProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>

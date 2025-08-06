@@ -1,37 +1,73 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useCustomerAuth, CustomerAddress } from "@/lib/customer-auth-context"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Home, Menu, Minus, Plus, ArrowLeft } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Home, Menu, Minus, Plus, ArrowLeft, MapPin, User, UserPlus } from "lucide-react"
+import CustomerAuthModal from "@/components/customer-auth-modal"
+import AddressManager from "@/components/address-manager"
 import type { CartItem, Page } from "@/app/page"
 
 interface OrderListPageProps {
   items: CartItem[]
   onNavigate: (page: Page) => void
   onUpdateQuantity: (id: string, quantity: number) => void
-  onOrderNow: (customerName?: string) => void
+  onOrderNow: (customerName?: string, deliveryAddress?: CustomerAddress, customerPhone?: string) => void
   orderType: "dine-in" | "delivery"
   tableNumber: string
   onOrderTypeChange: (type: "dine-in" | "delivery") => void
 }
 
 export default function OrderListPage({ items, onNavigate, onUpdateQuantity, onOrderNow, orderType, tableNumber, onOrderTypeChange }: OrderListPageProps) {
+  const { user, profile } = useCustomerAuth()
   const [customerName, setCustomerName] = useState("")
   const [customerPhone, setCustomerPhone] = useState("")
-  const [deliveryAddress, setDeliveryAddress] = useState("")
+  const [selectedAddress, setSelectedAddress] = useState<CustomerAddress | null>(null)
   const [specialInstructions, setSpecialInstructions] = useState("")
+  const [showAuthModal, setShowAuthModal] = useState(false)
+  const [showAddressSelector, setShowAddressSelector] = useState(false)
 
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  
+  // Auto-populate user data when user logs in
+  useEffect(() => {
+    if (user && profile) {
+      setCustomerName(profile.displayName)
+      // Auto-select default address if available
+      const defaultAddress = profile.addresses.find(addr => addr.isDefault)
+      if (defaultAddress) {
+        setSelectedAddress(defaultAddress)
+      }
+      // Auto-populate phone from profile if available
+      if (profile.phoneNumber && !customerPhone) {
+        setCustomerPhone(profile.phoneNumber)
+      }
+    }
+  }, [user, profile, customerPhone])
+  
+  const handleAddressSelect = (address: CustomerAddress) => {
+    setSelectedAddress(address)
+    setShowAddressSelector(false)
+  }
 
   const handleOrderNow = () => {
     if (orderType === "delivery" && !customerName.trim()) {
       alert("Please enter your name for delivery orders")
       return
     }
-    onOrderNow(customerName.trim() || undefined)
+    
+    // For delivery orders, pass the address and phone information
+    if (orderType === "delivery") {
+      const phoneToPass = profile?.phoneNumber || customerPhone
+      onOrderNow(customerName.trim() || undefined, selectedAddress || undefined, phoneToPass || undefined)
+    } else {
+      onOrderNow(customerName.trim() || undefined)
+    }
   }
 
   return (
@@ -114,27 +150,89 @@ export default function OrderListPage({ items, onNavigate, onUpdateQuantity, onO
 
             {orderType === "delivery" && (
               <>
-                <div>
-                  <Label htmlFor="customerPhone">Phone Number</Label>
-                  <Input
-                    id="customerPhone"
-                    value={customerPhone}
-                    onChange={(e) => setCustomerPhone(e.target.value)}
-                    placeholder="Enter your phone number"
-                    type="tel"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="deliveryAddress">Delivery Address</Label>
-                  <Textarea
-                    id="deliveryAddress"
-                    value={deliveryAddress}
-                    onChange={(e) => setDeliveryAddress(e.target.value)}
-                    placeholder="Enter your full delivery address"
-                    rows={3}
-                  />
-                </div>
+                {/* Customer Authentication Section */}
+                {!user ? (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <UserPlus className="h-5 w-5" />
+                        Create Account for Better Experience
+                      </CardTitle>
+                      <CardDescription>
+                        Sign up to save addresses and track your orders easily
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button
+                        variant="outline"
+                        onClick={() => setShowAuthModal(true)}
+                        className="w-full"
+                      >
+                        <User className="mr-2 h-4 w-4" />
+                        Login or Sign Up
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  /* Address Selection for Logged-in Users */
+                  <div>
+                    <Label>Delivery Address</Label>
+                    {selectedAddress ? (
+                      <Card className="cursor-pointer" onClick={() => setShowAddressSelector(true)}>
+                        <CardContent className="p-4">
+                          <div className="flex items-start justify-between">
+                            <div className="space-y-1">
+                              <div className="flex items-center gap-2">
+                                <MapPin className="h-4 w-4" />
+                                <span className="font-medium">{selectedAddress.label}</span>
+                                {selectedAddress.isDefault && (
+                                  <Badge variant="secondary" className="text-xs">Default</Badge>
+                                )}
+                              </div>
+                              <p className="text-sm text-muted-foreground">
+                                {selectedAddress.streetAddress}
+                              </p>
+                              <p className="text-sm text-muted-foreground">
+                                {selectedAddress.city}, {selectedAddress.state} {selectedAddress.zipCode}
+                              </p>
+                            </div>
+                            <Button variant="ghost" size="sm">
+                              Change
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ) : (
+                      <Card>
+                        <CardContent className="p-6 text-center">
+                          <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                          <CardTitle className="mb-2">Select Delivery Address</CardTitle>
+                          <CardDescription className="mb-4">
+                            Choose from your saved addresses or add a new one
+                          </CardDescription>
+                          <Button onClick={() => setShowAddressSelector(true)}>
+                            <MapPin className="mr-2 h-4 w-4" />
+                            Select Address
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    )}
+                  </div>
+                )}
+                
+                {/* Fallback Phone Input for guests or if user doesn't have phone */}
+                {(!user || !profile?.phoneNumber) && (
+                  <div>
+                    <Label htmlFor="customerPhone">Phone Number</Label>
+                    <Input
+                      id="customerPhone"
+                      value={customerPhone}
+                      onChange={(e) => setCustomerPhone(e.target.value)}
+                      placeholder="Enter your phone number"
+                      type="tel"
+                    />
+                  </div>
+                )}
               </>
             )}
 
@@ -167,8 +265,24 @@ export default function OrderListPage({ items, onNavigate, onUpdateQuantity, onO
           {orderType === "delivery" ? "Place Delivery Order" : "Place Order"} - ₹{total.toFixed(2)}
         </Button>
       </div>
-
-
+      
+      {/* Customer Authentication Modal */}
+      <CustomerAuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onSuccess={() => {
+          setShowAuthModal(false)
+          // User data will be auto-populated by useEffect
+        }}
+      />
+      
+      {/* Address Selector Modal */}
+      <AddressManager
+        isOpen={showAddressSelector}
+        onClose={() => setShowAddressSelector(false)}
+        onAddressSelect={handleAddressSelect}
+        selectMode={true}
+      />
     </div>
   )
 }

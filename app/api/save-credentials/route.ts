@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
     const filePath = path.join(process.cwd(), 'staff-credentials.json');
     
     // Write the updated credentials to the file
+    console.log('💾 JSON FILE ACCESS: staff-credentials.json updated from api/save-credentials/route.ts -> POST()');
     fs.writeFileSync(filePath, JSON.stringify(credentialsData, null, 4));
 
     return NextResponse.json(

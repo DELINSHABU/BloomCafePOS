@@ -17,6 +17,7 @@ function initializeAvailabilityFile() {
 
 export async function GET() {
   try {
+    console.log('📋 JSON FILE ACCESS: menu-availability.json accessed from api/menu-availability/route.ts -> GET()');
     initializeAvailabilityFile()
     const fileContents = fs.readFileSync(AVAILABILITY_FILE_PATH, 'utf8')
     const availabilityData = JSON.parse(fileContents)
@@ -29,6 +30,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('📝 JSON FILE ACCESS: menu-availability.json accessed from api/menu-availability/route.ts -> POST() - updating availability');
     initializeAvailabilityFile()
     const { itemNo, available, price } = await request.json()
     
@@ -63,6 +65,7 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
+    console.log('🔄 JSON FILE ACCESS: menu-availability.json accessed from api/menu-availability/route.ts -> PUT() - bulk updating availability');
     initializeAvailabilityFile()
     const updates = await request.json() // Array of updates or single update
     

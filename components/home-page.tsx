@@ -7,6 +7,7 @@ import {
   applyOfferToPrice,
 } from "@/lib/offers-utils";
 import { getActiveCombos, formatComboForCart } from "@/lib/combo-utils";
+import { useCustomerAuth } from "@/lib/customer-auth-context";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -16,8 +17,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart, Grid3X3, ArrowUpDown, Tag, Package } from "lucide-react";
+import { ShoppingCart, Grid3X3, ArrowUpDown, Tag, Package, User, UserPlus } from "lucide-react";
 import Image from "next/image";
+import CustomerAuthModal from "@/components/customer-auth-modal";
+import CustomerProfile from "@/components/customer-profile";
 import type { Page, CartItem } from "@/app/page";
 
 interface HomePageProps {
@@ -56,6 +59,11 @@ export default function HomePage({
   const [offers, setOffers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // Customer auth states
+  const { user, profile, loading: authLoading } = useCustomerAuth();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   // Load Today's Special items from API
   useEffect(() => {
@@ -207,7 +215,10 @@ export default function HomePage({
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-yellow-300 text-xl sm:text-2xl lg:text-3xl font-bold">
-              Bloom Garden Cafe
+              {user && profile ? 
+                `Welcome, ${profile.displayName}!` : 
+                "Bloom Garden Cafe"
+              }
             </h1>
             <Button
               variant="outline"
@@ -517,6 +528,63 @@ export default function HomePage({
             </SheetContent>
           </Sheet>
 
+          {/* TEST BUTTON - Simple debugging */}
+          <button 
+            style={{ 
+              backgroundColor: 'blue', 
+              color: 'white', 
+              border: '3px solid red',
+              borderRadius: '50%',
+              width: '48px',
+              height: '48px',
+              fontSize: '12px'
+            }}
+            onClick={() => {
+              alert('TEST BUTTON CLICKED!')
+              console.log('🚨 TEST: Button clicked successfully')
+              setShowAuthModal(true)
+            }}
+          >
+            TEST
+          </button>
+
+          {/* Customer Account Button */}
+          <button 
+            style={{ 
+              backgroundColor: 'transparent',
+              color: '#10b981',
+              border: 'none',
+              borderRadius: '50%',
+              width: '48px',
+              height: '48px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'background-color 0.2s'
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#dcfce7'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+            onClick={() => {
+              console.log('🔧 Login button clicked!')
+              console.log('🔧 User state:', user ? 'logged in' : 'not logged in')
+              if (user) {
+                console.log('🔧 Opening profile modal')
+                setShowProfileModal(true)
+              } else {
+                console.log('🔧 Opening auth modal')
+                setShowAuthModal(true)
+              }
+            }}
+            title={user ? 'View Profile' : 'Login / Register'}
+          >
+            {user ? (
+              <User style={{ width: '20px', height: '20px', color: '#10b981' }} />
+            ) : (
+              <UserPlus style={{ width: '20px', height: '20px', color: '#10b981' }} />
+            )}
+          </button>
+
           {/* Cart Button */}
           <Button
             variant="ghost"
@@ -533,6 +601,26 @@ export default function HomePage({
           </Button>
         </div>
       </div>
+      
+      {/* Customer Authentication Modals */}
+      {console.log('🔧 Rendering CustomerAuthModal, isOpen:', showAuthModal)}
+      <CustomerAuthModal
+        isOpen={showAuthModal}
+        onClose={() => {
+          console.log('🔧 Closing auth modal')
+          setShowAuthModal(false)
+        }}
+        onSuccess={() => {
+          console.log('🔧 Auth success, closing modal')
+          setShowAuthModal(false)
+          // Optionally show a success toast here
+        }}
+      />
+      
+      <CustomerProfile
+        isOpen={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
+      />
     </div>
   );
 }

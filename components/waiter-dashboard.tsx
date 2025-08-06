@@ -14,7 +14,22 @@ import {
   RefreshCw,
   LogOut,
   User,
+  X,
 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { SimpleThemeToggle } from "@/components/theme-toggle";
 import { useOrders } from "@/lib/order-context";
 import type { OrderStatus } from "@/app/page";
@@ -30,9 +45,11 @@ export default function WaiterDashboard({
   currentUser,
   onLogout,
 }: WaiterDashboardProps) {
-  const { orders, updateOrderStatus, syncOrders } = useOrders();
+  const { orders, updateOrderStatus, cancelOrder, syncOrders } = useOrders();
   const [isSyncing, setIsSyncing] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [cancellingOrderId, setCancellingOrderId] = useState<string | null>(null);
+  const [cancellationReason, setCancellationReason] = useState("");
 
   useEffect(() => {
     setIsMounted(true);
@@ -56,6 +73,8 @@ export default function WaiterDashboard({
         return "bg-green-500";
       case "delivered":
         return "bg-gray-500";
+      case "cancelled":
+        return "bg-red-500";
       default:
         return "bg-gray-500";
     }
@@ -71,9 +90,22 @@ export default function WaiterDashboard({
         return <CheckCircle className="w-4 h-4" />;
       case "delivered":
         return <Truck className="w-4 h-4" />;
+      case "cancelled":
+        return <X className="w-4 h-4" />;
       default:
         return <Clock className="w-4 h-4" />;
     }
+  };
+
+  const handleCancelOrder = (orderId: string) => {
+    if (!cancellationReason.trim()) {
+      alert('Please enter a cancellation reason');
+      return;
+    }
+    
+    cancelOrder(orderId, cancellationReason, currentUser?.name || 'Staff');
+    setCancellingOrderId(null);
+    setCancellationReason('');
   };
 
   const getNextStatus = (currentStatus: OrderStatus): OrderStatus | null => {
@@ -286,15 +318,16 @@ export default function WaiterDashboard({
 
         {/* Orders Tabs */}
         <Tabs defaultValue="pending" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="pending">Pending</TabsTrigger>
             <TabsTrigger value="preparing">Preparing</TabsTrigger>
             <TabsTrigger value="ready">Ready</TabsTrigger>
             <TabsTrigger value="delivered">Delivered</TabsTrigger>
+            <TabsTrigger value="cancelled">Cancelled</TabsTrigger>
           </TabsList>
 
           {(
-            ["pending", "preparing", "ready", "delivered"] as OrderStatus[]
+            ["pending", "preparing", "ready", "delivered", "cancelled"] as OrderStatus[]
           ).map((status) => (
             <TabsContent key={status} value={status} className="mt-6">
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -349,22 +382,40 @@ export default function WaiterDashboard({
                           )}
                         </div>
 
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-gray-600 space-y-1">
                           <div>{formatTime(order.timestamp)}</div>
                           {order.orderType === "dine-in" &&
                             order.tableNumber && (
                               <div>Table {order.tableNumber}</div>
                             )}
-                          {order.orderType === "delivery" &&
-                            order.customerName && (
-                              <div>{order.customerName}</div>
-                            )}
+                          {order.orderType === "delivery" && (
+                            <>
+                              {order.customerName && (
+                                <div className="font-medium text-gray-800">{order.customerName}</div>
+                              )}
+                              {order.customerPhone && (
+                                <div className="flex items-center gap-1 text-green-600">
+                                  📞 {order.customerPhone}
+                                </div>
+                              )}
+                              {order.deliveryAddress && (
+                                <div className="text-xs bg-gray-50 p-2 rounded border-l-2 border-blue-400">
+                                  <div className="font-medium text-blue-600 mb-1">📍 Delivery Address:</div>
+                                  <div>{order.deliveryAddress.streetAddress}</div>
+                                  <div>{order.deliveryAddress.city}, {order.deliveryAddress.state} {order.deliveryAddress.zipCode}</div>
+                                  {order.deliveryAddress.phoneNumber && (
+                                    <div className="text-green-600 mt-1">📞 {order.deliveryAddress.phoneNumber}</div>
+                                  )}
+                                </div>
+                              )}
+                            </>
+                          )}
                           {order.staffMember && (
                             <div className="text-blue-600">
                               Staff: {order.staffMember}
                             </div>
                           )}
-                          <div className="capitalize">{order.orderType}</div>
+                          <div className="capitalize font-medium">{order.orderType}</div>
                         </div>
                       </CardHeader>
                       <CardContent>
@@ -383,24 +434,87 @@ export default function WaiterDashboard({
                             </div>
                           ))}
                         </div>
+                        {/* Show cancellation info for cancelled orders */}
+                        {status === "cancelled" && order.cancellationReason && (
+                          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded">
+                            <div className="text-sm font-medium text-red-800 mb-1">Cancelled</div>
+                            <div className="text-sm text-red-600">Reason: {order.cancellationReason}</div>
+                            {order.cancelledBy && (
+                              <div className="text-xs text-red-500 mt-1">By: {order.cancelledBy}</div>
+                            )}
+                          </div>
+                        )}
+                        
                         <div className="flex justify-between items-center pt-2 border-t">
                           <div className="font-bold">
                             Total: ₹{order.total.toFixed(2)}
                           </div>
-                          {getNextStatus(status) && (
-                            <Button
-                              size="sm"
-                              onClick={() =>
-                                updateOrderStatus(
-                                  order.id,
-                                  getNextStatus(status)!
-                                )
-                              }
-                              className="bg-emerald-600 hover:bg-emerald-700"
-                            >
-                              Mark as {getNextStatus(status)}
-                            </Button>
-                          )}
+                          <div className="flex gap-2">
+                            {/* Cancel button for active orders */}
+                            {(status === "pending" || status === "preparing") && (
+                              <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                  <Button
+                                    size="sm"
+                                    variant="destructive"
+                                    onClick={() => setCancellingOrderId(order.id)}
+                                  >
+                                    <X className="w-4 h-4 mr-1" />
+                                    Cancel
+                                  </Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                  <AlertDialogHeader>
+                                    <AlertDialogTitle>Cancel Order #{order.id.slice(-6)}</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                      This action cannot be undone. Please provide a reason for cancelling this order.
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <div className="space-y-4">
+                                    <div>
+                                      <Label htmlFor="cancellation-reason">Cancellation Reason *</Label>
+                                      <Textarea
+                                        id="cancellation-reason"
+                                        placeholder="Please enter the reason for cancelling this order..."
+                                        value={cancellationReason}
+                                        onChange={(e) => setCancellationReason(e.target.value)}
+                                        className="mt-2"
+                                        rows={3}
+                                      />
+                                    </div>
+                                  </div>
+                                  <AlertDialogFooter>
+                                    <AlertDialogCancel onClick={() => {
+                                      setCancellingOrderId(null);
+                                      setCancellationReason('');
+                                    }}>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction
+                                      onClick={() => handleCancelOrder(order.id)}
+                                      className="bg-red-600 hover:bg-red-700"
+                                    >
+                                      Yes, Cancel Order
+                                    </AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
+                            )}
+                            
+                            {/* Progress button */}
+                            {getNextStatus(status) && (
+                              <Button
+                                size="sm"
+                                onClick={() =>
+                                  updateOrderStatus(
+                                    order.id,
+                                    getNextStatus(status)!
+                                  )
+                                }
+                                className="bg-emerald-600 hover:bg-emerald-700"
+                              >
+                                Mark as {getNextStatus(status)}
+                              </Button>
+                            )}
+                          </div>
                         </div>
                       </CardContent>
                     </Card>

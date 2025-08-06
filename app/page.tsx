@@ -8,6 +8,7 @@ import MenuPage from "@/components/menu-page"
 import OrderSuccessPage from "@/components/order-success-page"
 import QRGenerator from "@/components/qr-generator"
 import { OrderProvider, useOrders } from "@/lib/order-context"
+import { CustomerAuthProvider, useCustomerAuth } from "@/lib/customer-auth-context"
 
 export type CartItem = {
   id: string
@@ -17,7 +18,7 @@ export type CartItem = {
   quantity: number
 }
 
-export type OrderStatus = "pending" | "preparing" | "ready" | "delivered"
+export type OrderStatus = "pending" | "preparing" | "ready" | "delivered" | "cancelled"
 
 export type Order = {
   id: string
@@ -29,6 +30,20 @@ export type Order = {
   orderType: "dine-in" | "delivery"
   timestamp: Date
   staffMember?: string
+  // Cancellation information
+  cancellationReason?: string
+  cancelledBy?: string
+  cancelledAt?: Date
+  // Customer delivery information
+  customerPhone?: string
+  deliveryAddress?: {
+    label: string
+    streetAddress: string
+    city: string
+    state: string
+    zipCode: string
+    phoneNumber?: string
+  }
 }
 
 export type Page = "home" | "menu" | "cart" | "order-list" | "order-success" | "qr-generator"
@@ -42,6 +57,7 @@ function AppContent() {
   const [isCartLoaded, setIsCartLoaded] = useState(false)
   
   const { orders, addOrder, updateOrderStatus } = useOrders()
+  const { user, profile, createOrder: createCustomerOrder } = useCustomerAuth()
 
   // Cart persistence functions
   const saveCartToStorage = (items: CartItem[]) => {
@@ -227,7 +243,7 @@ function AppContent() {
     return cartItems.reduce((sum, item) => sum + item.quantity, 0)
   }
 
-  const createOrder = (customerName?: string) => {
+  const createOrder = async (customerName?: string, deliveryAddress?: any, customerPhone?: string) => {
     const newOrder: Order = {
       id: `order-${Math.random().toString(36).substr(2, 9)}`,
       items: [...cartItems],
@@ -236,10 +252,41 @@ function AppContent() {
       tableNumber: orderType === "dine-in" ? tableNumber : undefined,
       customerName,
       orderType,
-      timestamp: new Date()
+      timestamp: new Date(),
+      customerPhone,
+      deliveryAddress: deliveryAddress ? {
+        label: deliveryAddress.label,
+        streetAddress: deliveryAddress.streetAddress,
+        city: deliveryAddress.city,
+        state: deliveryAddress.state,
+        zipCode: deliveryAddress.zipCode,
+        phoneNumber: deliveryAddress.phoneNumber
+      } : undefined
     }
     
+    // Store order in the main order system (JSON files/API)
     addOrder(newOrder)
+    
+    // If user is authenticated, also store in their Firestore profile for order history
+    if (user && profile && createCustomerOrder) {
+      try {
+        console.log('Storing order in customer database for user:', user.email)
+        await createCustomerOrder({
+          items: cartItems,
+          total: newOrder.total,
+          status: "pending",
+          orderType,
+          tableNumber: orderType === "dine-in" ? tableNumber : undefined,
+          deliveryAddress: deliveryAddress,
+          customerName: profile.displayName
+        })
+        console.log('Order successfully stored in customer database')
+      } catch (error) {
+        console.error('Failed to store order in customer database:', error)
+        // Continue anyway - the order is still in the main system
+      }
+    }
+    
     setCartItems([])
     clearCartFromStorage() // Clear cart from localStorage after successful order
     return newOrder
@@ -302,8 +349,8 @@ function AppContent() {
         items={cartItems}
         onNavigate={navigateToPage}
         onUpdateQuantity={updateQuantity}
-        onOrderNow={(customerName) => {
-          createOrder(customerName)
+        onOrderNow={async (customerName, deliveryAddress, customerPhone) => {
+          await createOrder(customerName, deliveryAddress, customerPhone)
           navigateToPage("order-success")
         }}
         orderType={orderType}
@@ -333,8 +380,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <OrderProvider>
-      <AppContent />
-    </OrderProvider>
+    <CustomerAuthProvider>
+      <OrderProvider>
+        <AppContent />
+      </OrderProvider>
+    </CustomerAuthProvider>
   )
 }

@@ -1,21 +1,46 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { promises as fs } from 'fs'
+import fs from 'fs'
 import path from 'path'
+
+const ORDERS_FILE = path.join(process.cwd(), 'orders.json')
+const ANALYTICS_FILE = path.join(process.cwd(), 'analytics_data.json')
+
+// Helper function to read orders data from JSON
+function readOrdersData() {
+  try {
+    if (fs.existsSync(ORDERS_FILE)) {
+      console.log('📋 JSON FILE ACCESS: orders.json accessed from api/orders/route.ts -> readOrdersData()');
+      const data = fs.readFileSync(ORDERS_FILE, 'utf8')
+      return JSON.parse(data)
+    }
+    return { orders: [], lastUpdated: new Date().toISOString() }
+  } catch (error) {
+    console.error('Error reading orders.json:', error)
+    return { orders: [], lastUpdated: new Date().toISOString() }
+  }
+}
+
+// Helper function to write orders data to JSON
+function writeOrdersData(data: any): boolean {
+  try {
+    console.log('💾 JSON FILE ACCESS: orders.json updated from api/orders/route.ts -> writeOrdersData()');
+    data.lastUpdated = new Date().toISOString()
+    fs.writeFileSync(ORDERS_FILE, JSON.stringify(data, null, 2))
+    return true
+  } catch (error) {
+    console.error('Error writing orders.json:', error)
+    return false
+  }
+}
 
 // Analytics update function moved here to avoid import issues
 async function updateAnalyticsData() {
   try {
-    const ORDERS_FILE = path.join(process.cwd(), 'orders.json')
-    const ANALYTICS_FILE = path.join(process.cwd(), 'analytics_data.json')
+    console.log('📈 JSON FILE ACCESS: orders data accessed from orders.json -> updateAnalyticsData()');
     
-    // Read orders data
-    if (!(await fs.access(ORDERS_FILE).then(() => true).catch(() => false))) {
-      console.log('Orders file not found')
-      return
-    }
-
-    const ordersData = JSON.parse(await fs.readFile(ORDERS_FILE, 'utf8'))
-    const orders = ordersData.orders
+    // Read orders data from JSON
+    const ordersData = readOrdersData()
+    const orders = ordersData.orders || []
 
     // Analyze existing data to create comprehensive analytics
     const analytics = {
@@ -137,10 +162,10 @@ async function updateAnalyticsData() {
       .sort((a: any, b: any) => b.totalQuantity - a.totalQuantity)
       .slice(0, 15)
 
-    // Write to file
-    await fs.writeFile(ANALYTICS_FILE, JSON.stringify(analytics, null, 2))
+    // Write analytics to JSON file
+    fs.writeFileSync(ANALYTICS_FILE, JSON.stringify(analytics, null, 2))
 
-    console.log('Analytics data updated successfully!')
+    console.log('Analytics data updated successfully in Firebase!')
     console.log(`Total Orders: ${analytics.fullRecord.totalOrders}`)
     console.log(`Total Revenue: ₹${analytics.revenueAnalytics.totalRevenue}`)
     console.log(`Average Order Value: ₹${analytics.revenueAnalytics.averageOrderValue}`)
@@ -152,31 +177,20 @@ async function updateAnalyticsData() {
   }
 }
 
-const ORDERS_FILE = path.join(process.cwd(), 'orders.json')
-
-// Ensure orders file exists
-async function ensureOrdersFile() {
-  try {
-    await fs.access(ORDERS_FILE)
-  } catch {
-    await fs.writeFile(ORDERS_FILE, JSON.stringify({ orders: [] }))
-  }
-}
-
-// GET - Fetch all orders
+// GET - Fetch all orders from JSON
 export async function GET() {
   try {
-    await ensureOrdersFile()
-    const data = await fs.readFile(ORDERS_FILE, 'utf8')
-    const { orders } = JSON.parse(data)
+    console.log('📋 JSON FILE ACCESS: orders data accessed from orders.json -> GET()');
+    
+    const ordersData = readOrdersData()
     
     return NextResponse.json({ 
       success: true, 
-      orders: orders || [],
+      orders: ordersData.orders || [],
       timestamp: new Date().toISOString()
     })
   } catch (error) {
-    console.error('Error fetching orders:', error)
+    console.error('Error fetching orders from JSON:', error)
     return NextResponse.json({ 
       success: false, 
       error: 'Failed to fetch orders',
@@ -185,37 +199,60 @@ export async function GET() {
   }
 }
 
-// POST - Add new order or update existing order
+// POST - Add new order or update existing order in JSON
 export async function POST(request: NextRequest) {
   try {
-    await ensureOrdersFile()
+    console.log('📝 JSON FILE ACCESS: orders data accessed from orders.json -> POST() - modifying orders');
+    
     const body = await request.json()
-    const { action, order, orderId, status } = body
+    const { action, order, orderId, status, cancellationReason, cancelledBy, cancelledAt } = body
 
-    const data = await fs.readFile(ORDERS_FILE, 'utf8')
-    const ordersData = JSON.parse(data)
-    let orders = ordersData.orders || []
-
+    const ordersData = readOrdersData()
+    
     if (action === 'add') {
-      // Add new order
-      orders.push({
+      // Add new order with unique key
+      const newOrderData = {
         ...order,
         timestamp: new Date(order.timestamp).toISOString()
-      })
-      console.log('New order added:', order.id)
-    } else if (action === 'update' && orderId && status) {
-      // Update order status
-      orders = orders.map((o: any) => 
-        o.id === orderId ? { ...o, status } : o
-      )
-      console.log(`Order ${orderId} status updated to: ${status}`)
+      }
+      
+      ordersData.orders.push(newOrderData)
+      
+      console.log('New order added to JSON:', order.id)
+      
+    } else if ((action === 'update' || action === 'cancel') && orderId) {
+      // Find and update existing order
+      const orderIndex = ordersData.orders.findIndex((o: any) => o.id === orderId)
+      
+      if (orderIndex !== -1) {
+        let updatedOrder = { ...ordersData.orders[orderIndex] }
+        
+        if (action === 'update' && status) {
+          updatedOrder.status = status
+          console.log(`Order ${orderId} status updated to: ${status}`)
+        } else if (action === 'cancel' && cancellationReason) {
+          updatedOrder = {
+            ...updatedOrder,
+            status: 'cancelled',
+            cancellationReason,
+            cancelledBy,
+            cancelledAt: new Date(cancelledAt).toISOString()
+          }
+          console.log(`Order ${orderId} cancelled by ${cancelledBy}: ${cancellationReason}`)
+        }
+        
+        ordersData.orders[orderIndex] = updatedOrder
+      } else {
+        throw new Error(`Order ${orderId} not found`)
+      }
     }
 
-    // Save updated orders
-    await fs.writeFile(ORDERS_FILE, JSON.stringify({ 
-      orders,
-      lastUpdated: new Date().toISOString()
-    }))
+    // Write updated orders back to file
+    if (!writeOrdersData(ordersData)) {
+      throw new Error('Failed to save orders data')
+    }
+    
+    const orders = ordersData.orders
 
     // Update analytics data after orders change
     try {
@@ -229,7 +266,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ 
       success: true, 
       orders,
-      message: action === 'add' ? 'Order added successfully' : 'Order updated successfully'
+      message: action === 'add' ? 'Order added successfully' : 
+               action === 'cancel' ? 'Order cancelled successfully' : 
+               'Order updated successfully'
     })
   } catch (error) {
     console.error('Error processing order:', error)
@@ -240,23 +279,32 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// DELETE - Clear all orders (for testing)
+// DELETE - Clear all orders from JSON (for testing)
 export async function DELETE() {
   try {
-    await fs.writeFile(ORDERS_FILE, JSON.stringify({ 
+    // Clear orders
+    const emptyOrdersData = {
       orders: [],
       lastUpdated: new Date().toISOString()
-    }))
+    }
+    writeOrdersData(emptyOrdersData)
+    
+    // Clear analytics data as well
+    if (fs.existsSync(ANALYTICS_FILE)) {
+      fs.unlinkSync(ANALYTICS_FILE)
+    }
+    
+    console.log('All orders and analytics cleared from JSON files')
     
     return NextResponse.json({ 
       success: true, 
-      message: 'All orders cleared' 
+      message: 'All orders cleared from JSON files' 
     })
   } catch (error) {
-    console.error('Error clearing orders:', error)
+    console.error('Error clearing orders from JSON:', error)
     return NextResponse.json({ 
       success: false, 
-      error: 'Failed to clear orders' 
+      error: 'Failed to clear orders from JSON' 
     }, { status: 500 })
   }
 }

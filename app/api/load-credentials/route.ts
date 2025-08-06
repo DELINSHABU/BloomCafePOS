@@ -4,6 +4,7 @@ import path from 'path';
 
 export async function GET() {
   try {
+    console.log('🔐 JSON FILE ACCESS: staff-credentials.json accessed from api/load-credentials/route.ts -> GET()');
     const filePath = path.join(process.cwd(), 'staff-credentials.json');
     
     if (!fs.existsSync(filePath)) {

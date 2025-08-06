@@ -7,6 +7,7 @@ interface OrderContextType {
   orders: Order[]
   addOrder: (order: Order) => void
   updateOrderStatus: (orderId: string, status: OrderStatus) => void
+  cancelOrder: (orderId: string, reason: string, cancelledBy: string) => void
   getOrdersByStatus: (status: OrderStatus) => Order[]
   syncOrders: () => void
 }
@@ -98,6 +99,35 @@ const updateOrderStatusInAPI = async (orderId: string, status: OrderStatus): Pro
   }
 }
 
+const cancelOrderInAPI = async (orderId: string, reason: string, cancelledBy: string): Promise<boolean> => {
+  try {
+    const response = await fetch('/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        action: 'cancel',
+        orderId,
+        cancellationReason: reason,
+        cancelledBy,
+        cancelledAt: new Date().toISOString()
+      })
+    })
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log('Order cancelled in API:', data.message)
+    return data.success
+  } catch (error) {
+    console.error('Failed to cancel order in API:', error)
+    return false
+  }
+}
+
 export function OrderProvider({ children }: { children: ReactNode }) {
   const [orders, setOrders] = useState<Order[]>([])
   const [isInitialized, setIsInitialized] = useState(false)
@@ -167,6 +197,31 @@ export function OrderProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const cancelOrder = async (orderId: string, reason: string, cancelledBy: string) => {
+    console.log(`Cancelling order ${orderId} with reason: ${reason}`)
+    
+    // Optimistically update local state
+    const previousOrders = orders
+    const cancelledAt = new Date()
+    setOrders(prev => prev.map(order => 
+      order.id === orderId ? { 
+        ...order, 
+        status: 'cancelled' as OrderStatus,
+        cancellationReason: reason,
+        cancelledBy,
+        cancelledAt
+      } : order
+    ))
+    
+    // Sync with API
+    const success = await cancelOrderInAPI(orderId, reason, cancelledBy)
+    if (!success) {
+      // Revert on failure
+      setOrders(previousOrders)
+      console.error('Failed to cancel order in API, reverted local state')
+    }
+  }
+
   const getOrdersByStatus = (status: OrderStatus) => {
     return orders.filter(order => order.status === status)
   }
@@ -186,6 +241,7 @@ export function OrderProvider({ children }: { children: ReactNode }) {
       orders,
       addOrder,
       updateOrderStatus,
+      cancelOrder,
       getOrdersByStatus,
       syncOrders
     }}>

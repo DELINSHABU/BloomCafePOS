@@ -7,6 +7,7 @@ const ANALYTICS_FILE = path.join(process.cwd(), 'analytics_data.json')
 export async function GET() {
   try {
     if (fs.existsSync(ANALYTICS_FILE)) {
+      console.log('📈 JSON FILE ACCESS: analytics_data.json accessed from api/analytics/route.ts -> GET()');
       const data = fs.readFileSync(ANALYTICS_FILE, 'utf8')
       const analyticsData = JSON.parse(data)
       

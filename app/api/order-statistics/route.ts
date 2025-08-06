@@ -33,6 +33,7 @@ interface OrdersData {
 function readOrdersData(): OrdersData {
   try {
     if (fs.existsSync(ORDERS_FILE)) {
+      console.log('📊 JSON FILE ACCESS: orders.json accessed from api/order-statistics/route.ts -> readOrdersData()');
       const data = fs.readFileSync(ORDERS_FILE, 'utf8')
       return JSON.parse(data)
     }

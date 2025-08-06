@@ -28,6 +28,7 @@ interface OffersData {
 function readOffersData(): OffersData {
   try {
     if (fs.existsSync(OFFERS_FILE)) {
+      console.log('🎯 JSON FILE ACCESS: offers.json accessed from api/offers/route.ts -> readOffersData()');
       const data = fs.readFileSync(OFFERS_FILE, 'utf8')
       return JSON.parse(data)
     }
@@ -41,6 +42,7 @@ function readOffersData(): OffersData {
 // Helper function to write offers data
 function writeOffersData(data: OffersData): boolean {
   try {
+    console.log('💾 JSON FILE ACCESS: offers.json updated from api/offers/route.ts -> writeOffersData()');
     data.lastUpdated = new Date().toISOString()
     fs.writeFileSync(OFFERS_FILE, JSON.stringify(data, null, 2))
     return true

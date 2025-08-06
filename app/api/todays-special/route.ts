@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 
-const TODAYS_SPECIAL_FILE = path.join(process.cwd(), 'todays-special.json')
-
 interface TodaysSpecialItem {
   id: string
   name: string
@@ -13,12 +11,17 @@ interface TodaysSpecialItem {
   isActive: boolean
 }
 
-// Helper function to read Today's Special data
+const TODAYS_SPECIAL_FILE = path.join(process.cwd(), 'todays-special.json')
+
+// Helper function to read Today's Special data from JSON
 function readTodaysSpecialData(): TodaysSpecialItem[] {
   try {
     if (fs.existsSync(TODAYS_SPECIAL_FILE)) {
+      console.log('⭐ JSON FILE ACCESS: todays-special.json accessed from api/todays-special/route.ts -> readTodaysSpecialData()');
       const data = fs.readFileSync(TODAYS_SPECIAL_FILE, 'utf8')
-      return JSON.parse(data)
+      const jsonData = JSON.parse(data)
+      // Handle both array format and object format
+      return Array.isArray(jsonData) ? jsonData : Object.values(jsonData)
     }
     return []
   } catch (error) {
@@ -27,9 +30,10 @@ function readTodaysSpecialData(): TodaysSpecialItem[] {
   }
 }
 
-// Helper function to write Today's Special data
+// Helper function to write Today's Special data to JSON
 function writeTodaysSpecialData(data: TodaysSpecialItem[]): boolean {
   try {
+    console.log('💾 JSON FILE ACCESS: todays-special.json updated from api/todays-special/route.ts -> writeTodaysSpecialData()');
     fs.writeFileSync(TODAYS_SPECIAL_FILE, JSON.stringify(data, null, 2))
     return true
   } catch (error) {

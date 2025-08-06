@@ -35,6 +35,7 @@ interface CombosData {
 function readCombosData(): CombosData {
   try {
     if (fs.existsSync(COMBOS_FILE)) {
+      console.log('🍽️ JSON FILE ACCESS: combos.json accessed from api/combos/route.ts -> readCombosData()');
       const data = fs.readFileSync(COMBOS_FILE, 'utf8')
       return JSON.parse(data)
     }
@@ -51,6 +52,7 @@ function readCombosData(): CombosData {
 // Helper function to write combos data
 function writeCombosData(data: CombosData): void {
   try {
+    console.log('💾 JSON FILE ACCESS: combos.json updated from api/combos/route.ts -> writeCombosData()');
     fs.writeFileSync(COMBOS_FILE, JSON.stringify(data, null, 2))
   } catch (error) {
     console.error('Error writing combos file:', error)

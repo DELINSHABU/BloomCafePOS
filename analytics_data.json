@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2025-08-05T16:43:57.265Z",
+  "lastUpdated": "2025-08-06T13:09:34.151Z",
   "fullRecord": {
-    "totalOrders": 98,
-    "totalRevenue": 959115,
+    "totalOrders": 115,
+    "totalRevenue": 963020,
     "orders": [
       {
         "id": "order-fw5qwd54l",
@@ -2195,7 +2195,7 @@
           }
         ],
         "total": 420,
-        "status": "preparing",
+        "status": "delivered",
         "tableNumber": "5",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2214,7 +2214,7 @@
           }
         ],
         "total": 210,
-        "status": "preparing",
+        "status": "delivered",
         "tableNumber": "7",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2233,7 +2233,7 @@
           }
         ],
         "total": 600,
-        "status": "preparing",
+        "status": "delivered",
         "tableNumber": "7",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2259,7 +2259,7 @@
           }
         ],
         "total": 510,
-        "status": "preparing",
+        "status": "delivered",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2278,12 +2278,403 @@
           }
         ],
         "total": 630,
-        "status": "preparing",
+        "status": "delivered",
         "tableNumber": "9",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
         "timestamp": "2025-08-05T16:20:34.916Z",
         "staffMember": "Mike Wilson"
+      },
+      {
+        "id": "order-hmz4csry5",
+        "items": [
+          {
+            "id": "combo-1754376219924",
+            "name": "Item01+item02",
+            "description": "Combo Special",
+            "price": 300,
+            "quantity": 2
+          }
+        ],
+        "total": 600,
+        "status": "delivered",
+        "tableNumber": "1",
+        "customerName": "DELIN SHABU",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T09:00:25.693Z"
+      },
+      {
+        "id": "order-4m1qs50o1",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 2
+          }
+        ],
+        "total": 420,
+        "status": "delivered",
+        "tableNumber": "",
+        "customerName": "asdfA",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T09:55:19.827Z"
+      },
+      {
+        "id": "order-s2dbe212o",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "Combo Special",
+            "price": 55,
+            "quantity": 1
+          }
+        ],
+        "total": 55,
+        "status": "delivered",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:08:12.768Z"
+      },
+      {
+        "id": "order-jucxqvb9r",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "3 APPAM + EGG CURRY",
+            "price": 55,
+            "quantity": 1
+          }
+        ],
+        "total": 55,
+        "status": "delivered",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:08:40.955Z"
+      },
+      {
+        "id": "order-zm2i09dx8",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 1
+          },
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "Combo Special",
+            "price": 55,
+            "quantity": 1
+          }
+        ],
+        "total": 265,
+        "status": "delivered",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:09:33.471Z"
+      },
+      {
+        "id": "order-pkwcvcmbu",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 1
+          }
+        ],
+        "total": 210,
+        "status": "delivered",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:13:06.259Z"
+      },
+      {
+        "id": "order-tb0806agv",
+        "items": [
+          {
+            "id": "combo-1754376219924",
+            "name": "Item01+item02",
+            "description": "Combo Special",
+            "price": 300,
+            "quantity": 1
+          }
+        ],
+        "total": 300,
+        "status": "delivered",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:16:35.503Z"
+      },
+      {
+        "id": "order-syjvs85ex",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 1
+          }
+        ],
+        "total": 210,
+        "status": "delivered",
+        "customerName": "Delin Shabu",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:19:39.287Z",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "  karikom PO kottarakara",
+          "city": "kollam",
+          "state": "keralal",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
+      },
+      {
+        "id": "order-e984ngkum",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 1
+          }
+        ],
+        "total": 210,
+        "status": "delivered",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:22:03.444Z",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "lower karikom",
+          "city": "kollam",
+          "state": "keralal",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
+      },
+      {
+        "id": "order-nzwvm7eec",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 1
+          }
+        ],
+        "total": 210,
+        "status": "delivered",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:26:40.828Z",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "lower karikom",
+          "city": "kollam",
+          "state": "keralal",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
+      },
+      {
+        "id": "order-51am7ynqy",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 1
+          }
+        ],
+        "total": 210,
+        "status": "delivered",
+        "customerName": "Sonu sasi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:28:49.377Z",
+        "customerPhone": "9633766791",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "kazhakottam",
+          "city": "tvm",
+          "state": "kerala",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
+      },
+      {
+        "id": "order-a5yx2bo7o",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "Combo Special",
+            "price": 55,
+            "quantity": 1
+          }
+        ],
+        "total": 55,
+        "status": "delivered",
+        "customerName": "Sonu sasi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:29:05.103Z",
+        "customerPhone": "9633766791",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "kazhakottam",
+          "city": "tvm",
+          "state": "kerala",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
+      },
+      {
+        "id": "order-pnny8by6d",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 1
+          }
+        ],
+        "total": 210,
+        "status": "cancelled",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:31:57.909Z",
+        "customerPhone": "9633766791",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "lower karikom",
+          "city": "kollam",
+          "state": "keralal",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        },
+        "cancellationReason": "bsfghsfh",
+        "cancelledBy": "Delin Developer",
+        "cancelledAt": "2025-08-06T12:43:36.540Z"
+      },
+      {
+        "id": "order-vegb3h04q",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 2
+          }
+        ],
+        "total": 420,
+        "status": "cancelled",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:41:42.851Z",
+        "customerPhone": "9633766791",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "lower karikom",
+          "city": "kollam",
+          "state": "keralal",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        },
+        "cancellationReason": "asfasdf",
+        "cancelledBy": "Delin Developer",
+        "cancelledAt": "2025-08-06T12:42:12.356Z"
+      },
+      {
+        "id": "order-b9btosm67",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 1
+          }
+        ],
+        "total": 210,
+        "status": "delivered",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T12:52:59.925Z",
+        "customerPhone": "9633766791",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "lower karikom",
+          "city": "kollam",
+          "state": "keralal",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
+      },
+      {
+        "id": "order-g3ts2tyay",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 1
+          }
+        ],
+        "total": 210,
+        "status": "preparing",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T13:08:09.787Z",
+        "customerPhone": "9633766791",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "lower karikom",
+          "city": "kollam",
+          "state": "keralal",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
+      },
+      {
+        "id": "order-d21imzz56",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "Combo Special",
+            "price": 55,
+            "quantity": 1
+          }
+        ],
+        "total": 55,
+        "status": "preparing",
+        "customerName": "Delin Shabu",
+        "orderType": "delivery",
+        "timestamp": "2025-08-06T13:08:37.614Z",
+        "customerPhone": "09633766791",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "  karikom PO kottarakara",
+          "city": "kollam",
+          "state": "keralal",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
       }
     ]
   },
@@ -2301,20 +2692,20 @@
     },
     {
       "month": "August",
-      "orders": 39,
-      "revenue": 940505,
-      "john": 5,
-      "emily": 7,
-      "mike": 8,
-      "sarah": 4,
-      "david": 6,
-      "customer": 23
+      "orders": 56,
+      "revenue": 944410,
+      "john": 8,
+      "emily": 10,
+      "mike": 12,
+      "sarah": 6,
+      "david": 8,
+      "customer": 33
     }
   ],
   "revenueAnalytics": {
-    "totalRevenue": 959115,
+    "totalRevenue": 963020,
     "revenueByStaff": {
-      "Customer Orders": 13165,
+      "Customer Orders": 17070,
       "Emily Davis": 9260,
       "John Smith": 516420,
       "Sarah Johnson": 403095,
@@ -2329,8 +2720,8 @@
         "revenue": 18610
       },
       "August": {
-        "orders": 39,
-        "revenue": 940505
+        "orders": 56,
+        "revenue": 944410
       }
     },
     "revenueByDay": {
@@ -2339,9 +2730,10 @@
       "2025-07-26": 7170,
       "2025-07-27": 630,
       "2025-07-30": 740,
-      "2025-08-05": 940505
+      "2025-08-05": 940505,
+      "2025-08-06": 3905
     },
-    "averageOrderValue": 9787
+    "averageOrderValue": 8374
   },
   "dailyAnalytics": {
     "morning": {
@@ -2355,12 +2747,12 @@
       }
     },
     "noon": {
-      "orders": 42,
-      "revenue": 19675,
+      "orders": 54,
+      "revenue": 22475,
       "staffBreakdown": {
         "Customer Orders": {
-          "orders": 26,
-          "revenue": 9790
+          "orders": 38,
+          "revenue": 12590
         },
         "Emily Davis": {
           "orders": 3,
@@ -2389,12 +2781,12 @@
       }
     },
     "night": {
-      "orders": 29,
-      "revenue": 931830,
+      "orders": 34,
+      "revenue": 932935,
       "staffBreakdown": {
         "Customer Orders": {
-          "orders": 6,
-          "revenue": 1700
+          "orders": 11,
+          "revenue": 2805
         },
         "Lisa Garcia": {
           "orders": 2,
@@ -2419,8 +2811,8 @@
       }
     },
     "fullDay": {
-      "orders": 123,
-      "revenue": 966085,
+      "orders": 140,
+      "revenue": 969990,
       "staffBreakdown": {
         "John Smith": {
           "orders": 1,
@@ -2460,16 +2852,16 @@
   "popularItems": [
     {
       "name": "Alfaham special Combo ",
-      "totalQuantity": 96,
-      "totalRevenue": 20160,
-      "orderCount": 24,
+      "totalQuantity": 109,
+      "totalRevenue": 22890,
+      "orderCount": 35,
       "averagePrice": 210
     },
     {
       "name": "Simple Breakfast ",
-      "totalQuantity": 58,
-      "totalRevenue": 3190,
-      "orderCount": 19,
+      "totalQuantity": 63,
+      "totalRevenue": 3465,
+      "orderCount": 24,
       "averagePrice": 55
     },
     {
@@ -2481,9 +2873,9 @@
     },
     {
       "name": "Item01+item02",
-      "totalQuantity": 47,
-      "totalRevenue": 14100,
-      "orderCount": 7,
+      "totalQuantity": 50,
+      "totalRevenue": 15000,
+      "orderCount": 9,
       "averagePrice": 300
     },
     {

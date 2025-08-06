@@ -12,6 +12,7 @@ export interface MenuCategory {
 }
 
 export const getMenuData = (): MenuCategory[] => {
+  console.log('🍽️ JSON FILE ACCESS: menu.json accessed from lib/menu-data.ts -> getMenuData()');
   return menuData.categories || menuData.menu || []
 }
 

@@ -716,6 +716,7 @@ export default function StaffOrderPage({
           staffName={pendingStaffSelection}
           errorMessage={passwordError}
           onPasswordSubmit={(password) => {
+            console.log('🔐 JSON FILE ACCESS: staff-credentials.json accessed from components/staff-order-page.tsx -> password verification');
             const user = staffCredentials.users.find((u) => u.name === pendingStaffSelection);
             if (user && password === user.password) {
               setSelectedStaff(pendingStaffSelection);
