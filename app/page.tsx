@@ -7,6 +7,7 @@ import OrderListPage from "@/components/order-list-page"
 import MenuPage from "@/components/menu-page"
 import OrderSuccessPage from "@/components/order-success-page"
 import QRGenerator from "@/components/qr-generator"
+import AboutUs from "@/components/about-us"
 import { OrderProvider, useOrders } from "@/lib/order-context"
 import { CustomerAuthProvider, useCustomerAuth } from "@/lib/customer-auth-context"
 
@@ -46,7 +47,7 @@ export type Order = {
   }
 }
 
-export type Page = "home" | "menu" | "cart" | "order-list" | "order-success" | "qr-generator"
+export type Page = "home" | "menu" | "cart" | "order-list" | "order-success" | "qr-generator" | "about-us"
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<Page>("home")
@@ -192,7 +193,7 @@ function AppContent() {
 
   // Helper function to validate page parameter
   const isValidPage = (page: string): page is Page => {
-    const validPages: Page[] = ["home", "menu", "cart", "order-list", "order-success", "qr-generator"]
+    const validPages: Page[] = ["home", "menu", "cart", "order-list", "order-success", "qr-generator", "about-us"]
     return validPages.includes(page as Page)
   }
 
@@ -303,6 +304,7 @@ function AppContent() {
           orderType={orderType}
           tableNumber={tableNumber}
           onOrderTypeChange={setOrderType}
+          onShowAboutUs={(show) => navigateToPage(show ? "about-us" : "home")}
         />
         {showCartModal && (
           <CartModal
@@ -373,6 +375,10 @@ function AppContent() {
 
   if (currentPage === "qr-generator") {
     return <QRGenerator onNavigate={navigateToPage} />
+  }
+
+  if (currentPage === "about-us") {
+    return <AboutUs onBack={() => navigateToPage("home")} />
   }
 
   return null

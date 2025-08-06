@@ -73,24 +73,26 @@ export default function StaffOrderPage({
   const { addOrder } = useOrders();
   const [menuData, setMenuData] = useState<any[]>([]);
   const [combos, setCombos] = useState<any[]>([]);
+  const [isLoadingMenu, setIsLoadingMenu] = useState(false);
+
+  const loadMenuData = async () => {
+    try {
+      const [menuData, combosData] = await Promise.all([
+        getMenuDataWithAvailability(),
+        getActiveCombos(),
+      ]);
+      setMenuData(menuData);
+      setCombos(combosData);
+    } catch (error) {
+      console.error("Error loading menu data:", error);
+      // Fallback to sync version
+      const fallbackData = getMenuDataWithAvailabilitySync();
+      setMenuData(fallbackData);
+      setCombos([]);
+    }
+  };
 
   useEffect(() => {
-    const loadMenuData = async () => {
-      try {
-        const [menuData, combosData] = await Promise.all([
-          getMenuDataWithAvailability(),
-          getActiveCombos(),
-        ]);
-        setMenuData(menuData);
-        setCombos(combosData);
-      } catch (error) {
-        console.error("Error loading menu data:", error);
-        // Fallback to sync version
-        const fallbackData = getMenuDataWithAvailabilitySync();
-        setMenuData(fallbackData);
-        setCombos([]);
-      }
-    };
     loadMenuData();
   }, []);
 
@@ -709,13 +711,23 @@ export default function StaffOrderPage({
         )}
       </div>
       
+      {/* Loading Overlay during menu refresh */}
+      {isLoadingMenu && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 flex flex-col items-center gap-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
+            <p className="text-gray-900 dark:text-gray-100 font-medium">Refreshing menu data...</p>
+          </div>
+        </div>
+      )}
+      
       {/* Password Drawer */}
       {showPasswordDrawer && (
         <StaffPasswordDrawer 
           isOpen={showPasswordDrawer}
           staffName={pendingStaffSelection}
           errorMessage={passwordError}
-          onPasswordSubmit={(password) => {
+          onPasswordSubmit={async (password) => {
             console.log('🔐 JSON FILE ACCESS: staff-credentials.json accessed from components/staff-order-page.tsx -> password verification');
             const user = staffCredentials.users.find((u) => u.name === pendingStaffSelection);
             if (user && password === user.password) {
@@ -723,6 +735,11 @@ export default function StaffOrderPage({
               setShowPasswordDrawer(false);
               setPendingStaffSelection("");
               setPasswordError(""); // Clear error on success
+              
+              // Show loading and reload menu data after successful staff change
+              setIsLoadingMenu(true);
+              await loadMenuData();
+              setIsLoadingMenu(false);
             } else {
               setPasswordError('Incorrect password! Please try again.');
             }

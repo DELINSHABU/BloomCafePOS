@@ -15,6 +15,7 @@ import {
   QrCode,
   Star,
   Percent,
+  ClipboardList,
 } from "lucide-react";
 import { SimpleThemeToggle } from "@/components/theme-toggle";
 import WaiterDashboard from "@/components/waiter-dashboard";
@@ -24,6 +25,7 @@ import TodaysSpecialManager from "@/components/todays-special-manager";
 import OrderStatisticsDashboard from "@/components/order-statistics-dashboard";
 import OffersManager from "@/components/offers-manager";
 import UserCredentialsManager from "@/components/UserCredentialsManager";
+import TaskAssignmentManager from "@/components/task-assignment-manager";
 
 interface SuperAdminDashboardProps {
   onNavigate?: (page: any) => void;
@@ -135,7 +137,7 @@ export default function SuperAdminDashboard({
 
         {/* Navigation Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3 sm:grid-cols-7 bg-gray-400 dark:bg-gray-800 gap-1 p-2 min-h-[80px] sm:min-h-[40px]">
+        <TabsList className="grid w-full grid-cols-4 sm:grid-cols-8 bg-gray-400 dark:bg-gray-800 gap-1 p-2 min-h-[100px] sm:min-h-[50px]">
             <TabsTrigger
               value="overview"
               className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
@@ -177,6 +179,13 @@ export default function SuperAdminDashboard({
               className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
             >
               User Credentials
+            </TabsTrigger>
+            <TabsTrigger
+              value="tasks"
+              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
+            >
+              <ClipboardList className="w-3 h-3 mr-1 sm:mr-2" />
+              Tasks
             </TabsTrigger>
           </TabsList>
 
@@ -315,6 +324,27 @@ export default function SuperAdminDashboard({
                 </CardContent>
               </Card>
 
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <ClipboardList className="w-5 h-5 text-teal-600" />
+                    Task Assignment
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Assign tasks to waiters, track progress, and manage
+                    workload distribution with priority levels and due dates.
+                  </p>
+                  <Button
+                    onClick={() => setActiveTab("tasks")}
+                    className="w-full bg-teal-600 hover:bg-teal-700"
+                  >
+                    Manage Task Assignment
+                  </Button>
+                </CardContent>
+              </Card>
+
               <Card className="lg:col-span-2 xl:col-span-1">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -412,6 +442,12 @@ export default function SuperAdminDashboard({
           <TabsContent value="users" className="mt-6">
             <div className="bg-white rounded-lg border p-6">
               <UserCredentialsManager currentUser={currentUser} />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="tasks" className="mt-6">
+            <div className="bg-white rounded-lg border p-6">
+              <TaskAssignmentManager currentUser={currentUser} />
             </div>
           </TabsContent>
         </Tabs>

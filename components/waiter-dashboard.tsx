@@ -33,6 +33,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { SimpleThemeToggle } from "@/components/theme-toggle";
 import { useOrders } from "@/lib/order-context";
 import type { OrderStatus } from "@/app/page";
+import WaiterTaskManagement from "@/components/waiter-task-management";
 
 interface WaiterDashboardProps {
   onNavigate?: (page: any) => void;
@@ -316,15 +317,23 @@ export default function WaiterDashboard({
           </Card>
         </div>
 
-        {/* Orders Tabs */}
-        <Tabs defaultValue="pending" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="pending">Pending</TabsTrigger>
-            <TabsTrigger value="preparing">Preparing</TabsTrigger>
-            <TabsTrigger value="ready">Ready</TabsTrigger>
-            <TabsTrigger value="delivered">Delivered</TabsTrigger>
-            <TabsTrigger value="cancelled">Cancelled</TabsTrigger>
+        {/* Main Tabs */}
+        <Tabs defaultValue="orders" className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="orders">Order Management</TabsTrigger>
+            <TabsTrigger value="tasks">Task Management</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="orders" className="mt-6">
+            {/* Orders Sub-Tabs */}
+            <Tabs defaultValue="pending" className="w-full">
+              <TabsList className="grid w-full grid-cols-5">
+                <TabsTrigger value="pending">Pending</TabsTrigger>
+                <TabsTrigger value="preparing">Preparing</TabsTrigger>
+                <TabsTrigger value="ready">Ready</TabsTrigger>
+                <TabsTrigger value="delivered">Delivered</TabsTrigger>
+                <TabsTrigger value="cancelled">Cancelled</TabsTrigger>
+              </TabsList>
 
           {(
             ["pending", "preparing", "ready", "delivered", "cancelled"] as OrderStatus[]
@@ -527,7 +536,13 @@ export default function WaiterDashboard({
                 </div>
               )}
             </TabsContent>
-          ))}
+              ))}
+            </Tabs>
+          </TabsContent>
+
+          <TabsContent value="tasks" className="mt-6">
+            <WaiterTaskManagement currentUser={currentUser} />
+          </TabsContent>
         </Tabs>
       </div>
     </div>

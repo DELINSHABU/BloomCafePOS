@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2025-08-06T13:09:34.151Z",
+  "lastUpdated": "2025-08-06T18:52:38.404Z",
   "fullRecord": {
-    "totalOrders": 115,
-    "totalRevenue": 963020,
+    "totalOrders": 130,
+    "totalRevenue": 1367135,
     "orders": [
       {
         "id": "order-fw5qwd54l",
@@ -2636,7 +2636,7 @@
           }
         ],
         "total": 210,
-        "status": "preparing",
+        "status": "delivered",
         "customerName": "Rahul Ravi",
         "orderType": "delivery",
         "timestamp": "2025-08-06T13:08:09.787Z",
@@ -2662,7 +2662,7 @@
           }
         ],
         "total": 55,
-        "status": "preparing",
+        "status": "delivered",
         "customerName": "Delin Shabu",
         "orderType": "delivery",
         "timestamp": "2025-08-06T13:08:37.614Z",
@@ -2675,6 +2675,291 @@
           "zipCode": "691531",
           "phoneNumber": "09633766791"
         }
+      },
+      {
+        "id": "staff-f0ya6zbk4",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "3 APPAM + EGG CURRY",
+            "price": 55,
+            "quantity": 2
+          }
+        ],
+        "total": 110,
+        "status": "preparing",
+        "tableNumber": "3",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:43:00.126Z",
+        "staffMember": "John Smith"
+      },
+      {
+        "id": "staff-ov5buptca",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "3 APPAM + EGG CURRY",
+            "price": 55,
+            "quantity": 3
+          }
+        ],
+        "total": 165,
+        "status": "preparing",
+        "tableNumber": "2",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:43:06.468Z",
+        "staffMember": "John Smith"
+      },
+      {
+        "id": "staff-ul2f9i9cu",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Half Alfaham + 3  KUBBOS",
+            "price": 210,
+            "quantity": 3
+          }
+        ],
+        "total": 630,
+        "status": "preparing",
+        "tableNumber": "3",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:43:17.001Z",
+        "staffMember": "John Smith"
+      },
+      {
+        "id": "staff-uffseq7eq",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Half Alfaham + 3  KUBBOS",
+            "price": 210,
+            "quantity": 2
+          }
+        ],
+        "total": 420,
+        "status": "pending",
+        "tableNumber": "2",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:50:05.417Z",
+        "staffMember": "John Smith"
+      },
+      {
+        "id": "staff-2zwdodu6e",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "3 APPAM + EGG CURRY",
+            "price": 55,
+            "quantity": 3
+          }
+        ],
+        "total": 165,
+        "status": "pending",
+        "tableNumber": "3",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:50:37.768Z",
+        "staffMember": "Sarah Johnson"
+      },
+      {
+        "id": "staff-m89bmbfrx",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "3 APPAM + EGG CURRY",
+            "price": 55,
+            "quantity": 4
+          }
+        ],
+        "total": 220,
+        "status": "pending",
+        "tableNumber": "5",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:50:43.448Z",
+        "staffMember": "Sarah Johnson"
+      },
+      {
+        "id": "staff-f5syzryef",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "3 APPAM + EGG CURRY",
+            "price": 55,
+            "quantity": 4
+          }
+        ],
+        "total": 220,
+        "status": "pending",
+        "tableNumber": "8",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:50:49.562Z",
+        "staffMember": "Sarah Johnson"
+      },
+      {
+        "id": "staff-yo0yofloe",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "3 APPAM + EGG CURRY",
+            "price": 55,
+            "quantity": 4
+          }
+        ],
+        "total": 220,
+        "status": "pending",
+        "tableNumber": "6",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:50:54.143Z",
+        "staffMember": "Sarah Johnson"
+      },
+      {
+        "id": "staff-weufi98mn",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "3 APPAM + EGG CURRY",
+            "price": 55,
+            "quantity": 3
+          }
+        ],
+        "total": 165,
+        "status": "pending",
+        "tableNumber": "4",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:50:59.617Z",
+        "staffMember": "Sarah Johnson"
+      },
+      {
+        "id": "staff-e6xpxvzmj",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Half Alfaham + 3  KUBBOS",
+            "price": 210,
+            "quantity": 3
+          }
+        ],
+        "total": 630,
+        "status": "pending",
+        "tableNumber": "4",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:51:08.961Z",
+        "staffMember": "Sarah Johnson"
+      },
+      {
+        "id": "staff-usw9z4f10",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "3 APPAM + EGG CURRY",
+            "price": 55,
+            "quantity": 3
+          }
+        ],
+        "total": 165,
+        "status": "pending",
+        "tableNumber": "8",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:51:46.053Z",
+        "staffMember": "Emily Davis"
+      },
+      {
+        "id": "staff-bsahkzu7f",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Half Alfaham + 3  KUBBOS",
+            "price": 210,
+            "quantity": 2
+          }
+        ],
+        "total": 420,
+        "status": "pending",
+        "tableNumber": "8",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:51:51.154Z",
+        "staffMember": "Emily Davis"
+      },
+      {
+        "id": "staff-4nw15410r",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "3 APPAM + EGG CURRY",
+            "price": 55,
+            "quantity": 3
+          }
+        ],
+        "total": 165,
+        "status": "pending",
+        "tableNumber": "8",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:52:26.391Z",
+        "staffMember": "Tom Anderson"
+      },
+      {
+        "id": "staff-rpflx55f7",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Half Alfaham + 3  KUBBOS",
+            "price": 210,
+            "quantity": 2
+          }
+        ],
+        "total": 420,
+        "status": "pending",
+        "tableNumber": "6",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:52:33.988Z",
+        "staffMember": "Tom Anderson"
+      },
+      {
+        "id": "staff-5m9ht2qif",
+        "items": [
+          {
+            "id": "combo-1754402936233",
+            "name": "Large Amout",
+            "description": "Test text 04",
+            "price": 100000,
+            "quantity": 4
+          }
+        ],
+        "total": 400000,
+        "status": "pending",
+        "tableNumber": "8",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-06T18:52:38.396Z",
+        "staffMember": "Tom Anderson"
       }
     ]
   },
@@ -2692,27 +2977,27 @@
     },
     {
       "month": "August",
-      "orders": 56,
-      "revenue": 944410,
-      "john": 8,
-      "emily": 10,
-      "mike": 12,
-      "sarah": 6,
-      "david": 8,
-      "customer": 33
+      "orders": 71,
+      "revenue": 1348525,
+      "john": 10,
+      "emily": 12,
+      "mike": 15,
+      "sarah": 8,
+      "david": 11,
+      "customer": 42
     }
   ],
   "revenueAnalytics": {
-    "totalRevenue": 963020,
+    "totalRevenue": 1367135,
     "revenueByStaff": {
       "Customer Orders": 17070,
-      "Emily Davis": 9260,
-      "John Smith": 516420,
-      "Sarah Johnson": 403095,
+      "Emily Davis": 9845,
+      "John Smith": 517745,
+      "Sarah Johnson": 404715,
       "Mike Wilson": 5450,
       "David Brown": 2185,
       "Lisa Garcia": 8420,
-      "Tom Anderson": 1120
+      "Tom Anderson": 401705
     },
     "revenueByMonth": {
       "July": {
@@ -2720,8 +3005,8 @@
         "revenue": 18610
       },
       "August": {
-        "orders": 56,
-        "revenue": 944410
+        "orders": 71,
+        "revenue": 1348525
       }
     },
     "revenueByDay": {
@@ -2731,9 +3016,9 @@
       "2025-07-27": 630,
       "2025-07-30": 740,
       "2025-08-05": 940505,
-      "2025-08-06": 3905
+      "2025-08-06": 408020
     },
-    "averageOrderValue": 8374
+    "averageOrderValue": 10516
   },
   "dailyAnalytics": {
     "morning": {
@@ -2811,16 +3096,16 @@
       }
     },
     "fullDay": {
-      "orders": 140,
-      "revenue": 969990,
+      "orders": 170,
+      "revenue": 1778220,
       "staffBreakdown": {
         "John Smith": {
-          "orders": 1,
-          "revenue": 100
+          "orders": 5,
+          "revenue": 1425
         },
         "Sarah Johnson": {
-          "orders": 2,
-          "revenue": 320
+          "orders": 8,
+          "revenue": 1940
         },
         "Mike Wilson": {
           "orders": 4,
@@ -2835,12 +3120,12 @@
           "revenue": 1490
         },
         "Tom Anderson": {
-          "orders": 3,
-          "revenue": 900
+          "orders": 6,
+          "revenue": 401485
         },
         "Emily Davis": {
-          "orders": 6,
-          "revenue": 1665
+          "orders": 8,
+          "revenue": 2250
         },
         "Customer Orders": {
           "orders": 5,
@@ -2852,16 +3137,16 @@
   "popularItems": [
     {
       "name": "Alfaham special Combo ",
-      "totalQuantity": 109,
-      "totalRevenue": 22890,
-      "orderCount": 35,
+      "totalQuantity": 121,
+      "totalRevenue": 25410,
+      "orderCount": 40,
       "averagePrice": 210
     },
     {
       "name": "Simple Breakfast ",
-      "totalQuantity": 63,
-      "totalRevenue": 3465,
-      "orderCount": 24,
+      "totalQuantity": 92,
+      "totalRevenue": 5060,
+      "orderCount": 33,
       "averagePrice": 55
     },
     {
@@ -2877,6 +3162,13 @@
       "totalRevenue": 15000,
       "orderCount": 9,
       "averagePrice": 300
+    },
+    {
+      "name": "Large Amout",
+      "totalQuantity": 13,
+      "totalRevenue": 1300000,
+      "orderCount": 5,
+      "averagePrice": 100000
     },
     {
       "name": "SWEET CORN CHICKEN SOUP",
@@ -2912,13 +3204,6 @@
       "totalRevenue": 720,
       "orderCount": 1,
       "averagePrice": 80
-    },
-    {
-      "name": "Large Amout",
-      "totalQuantity": 9,
-      "totalRevenue": 900000,
-      "orderCount": 4,
-      "averagePrice": 100000
     },
     {
       "name": "Chicken Biriyani",

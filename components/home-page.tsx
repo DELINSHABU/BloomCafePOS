@@ -21,6 +21,7 @@ import { ShoppingCart, Grid3X3, ArrowUpDown, Tag, Package, User, UserPlus } from
 import Image from "next/image";
 import CustomerAuthModal from "@/components/customer-auth-modal";
 import CustomerProfile from "@/components/customer-profile";
+import AboutUs from "@/components/about-us";
 import type { Page, CartItem } from "@/app/page";
 
 interface HomePageProps {
@@ -31,6 +32,8 @@ interface HomePageProps {
   orderType?: "dine-in" | "delivery";
   tableNumber?: string;
   onOrderTypeChange?: (type: "dine-in" | "delivery") => void;
+  showAboutUs?: boolean;
+  onShowAboutUs?: (show: boolean) => void;
 }
 
 interface TodaysSpecialItem {
@@ -50,6 +53,8 @@ export default function HomePage({
   orderType = "delivery",
   tableNumber,
   onOrderTypeChange,
+  showAboutUs = false,
+  onShowAboutUs,
 }: HomePageProps) {
   const [sortBy, setSortBy] = useState<
     "name" | "price-low" | "price-high" | "category"
@@ -59,7 +64,7 @@ export default function HomePage({
   const [offers, setOffers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-  
+
   // Customer auth states
   const { user, profile, loading: authLoading } = useCustomerAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -215,19 +220,29 @@ export default function HomePage({
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-yellow-300 text-xl sm:text-2xl lg:text-3xl font-bold">
-              {user && profile ? 
-                `Welcome, ${profile.displayName}!` : 
+              {user && profile ?
+                `Welcome, ${profile.displayName}!` :
                 "Bloom Garden Cafe"
               }
             </h1>
-            <Button
-              variant="outline"
-              size="sm"
-              className="bg-white text-emerald-700 hover:bg-gray-50 text-xs sm:text-sm lg:text-base px-3 sm:px-4 lg:px-6"
-              onClick={() => (window.location.href = "/staff")}
-            >
-              Staff Login
-            </Button>
+            <div className="flex gap-2 sm:gap-3">
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-white text-emerald-700 hover:bg-gray-50 text-xs sm:text-sm lg:text-base px-3 sm:px-4 lg:px-6"
+                onClick={() => onShowAboutUs?.(true)}
+              >
+                About Us
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-white text-emerald-700 hover:bg-gray-50 text-xs sm:text-sm lg:text-base px-3 sm:px-4 lg:px-6"
+                onClick={() => (window.location.href = "/staff")}
+              >
+                Staff Login
+              </Button>
+            </div>
           </div>
 
           {/* Order Type Selection */}
@@ -308,7 +323,7 @@ export default function HomePage({
 
           {/* Today's Special Section Header */}
           <h2 className="text-white text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6">
-            Today's Specia
+            Today's Special
           </h2>
         </div>
       </div>
@@ -329,7 +344,7 @@ export default function HomePage({
                   <div className="absolute -top-2 left-2 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full z-20 shadow-lg">
                     -{combo.discountPercentage}% COMBO
                   </div>
-                  
+
                   <div className="bg-white rounded-xl border border-orange-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
                     <div className="w-full h-24 sm:h-28 lg:h-32 bg-gradient-to-br from-orange-100 to-yellow-100 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
                       <Package className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
@@ -394,7 +409,7 @@ export default function HomePage({
                         -{priceInfo.discountPercentage}%
                       </div>
                     )}
-                    
+
                     <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
                       <div className="w-full h-24 sm:h-28 lg:h-32 bg-gray-100 rounded-lg mb-3 overflow-hidden">
                         <Image
@@ -529,10 +544,10 @@ export default function HomePage({
           </Sheet>
 
           {/* TEST BUTTON - Simple debugging */}
-          <button 
-            style={{ 
-              backgroundColor: 'blue', 
-              color: 'white', 
+          <button
+            style={{
+              backgroundColor: 'blue',
+              color: 'white',
               border: '3px solid red',
               borderRadius: '50%',
               width: '48px',
@@ -549,8 +564,8 @@ export default function HomePage({
           </button>
 
           {/* Customer Account Button */}
-          <button 
-            style={{ 
+          <button
+            style={{
               backgroundColor: 'transparent',
               color: '#10b981',
               border: 'none',
@@ -601,7 +616,7 @@ export default function HomePage({
           </Button>
         </div>
       </div>
-      
+
       {/* Customer Authentication Modals */}
       {console.log('🔧 Rendering CustomerAuthModal, isOpen:', showAuthModal)}
       <CustomerAuthModal
@@ -616,7 +631,7 @@ export default function HomePage({
           // Optionally show a success toast here
         }}
       />
-      
+
       <CustomerProfile
         isOpen={showProfileModal}
         onClose={() => setShowProfileModal(false)}

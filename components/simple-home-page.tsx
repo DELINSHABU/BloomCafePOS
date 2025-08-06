@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import type { Page, CartItem } from "@/app/page";
+import AboutUs from "@/components/about-us";
 
 interface SimpleHomePageProps {
   onNavigate: (page: Page) => void;
@@ -13,6 +14,8 @@ interface SimpleHomePageProps {
   orderType?: "dine-in" | "delivery";
   tableNumber?: string;
   onOrderTypeChange?: (type: "dine-in" | "delivery") => void;
+  showAboutUs?: boolean;
+  onShowAboutUs?: (show: boolean) => void;
 }
 
 export default function SimpleHomePage({
@@ -23,6 +26,8 @@ export default function SimpleHomePage({
   orderType = "delivery",
   tableNumber,
   onOrderTypeChange,
+  showAboutUs = false,
+  onShowAboutUs,
 }: SimpleHomePageProps) {
   // Simple static menu items for testing
   const sampleItems = [
@@ -50,14 +55,24 @@ export default function SimpleHomePage({
             <h1 className="text-yellow-300 text-xl sm:text-2xl lg:text-3xl font-bold">
               Bloom Garden Cafe
             </h1>
-            <Button
-              variant="outline"
-              size="sm"
-              className="bg-white text-emerald-700 hover:bg-gray-50 text-xs sm:text-sm lg:text-base px-3 sm:px-4 lg:px-6"
-              onClick={() => (window.location.href = "/staff")}
-            >
-              Staff Login
-            </Button>
+            <div className="flex gap-2 sm:gap-3">
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-white text-emerald-700 hover:bg-gray-50 text-xs sm:text-sm lg:text-base px-3 sm:px-4 lg:px-6"
+                onClick={() => onShowAboutUs?.(true)}
+              >
+                About Us
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-white text-emerald-700 hover:bg-gray-50 text-xs sm:text-sm lg:text-base px-3 sm:px-4 lg:px-6"
+                onClick={() => (window.location.href = "/staff")}
+              >
+                Staff Login
+              </Button>
+            </div>
           </div>
 
           {/* Order Type Selection */}

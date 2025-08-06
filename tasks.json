@@ -1,0 +1,122 @@
+{
+  "tasks": [
+    {
+      "id": "task-1754505299344",
+      "title": "Clean the Bathroom",
+      "description": "asdf asdf",
+      "assignedTo": "John Smith",
+      "assignedBy": "Delin Developer",
+      "status": "completed",
+      "priority": "medium",
+      "dueDate": "2025-08-07",
+      "createdAt": "2025-08-06T18:34:59.344Z",
+      "updatedAt": "2025-08-06T18:49:43.404Z",
+      "category": "cleaning"
+    },
+    {
+      "id": "task-001",
+      "title": "Clean Table 5",
+      "description": "Thoroughly clean and sanitize table 5 after customer departure",
+      "assignedTo": "John Smith",
+      "assignedBy": "Super Admin",
+      "priority": "medium",
+      "status": "in-progress",
+      "category": "cleaning",
+      "dueDate": "2025-08-06T20:00:00.000Z",
+      "createdAt": "2025-08-06T18:15:00.000Z",
+      "updatedAt": "2025-08-06T18:49:45.900Z"
+    },
+    {
+      "id": "task-002",
+      "title": "Restock Napkins",
+      "description": "Refill napkin dispensers at all tables in section A",
+      "assignedTo": "Sarah Johnson",
+      "assignedBy": "Admin User",
+      "priority": "low",
+      "status": "in-progress",
+      "category": "maintenance",
+      "dueDate": "2025-08-06T19:30:00.000Z",
+      "createdAt": "2025-08-06T17:45:00.000Z",
+      "updatedAt": "2025-08-06T18:10:00.000Z"
+    },
+    {
+      "id": "task-003",
+      "title": "Deliver Order #15",
+      "description": "Deliver completed order #15 to table 8 - 2x Chicken Biriyani, 1x Al Faham",
+      "assignedTo": "Mike Wilson",
+      "assignedBy": "Super Admin",
+      "priority": "high",
+      "status": "completed",
+      "category": "service",
+      "dueDate": "2025-08-06T18:45:00.000Z",
+      "createdAt": "2025-08-06T18:30:00.000Z",
+      "updatedAt": "2025-08-06T18:42:00.000Z"
+    },
+    {
+      "id": "task-004",
+      "title": "Check Kitchen Supplies",
+      "description": "Inventory check for kitchen supplies and inform management of low stock items",
+      "assignedTo": "Emily Davis",
+      "assignedBy": "Admin User",
+      "priority": "medium",
+      "status": "pending",
+      "category": "inventory",
+      "dueDate": "2025-08-07T10:00:00.000Z",
+      "createdAt": "2025-08-06T18:00:00.000Z",
+      "updatedAt": "2025-08-06T18:00:00.000Z"
+    },
+    {
+      "id": "task-005",
+      "title": "Setup Special Event Table",
+      "description": "Prepare table 12 for birthday celebration - decorations, special menu, and seating arrangement",
+      "assignedTo": "David Brown",
+      "assignedBy": "Super Admin",
+      "priority": "high",
+      "status": "in-progress",
+      "category": "special-events",
+      "dueDate": "2025-08-06T19:00:00.000Z",
+      "createdAt": "2025-08-06T16:30:00.000Z",
+      "updatedAt": "2025-08-06T18:00:00.000Z"
+    },
+    {
+      "id": "task-006",
+      "title": "Update Menu Boards",
+      "description": "Update the daily specials board with today's featured items and prices",
+      "assignedTo": "Lisa Garcia",
+      "assignedBy": "Admin User",
+      "priority": "medium",
+      "status": "completed",
+      "category": "maintenance",
+      "dueDate": "2025-08-06T16:00:00.000Z",
+      "createdAt": "2025-08-06T15:30:00.000Z",
+      "updatedAt": "2025-08-06T15:55:00.000Z"
+    },
+    {
+      "id": "task-007",
+      "title": "Train New Staff Member",
+      "description": "Provide orientation and training to new waiter on POS system and restaurant procedures",
+      "assignedTo": "Tom Anderson",
+      "assignedBy": "Super Admin",
+      "priority": "high",
+      "status": "pending",
+      "category": "training",
+      "dueDate": "2025-08-07T14:00:00.000Z",
+      "createdAt": "2025-08-06T17:00:00.000Z",
+      "updatedAt": "2025-08-06T17:00:00.000Z"
+    },
+    {
+      "id": "task-008",
+      "title": "Handle Customer Complaint",
+      "description": "Address customer concern about food quality at table 3 and provide appropriate compensation",
+      "assignedTo": "Maria Rodriguez",
+      "assignedBy": "Super Admin",
+      "priority": "high",
+      "status": "in-progress",
+      "category": "customer-service",
+      "dueDate": "2025-08-06T19:15:00.000Z",
+      "createdAt": "2025-08-06T18:45:00.000Z",
+      "updatedAt": "2025-08-06T18:50:00.000Z"
+    }
+  ],
+  "lastUpdated": "2025-08-06T18:49:45.901Z"
+}
