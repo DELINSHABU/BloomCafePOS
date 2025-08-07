@@ -1,0 +1,149 @@
+{
+  "header": {
+    "logo": "/BloomCafelogo.png",
+    "logoAlt": "Bloom Garden Cafe Logo",
+    "logoWidth": 650,
+    "logoHeight": 650,
+    "tagline": "Where Every Meal Blooms with Flavor",
+    "backgroundVideo": "/backgroundOfAboutUs.mp4"
+  },
+  "sections": {
+    "ourStory": {
+      "title": "Our Story",
+      "icon": "Heart",
+      "iconColor": "text-red-400",
+      "content": "Established in 2020, Bloom Garden Cafe has been serving the community with fresh, locally-sourced ingredients and authentic flavors. Our passion for culinary excellence and warm hospitality has made us a beloved destination for food lovers seeking both comfort and innovation.",
+      "glassEffect": {
+        "borderRadius": 24,
+        "displace": 5,
+        "distortionScale": -50,
+        "redOffset": 5,
+        "greenOffset": 15,
+        "blueOffset": 25,
+        "brightness": 10,
+        "opacity": 0,
+        "mixBlendMode": "screen"
+      }
+    },
+    "whatMakesUsSpecial": {
+      "title": "What Makes Us Special",
+      "icon": "Star",
+      "iconColor": "text-yellow-400",
+      "features": [
+        {
+          "icon": "Coffee",
+          "iconColor": "text-emerald-400",
+          "title": "Fresh Ingredients",
+          "description": "We source our ingredients daily from local farms and suppliers"
+        },
+        {
+          "icon": "Users",
+          "iconColor": "text-emerald-400",
+          "title": "Expert Chefs",
+          "description": "Our experienced culinary team crafts each dish with care"
+        },
+        {
+          "icon": "Award",
+          "iconColor": "text-emerald-400",
+          "title": "Award Winning",
+          "description": "Recognized for excellence in service and cuisine quality"
+        },
+        {
+          "icon": "Heart",
+          "iconColor": "text-emerald-400",
+          "title": "Family Friendly",
+          "description": "A welcoming atmosphere perfect for families and friends"
+        }
+      ],
+      "glassEffect": {
+        "borderRadius": 24,
+        "displace": 5,
+        "distortionScale": -50,
+        "redOffset": 5,
+        "greenOffset": 15,
+        "blueOffset": 25,
+        "brightness": 10,
+        "opacity": 0,
+        "mixBlendMode": "overlay"
+      }
+    },
+    "visitUs": {
+      "title": "Visit Us",
+      "icon": "MapPin",
+      "iconColor": "text-blue-400",
+      "location": {
+        "icon": "MapPin",
+        "title": "Location",
+        "address": [
+          "123 Garden Street",
+          "Downtown District",
+          "Bloom City, BC 12345"
+        ]
+      },
+      "contact": {
+        "phone": {
+          "icon": "Phone",
+          "title": "Phone",
+          "number": "+1 (555) 123-CAFE"
+        },
+        "email": {
+          "icon": "Mail",
+          "title": "Email",
+          "address": "info@bloomgardencafe.com"
+        }
+      },
+      "hours": {
+        "icon": "Clock",
+        "title": "Opening Hours",
+        "schedule": [
+          {
+            "days": "Monday - Friday:",
+            "time": "7:00 AM - 9:00 PM"
+          },
+          {
+            "days": "Saturday:",
+            "time": "8:00 AM - 10:00 PM"
+          },
+          {
+            "days": "Sunday:",
+            "time": "9:00 AM - 8:00 PM"
+          }
+        ]
+      },
+      "glassEffect": {
+        "borderRadius": 24,
+        "displace": 5,
+        "distortionScale": -50,
+        "redOffset": 5,
+        "greenOffset": 15,
+        "blueOffset": 25,
+        "brightness": 10,
+        "opacity": 0,
+        "mixBlendMode": "soft-light"
+      }
+    },
+    "ourMission": {
+      "title": "Our Mission",
+      "content": "To create memorable dining experiences that bring people together, celebrating the joy of good food, warm hospitality, and community connection. Every dish we serve is crafted with love and dedication to quality.",
+      "textColor": "text-yellow-200",
+      "contentColor": "text-yellow-100/90",
+      "glassEffect": {
+        "borderRadius": 24,
+        "displace": 5,
+        "distortionScale": -50,
+        "redOffset": 5,
+        "greenOffset": 15,
+        "blueOffset": 25,
+        "brightness": 10,
+        "opacity": 0,
+        "mixBlendMode": "color-dodge"
+      }
+    }
+  },
+  "backToMenuButton": {
+    "text": "Back to Menu",
+    "className": "bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+  },
+  "lastUpdated": "2025-08-07T08:30:16.068Z",
+  "updatedBy": "Delin.dev"
+}

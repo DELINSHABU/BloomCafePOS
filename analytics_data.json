@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-08-06T18:52:38.404Z",
+  "lastUpdated": "2025-08-07T06:34:24.244Z",
   "fullRecord": {
     "totalOrders": 130,
     "totalRevenue": 1367135,
@@ -2745,7 +2745,7 @@
           }
         ],
         "total": 420,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "2",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2764,7 +2764,7 @@
           }
         ],
         "total": 165,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "3",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2783,7 +2783,7 @@
           }
         ],
         "total": 220,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "5",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2802,7 +2802,7 @@
           }
         ],
         "total": 220,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2821,7 +2821,7 @@
           }
         ],
         "total": 220,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "6",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2840,7 +2840,7 @@
           }
         ],
         "total": 165,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "4",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2859,7 +2859,7 @@
           }
         ],
         "total": 630,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "4",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2878,7 +2878,7 @@
           }
         ],
         "total": 165,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2897,7 +2897,7 @@
           }
         ],
         "total": 420,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2916,7 +2916,7 @@
           }
         ],
         "total": 165,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2935,7 +2935,7 @@
           }
         ],
         "total": 420,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "6",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2954,7 +2954,7 @@
           }
         ],
         "total": 400000,
-        "status": "pending",
+        "status": "preparing",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",

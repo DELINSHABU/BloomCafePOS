@@ -16,6 +16,7 @@ import {
   Star,
   Percent,
   ClipboardList,
+  FileText,
 } from "lucide-react";
 import { SimpleThemeToggle } from "@/components/theme-toggle";
 import WaiterDashboard from "@/components/waiter-dashboard";
@@ -26,6 +27,8 @@ import OrderStatisticsDashboard from "@/components/order-statistics-dashboard";
 import OffersManager from "@/components/offers-manager";
 import UserCredentialsManager from "@/components/UserCredentialsManager";
 import TaskAssignmentManager from "@/components/task-assignment-manager";
+import AboutUsContentManager from "./about-us-content-manager";
+import BlogManager from "./blog-manager";
 
 interface SuperAdminDashboardProps {
   onNavigate?: (page: any) => void;
@@ -137,7 +140,7 @@ export default function SuperAdminDashboard({
 
         {/* Navigation Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-4 sm:grid-cols-8 bg-gray-400 dark:bg-gray-800 gap-1 p-2 min-h-[100px] sm:min-h-[50px]">
+        <TabsList className="grid w-full grid-cols-4 sm:grid-cols-10 bg-gray-400 dark:bg-gray-800 gap-1 p-2 min-h-[100px] sm:min-h-[50px]">
             <TabsTrigger
               value="overview"
               className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
@@ -186,6 +189,19 @@ export default function SuperAdminDashboard({
             >
               <ClipboardList className="w-3 h-3 mr-1 sm:mr-2" />
               Tasks
+            </TabsTrigger>
+            <TabsTrigger
+              value="about-us"
+              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
+            >
+              <FileText className="w-3 h-3 mr-1 sm:mr-2" />
+              About Us
+            </TabsTrigger>
+            <TabsTrigger
+              value="blog"
+              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
+            >
+              📝 Blog
             </TabsTrigger>
           </TabsList>
 
@@ -345,6 +361,47 @@ export default function SuperAdminDashboard({
                 </CardContent>
               </Card>
 
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-slate-600" />
+                    About Us Content
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Edit and manage all About Us page content including story,
+                    features, location, hours, and mission statement.
+                  </p>
+                  <Button
+                    onClick={() => setActiveTab("about-us")}
+                    className="w-full bg-slate-600 hover:bg-slate-700"
+                  >
+                    Manage About Us Content
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    📝 Blog Management
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Create, edit, and manage blog posts for the About Us page.
+                    Add rich content with images, videos, categories, and tags.
+                  </p>
+                  <Button
+                    onClick={() => setActiveTab("blog")}
+                    className="w-full bg-amber-600 hover:bg-amber-700"
+                  >
+                    Manage Blog Posts
+                  </Button>
+                </CardContent>
+              </Card>
+
               <Card className="lg:col-span-2 xl:col-span-1">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -448,6 +505,18 @@ export default function SuperAdminDashboard({
           <TabsContent value="tasks" className="mt-6">
             <div className="bg-white rounded-lg border p-6">
               <TaskAssignmentManager currentUser={currentUser} />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="about-us" className="mt-6">
+            <div className="bg-white rounded-lg border p-6">
+              <AboutUsContentManager currentUser={currentUser} />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="blog" className="mt-6">
+            <div className="bg-white rounded-lg border p-6">
+              <BlogManager currentUser={currentUser} />
             </div>
           </TabsContent>
         </Tabs>

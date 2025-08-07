@@ -1,0 +1,154 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "Welcome to Bloom Garden Cafe - Our Journey Begins",
+      "slug": "welcome-to-bloom-garden-cafe",
+      "excerpt": "Discover the story behind our beloved cafe and what makes us special in the heart of Downtown District.",
+      "content": "When we first opened our doors in 2020, we had a simple dream: to create a space where community, great food, and warm hospitality come together. Today, we're excited to share our journey with you through our blog.\n\nOur cafe isn't just about serving exceptional coffee and delicious meals – it's about creating moments that matter. Whether you're catching up with old friends, working on your next big project, or simply taking a moment to yourself, we want Bloom Garden Cafe to be your home away from home.\n\nFrom our locally-sourced ingredients to our carefully crafted seasonal menu, every detail reflects our commitment to quality and community. We believe that food has the power to bring people together, and that's exactly what we aim to do every single day.",
+      "featuredImage": "/blog/welcome-post.jpg",
+      "images": ["/blog/welcome-post.jpg", "/blog/cafe-interior.jpg"],
+      "videos": ["/blog/cafe-tour.mp4"],
+      "author": "Sarah Johnson",
+      "authorImage": "/blog/authors/sarah.jpg",
+      "publishDate": "2024-08-01T10:00:00Z",
+      "category": "News",
+      "tags": ["welcome", "story", "community"],
+      "featured": true,
+      "published": true,
+      "views": 245,
+      "readTime": "3 min read"
+    },
+    {
+      "id": "2", 
+      "title": "Farm-to-Table: Meet Our Local Suppliers",
+      "slug": "farm-to-table-local-suppliers",
+      "excerpt": "Get to know the amazing local farms and suppliers who help us bring fresh, quality ingredients to your table every day.",
+      "content": "At Bloom Garden Cafe, we believe that great food starts with great ingredients. That's why we've partnered with some of the most passionate local farmers and suppliers in our region.\n\nEvery morning, we receive fresh deliveries from Sunshine Valley Farm, where the Martinez family has been growing organic vegetables for over 30 years. Their heirloom tomatoes and crisp lettuce form the foundation of our signature salads.\n\nOur coffee beans come directly from Mountain Peak Roasters, a small-batch roastery just 20 miles away. Owner Jake Thompson personally selects each bean, ensuring that every cup we serve meets our exacting standards.\n\nWhen you dine with us, you're not just enjoying a meal – you're supporting a network of local businesses and sustainable farming practices that strengthen our entire community.",
+      "featuredImage": "/blog/farm-suppliers.jpg",
+      "images": ["/blog/farm-suppliers.jpg", "/blog/fresh-vegetables.jpg", "/blog/coffee-roasting.jpg"],
+      "videos": [],
+      "author": "Michael Chen",
+      "authorImage": "/blog/authors/michael.jpg", 
+      "publishDate": "2024-07-28T14:30:00Z",
+      "category": "Sustainability",
+      "tags": ["farm-to-table", "local", "suppliers", "sustainability"],
+      "featured": false,
+      "published": true,
+      "views": 189,
+      "readTime": "4 min read"
+    },
+    {
+      "id": "3",
+      "title": "Seasonal Menu Spotlight: Autumn Flavors",
+      "slug": "seasonal-menu-autumn-flavors",
+      "excerpt": "Discover our new autumn menu featuring pumpkin spice delights, hearty soups, and warming beverages perfect for the season.",
+      "content": "As the leaves begin to change, so does our menu! We're thrilled to introduce our autumn collection, featuring seasonal favorites and exciting new creations.\n\nOur chef's special this month is the Butternut Squash Risotto, made with locally-sourced butternut squash, sage from our herb garden, and finished with aged parmesan. It's comfort food at its finest.\n\nDon't miss our signature Pumpkin Spice Latte, made with real pumpkin puree and our house blend of warming spices. Unlike commercial versions, ours contains actual pumpkin and no artificial flavors.\n\nFor those looking for something heartier, try our Harvest Bowl – a nourishing combination of roasted root vegetables, quinoa, and our house-made apple cider vinaigrette. It's both satisfying and nutritious.",
+      "featuredImage": "/blog/autumn-menu.jpg",
+      "images": ["/blog/autumn-menu.jpg", "/blog/pumpkin-latte.jpg", "/blog/harvest-bowl.jpg"],
+      "videos": ["/blog/menu-preparation.mp4"],
+      "author": "Emily Rodriguez", 
+      "authorImage": "/blog/authors/emily.jpg",
+      "publishDate": "2024-07-25T16:00:00Z",
+      "category": "Menu",
+      "tags": ["seasonal", "autumn", "menu", "pumpkin-spice"],
+      "featured": true,
+      "published": true,
+      "views": 321,
+      "readTime": "3 min read"
+    },
+    {
+      "id": "4",
+      "title": "Behind the Scenes: A Day at Bloom Garden Cafe",
+      "slug": "behind-the-scenes-day-at-cafe",
+      "excerpt": "Take a virtual tour of our cafe and see what goes into creating the perfect dining experience from sunrise to sunset.",
+      "content": "Ever wondered what happens behind the scenes at Bloom Garden Cafe? Join us for a virtual tour as we take you through a typical day in our beloved establishment.\n\nOur day begins at 5:30 AM when our dedicated team arrives to start preparations. The aroma of freshly ground coffee fills the air as we begin the ritual of crafting the perfect brew. Our baristas take pride in every cup, ensuring each one meets our exacting standards.\n\nBy 7 AM, our kitchen is bustling with activity. Our chefs carefully prepare our signature dishes using the finest local ingredients. From hand-rolled pastries to artisanal sandwiches, everything is made fresh daily.\n\nWatch our exclusive behind-the-scenes video to see the passion and dedication that goes into every aspect of your dining experience. From our welcoming staff to our talented kitchen team, everyone plays a crucial role in making Bloom Garden Cafe special.",
+      "featuredImage": "/blog/cafe-interior.jpg",
+      "images": ["/blog/cafe-interior.jpg", "/blog/coffee-roasting.jpg"],
+      "videos": ["/blog/cafe-tour.mp4", "/blog/DDBloomCafelogoAnimation.webm"],
+      "author": "Sarah Johnson",
+      "authorImage": "/blog/authors/sarah.jpg",
+      "publishDate": "2024-07-20T11:00:00Z",
+      "category": "Community",
+      "tags": ["behind-the-scenes", "team", "daily-operations", "tour"],
+      "featured": false,
+      "published": true,
+      "views": 156,
+      "readTime": "5 min read"
+    },
+    {
+      "id": "5",
+      "title": "Coffee Culture: The Art of the Perfect Brew",
+      "slug": "coffee-culture-perfect-brew",
+      "excerpt": "Explore the intricate world of coffee making and discover what makes our coffee so exceptional.",
+      "content": "At Bloom Garden Cafe, we don't just serve coffee – we celebrate it. Our journey to the perfect cup begins with sourcing the finest beans from sustainable farms around the world.\n\nOur master roaster, Jake Thompson from Mountain Peak Roasters, has been perfecting his craft for over 15 years. Each batch is roasted to bring out the unique characteristics of the beans, whether it's the bright acidity of Ethiopian highland coffee or the rich, chocolatey notes of Central American varieties.\n\nOur baristas undergo extensive training to master various brewing methods. From the classic espresso to pour-over techniques, each method brings out different flavors and aromas. We believe that great coffee is both an art and a science.\n\nVisit us to experience the difference that passion and expertise make in every cup. Whether you prefer a bold espresso or a smooth cold brew, we have something to satisfy every coffee lover's palate.",
+      "featuredImage": "/blog/coffee-roasting.jpg",
+      "images": ["/blog/coffee-roasting.jpg", "/blog/cafe-interior.jpg", "/blog/fresh-vegetables.jpg"],
+      "videos": [],
+      "author": "Michael Chen",
+      "authorImage": "/blog/authors/michael.jpg",
+      "publishDate": "2024-07-15T09:30:00Z",
+      "category": "Menu",
+      "tags": ["coffee", "brewing", "barista", "quality"],
+      "featured": false,
+      "published": true,
+      "views": 203,
+      "readTime": "4 min read"
+    },
+    {
+      "id": "6",
+      "title": "Healthy Eating: Our Nutritious Menu Options",
+      "slug": "healthy-eating-nutritious-menu",
+      "excerpt": "Discover our range of healthy, delicious options that prove nutritious eating doesn't mean compromising on taste.",
+      "content": "At Bloom Garden Cafe, we believe that healthy food should be both nourishing and delicious. Our menu features a wide array of options designed to fuel your body and satisfy your taste buds.\n\nOur signature Harvest Bowl has become a customer favorite, featuring seasonal roasted vegetables, quinoa, mixed greens, and our house-made vinaigrette. It's packed with vitamins, minerals, and plant-based protein to keep you energized throughout the day.\n\nFor those following specific dietary needs, we offer gluten-free, vegan, and keto-friendly options. Our chefs work closely with local nutritionists to ensure our dishes not only taste great but also support your wellness goals.\n\nWe source our ingredients from local organic farms, ensuring maximum nutritional value and minimal environmental impact. From antioxidant-rich berries to omega-3 packed seeds, every ingredient is chosen for both its flavor and health benefits.\n\nCome experience how delicious healthy eating can be!",
+      "featuredImage": "/blog/harvest-bowl.jpg",
+      "images": ["/blog/harvest-bowl.jpg", "/blog/fresh-vegetables.jpg", "/blog/farm-suppliers.jpg"],
+      "videos": [],
+      "author": "Emily Rodriguez",
+      "authorImage": "/blog/authors/emily.jpg",
+      "publishDate": "2024-07-10T13:45:00Z",
+      "category": "Menu",
+      "tags": ["healthy", "nutrition", "wellness", "organic"],
+      "featured": true,
+      "published": true,
+      "views": 278,
+      "readTime": "4 min read"
+    }
+  ],
+  "categories": [
+    {
+      "name": "News",
+      "slug": "news",
+      "color": "bg-blue-500"
+    },
+    {
+      "name": "Menu", 
+      "slug": "menu",
+      "color": "bg-green-500"
+    },
+    {
+      "name": "Sustainability",
+      "slug": "sustainability", 
+      "color": "bg-emerald-500"
+    },
+    {
+      "name": "Events",
+      "slug": "events",
+      "color": "bg-purple-500"
+    },
+    {
+      "name": "Community",
+      "slug": "community",
+      "color": "bg-orange-500"
+    }
+  ],
+  "settings": {
+    "postsPerPage": 6,
+    "enableComments": false,
+    "showAuthor": true,
+    "showReadTime": true,
+    "showViews": true
+  },
+  "lastUpdated": "2024-08-07T08:31:52Z",
+  "updatedBy": "superadmin"
+}

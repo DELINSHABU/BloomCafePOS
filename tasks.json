@@ -20,11 +20,11 @@
       "assignedTo": "John Smith",
       "assignedBy": "Super Admin",
       "priority": "medium",
-      "status": "in-progress",
+      "status": "completed",
       "category": "cleaning",
       "dueDate": "2025-08-06T20:00:00.000Z",
       "createdAt": "2025-08-06T18:15:00.000Z",
-      "updatedAt": "2025-08-06T18:49:45.900Z"
+      "updatedAt": "2025-08-07T06:34:53.029Z"
     },
     {
       "id": "task-002",
@@ -33,11 +33,11 @@
       "assignedTo": "Sarah Johnson",
       "assignedBy": "Admin User",
       "priority": "low",
-      "status": "in-progress",
+      "status": "completed",
       "category": "maintenance",
       "dueDate": "2025-08-06T19:30:00.000Z",
       "createdAt": "2025-08-06T17:45:00.000Z",
-      "updatedAt": "2025-08-06T18:10:00.000Z"
+      "updatedAt": "2025-08-07T06:40:10.432Z"
     },
     {
       "id": "task-003",
@@ -59,11 +59,11 @@
       "assignedTo": "Emily Davis",
       "assignedBy": "Admin User",
       "priority": "medium",
-      "status": "pending",
+      "status": "completed",
       "category": "inventory",
       "dueDate": "2025-08-07T10:00:00.000Z",
       "createdAt": "2025-08-06T18:00:00.000Z",
-      "updatedAt": "2025-08-06T18:00:00.000Z"
+      "updatedAt": "2025-08-07T06:40:12.639Z"
     },
     {
       "id": "task-005",
@@ -72,11 +72,11 @@
       "assignedTo": "David Brown",
       "assignedBy": "Super Admin",
       "priority": "high",
-      "status": "in-progress",
+      "status": "completed",
       "category": "special-events",
       "dueDate": "2025-08-06T19:00:00.000Z",
       "createdAt": "2025-08-06T16:30:00.000Z",
-      "updatedAt": "2025-08-06T18:00:00.000Z"
+      "updatedAt": "2025-08-07T06:40:14.531Z"
     },
     {
       "id": "task-006",
@@ -98,11 +98,11 @@
       "assignedTo": "Tom Anderson",
       "assignedBy": "Super Admin",
       "priority": "high",
-      "status": "pending",
+      "status": "completed",
       "category": "training",
       "dueDate": "2025-08-07T14:00:00.000Z",
       "createdAt": "2025-08-06T17:00:00.000Z",
-      "updatedAt": "2025-08-06T17:00:00.000Z"
+      "updatedAt": "2025-08-07T06:40:16.949Z"
     },
     {
       "id": "task-008",
@@ -111,12 +111,12 @@
       "assignedTo": "Maria Rodriguez",
       "assignedBy": "Super Admin",
       "priority": "high",
-      "status": "in-progress",
+      "status": "completed",
       "category": "customer-service",
       "dueDate": "2025-08-06T19:15:00.000Z",
       "createdAt": "2025-08-06T18:45:00.000Z",
-      "updatedAt": "2025-08-06T18:50:00.000Z"
+      "updatedAt": "2025-08-07T06:40:18.973Z"
     }
   ],
-  "lastUpdated": "2025-08-06T18:49:45.901Z"
+  "lastUpdated": "2025-08-07T06:40:18.973Z"
 }

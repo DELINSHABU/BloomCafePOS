@@ -1,12 +1,13 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Clock, 
-  Users, 
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Users,
   Coffee,
   Star,
   Heart,
@@ -15,16 +16,171 @@ import {
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
+import GlassSurface from './GlassSurface'
+import BlogSection from './blog-section'
 
 interface AboutUsProps {
   onBack: () => void;
 }
 
+interface AboutUsContent {
+  header: {
+    logo: string;
+    logoAlt: string;
+    logoWidth: number;
+    logoHeight: number;
+    tagline: string;
+    backgroundVideo: string;
+  };
+  sections: {
+    ourStory: {
+      title: string;
+      icon: string;
+      iconColor: string;
+      content: string;
+      glassEffect: any;
+    };
+    whatMakesUsSpecial: {
+      title: string;
+      icon: string;
+      iconColor: string;
+      features: Array<{
+        icon: string;
+        iconColor: string;
+        title: string;
+        description: string;
+      }>;
+      glassEffect: any;
+    };
+    visitUs: {
+      title: string;
+      icon: string;
+      iconColor: string;
+      location: {
+        icon: string;
+        title: string;
+        address: string[];
+      };
+      contact: {
+        phone: {
+          icon: string;
+          title: string;
+          number: string;
+        };
+        email: {
+          icon: string;
+          title: string;
+          address: string;
+        };
+      };
+      hours: {
+        icon: string;
+        title: string;
+        schedule: Array<{
+          days: string;
+          time: string;
+        }>;
+      };
+      glassEffect: any;
+    };
+    ourMission: {
+      title: string;
+      content: string;
+      textColor: string;
+      contentColor: string;
+      glassEffect: any;
+    };
+  };
+  backToMenuButton: {
+    text: string;
+    className: string;
+  };
+  lastUpdated: string;
+  updatedBy: string;
+}
+
+// Icon mapping for dynamic icon rendering
+const IconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
+  Heart,
+  Star,
+  MapPin,
+  Coffee,
+  Users,
+  Award,
+  Phone,
+  Mail,
+  Clock,
+};
+
 export default function AboutUs({ onBack }: AboutUsProps) {
+  const [content, setContent] = useState<AboutUsContent | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadContent();
+  }, []);
+
+  const loadContent = async () => {
+    try {
+      const response = await fetch('/api/about-us-content');
+      if (response.ok) {
+        const data = await response.json();
+        setContent(data);
+      } else {
+        console.error('Failed to load About Us content');
+      }
+    } catch (error) {
+      console.error('Error loading About Us content:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const renderIcon = (iconName: string, className: string = '') => {
+    const IconComponent = IconMap[iconName];
+    return IconComponent ? <IconComponent className={className} /> : <Heart className={className} />;
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading About Us content...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!content) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="text-center">
+          <p className="text-red-600">Failed to load About Us content. Please try again later.</p>
+          <Button onClick={onBack} className="mt-4">
+            Back to Menu
+          </Button>
+        </div>
+      </div>
+    );
+  }
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Video Background */}
+      <video
+        className="fixed inset-0 w-full h-full object-cover z-0"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src={content.header.backgroundVideo} type="video/mp4" />
+      </video>
+
+      {/* Overlay to darken video slightly */}
+      <div className="fixed inset-0 bg-black bg-opacity-20 z-10"></div>
       {/* Header */}
-      <div className="bg-emerald-700 px-4 sm:px-6 lg:px-8 py-6">
+      <div className="relative z-20 bg-transparent px-4 sm:px-6 lg:px-8 py-6">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-center gap-4 mb-6">
             <Button
@@ -40,174 +196,193 @@ export default function AboutUs({ onBack }: AboutUsProps) {
           <div className="flex flex-col items-center text-center">
             <div className="mb-4">
               <Image
-                src="/BloomCafelogo.png"
-                alt="Bloom Garden Cafe Logo"
-                width={200}
-                height={200}
+                src={content.header.logo}
+                alt={content.header.logoAlt}
+                width={content.header.logoWidth}
+                height={content.header.logoHeight}
                 className="mx-auto"
                 priority
               />
             </div>
             <p className="text-xl text-white">
-              Where Every Meal Blooms with Flavor
+              {content.header.tagline}
             </p>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="space-y-8 text-center">
           {/* Our Story */}
-          <section>
-            <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center justify-center gap-2">
-              <Heart className="w-5 h-5 text-red-500" />
-              Our Story
-            </h3>
-            <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              Established in 2020, Bloom Garden Cafe has been serving the community with 
-              fresh, locally-sourced ingredients and authentic flavors. Our passion for 
-              culinary excellence and warm hospitality has made us a beloved destination 
-              for food lovers seeking both comfort and innovation.
-            </p>
-          </section>
+          <GlassSurface
+            width="100%"
+            height="auto"
+            borderRadius={content.sections.ourStory.glassEffect.borderRadius}
+            displace={content.sections.ourStory.glassEffect.displace}
+            distortionScale={content.sections.ourStory.glassEffect.distortionScale}
+            redOffset={content.sections.ourStory.glassEffect.redOffset}
+            greenOffset={content.sections.ourStory.glassEffect.greenOffset}
+            blueOffset={content.sections.ourStory.glassEffect.blueOffset}
+            brightness={content.sections.ourStory.glassEffect.brightness}
+            opacity={content.sections.ourStory.glassEffect.opacity}
+            mixBlendMode={content.sections.ourStory.glassEffect.mixBlendMode}
+            className="p-6"
+          >
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-3 flex items-center justify-center gap-2 drop-shadow-lg">
+                {renderIcon(content.sections.ourStory.icon, `w-5 h-5 ${content.sections.ourStory.iconColor}`)}
+                {content.sections.ourStory.title}
+              </h3>
+              <p className="text-white/90 leading-relaxed max-w-3xl mx-auto drop-shadow-md">
+                {content.sections.ourStory.content}
+              </p>
+            </div>
+          </GlassSurface>
+
+          {/* Blog Section */}
+          <BlogSection limit={3} showFeatured={false} />
 
           {/* What Makes Us Special */}
-          <section>
-            <h3 className="text-xl font-semibold text-gray-800 mb-6 flex items-center justify-center gap-2">
-              <Star className="w-5 h-5 text-yellow-500" />
-              What Makes Us Special
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-              <Card>
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Coffee className="w-5 h-5 text-emerald-600" />
-                    <h4 className="font-semibold">Fresh Ingredients</h4>
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    We source our ingredients daily from local farms and suppliers
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Users className="w-5 h-5 text-emerald-600" />
-                    <h4 className="font-semibold">Expert Chefs</h4>
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    Our experienced culinary team crafts each dish with care
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Award className="w-5 h-5 text-emerald-600" />
-                    <h4 className="font-semibold">Award Winning</h4>
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    Recognized for excellence in service and cuisine quality
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Heart className="w-5 h-5 text-emerald-600" />
-                    <h4 className="font-semibold">Family Friendly</h4>
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    A welcoming atmosphere perfect for families and friends
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </section>
-
-          {/* Location & Hours */}
-          <section>
-            <h3 className="text-xl font-semibold text-gray-800 mb-6 flex items-center justify-center gap-2">
-              <MapPin className="w-5 h-5 text-blue-500" />
-              Visit Us
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto text-left">
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-gray-500 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Location</h4>
-                    <p className="text-gray-600 text-sm">
-                      123 Garden Street<br />
-                      Downtown District<br />
-                      Bloom City, BC 12345
+          <GlassSurface
+            width="100%"
+            height="auto"
+            borderRadius={content.sections.whatMakesUsSpecial.glassEffect.borderRadius}
+            displace={content.sections.whatMakesUsSpecial.glassEffect.displace}
+            distortionScale={content.sections.whatMakesUsSpecial.glassEffect.distortionScale}
+            redOffset={content.sections.whatMakesUsSpecial.glassEffect.redOffset}
+            greenOffset={content.sections.whatMakesUsSpecial.glassEffect.greenOffset}
+            blueOffset={content.sections.whatMakesUsSpecial.glassEffect.blueOffset}
+            brightness={content.sections.whatMakesUsSpecial.glassEffect.brightness}
+            opacity={content.sections.whatMakesUsSpecial.glassEffect.opacity}
+            mixBlendMode={content.sections.whatMakesUsSpecial.glassEffect.mixBlendMode}
+            className="p-6"
+          >
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-6 flex items-center justify-center gap-2 drop-shadow-lg">
+                {renderIcon(content.sections.whatMakesUsSpecial.icon, `w-5 h-5 ${content.sections.whatMakesUsSpecial.iconColor}`)}
+                {content.sections.whatMakesUsSpecial.title}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                {content.sections.whatMakesUsSpecial.features.map((feature, index) => (
+                  <div key={index} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4">
+                    <div className="flex items-center gap-3 mb-2">
+                      {renderIcon(feature.icon, `w-5 h-5 ${feature.iconColor}`)}
+                      <h4 className="font-semibold text-white">{feature.title}</h4>
+                    </div>
+                    <p className="text-sm text-white/80">
+                      {feature.description}
                     </p>
                   </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-gray-500 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Phone</h4>
-                    <p className="text-gray-600 text-sm">+1 (555) 123-CAFE</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-gray-500 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Email</h4>
-                    <p className="text-gray-600 text-sm">info@bloomgardencafe.com</p>
-                  </div>
-                </div>
+                ))}
               </div>
-              
-              <div>
-                <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-gray-500 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">Opening Hours</h4>
-                    <div className="space-y-1 text-sm text-gray-600">
-                      <div className="flex justify-between">
-                        <span>Monday - Friday:</span>
-                        <span>7:00 AM - 9:00 PM</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Saturday:</span>
-                        <span>8:00 AM - 10:00 PM</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Sunday:</span>
-                        <span>9:00 AM - 8:00 PM</span>
+            </div>
+          </GlassSurface>
+
+          {/* Location & Hours */}
+          <GlassSurface
+            width="100%"
+            height="auto"
+            borderRadius={content.sections.visitUs.glassEffect.borderRadius}
+            displace={content.sections.visitUs.glassEffect.displace}
+            distortionScale={content.sections.visitUs.glassEffect.distortionScale}
+            redOffset={content.sections.visitUs.glassEffect.redOffset}
+            greenOffset={content.sections.visitUs.glassEffect.greenOffset}
+            blueOffset={content.sections.visitUs.glassEffect.blueOffset}
+            brightness={content.sections.visitUs.glassEffect.brightness}
+            opacity={content.sections.visitUs.glassEffect.opacity}
+            mixBlendMode={content.sections.visitUs.glassEffect.mixBlendMode}
+            className="p-6"
+          >
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-6 flex items-center justify-center gap-2 drop-shadow-lg">
+                {renderIcon(content.sections.visitUs.icon, `w-5 h-5 ${content.sections.visitUs.iconColor}`)}
+                {content.sections.visitUs.title}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto text-left">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    {renderIcon(content.sections.visitUs.location.icon, 'w-5 h-5 text-gray-300 mt-0.5')}
+                    <div>
+                      <h4 className="font-semibold text-white drop-shadow-md">{content.sections.visitUs.location.title}</h4>
+                      <p className="text-white/90 text-sm drop-shadow-md">
+                        {content.sections.visitUs.location.address.map((line, index) => (
+                          <span key={index}>
+                            {line}
+                            {index < content.sections.visitUs.location.address.length - 1 && <br />}
+                          </span>
+                        ))}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    {renderIcon(content.sections.visitUs.contact.phone.icon, 'w-5 h-5 text-gray-300 mt-0.5')}
+                    <div>
+                      <h4 className="font-semibold text-white drop-shadow-md">{content.sections.visitUs.contact.phone.title}</h4>
+                      <p className="text-white/90 text-sm drop-shadow-md">{content.sections.visitUs.contact.phone.number}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    {renderIcon(content.sections.visitUs.contact.email.icon, 'w-5 h-5 text-gray-300 mt-0.5')}
+                    <div>
+                      <h4 className="font-semibold text-white drop-shadow-md">{content.sections.visitUs.contact.email.title}</h4>
+                      <p className="text-white/90 text-sm drop-shadow-md">{content.sections.visitUs.contact.email.address}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-start gap-3">
+                    {renderIcon(content.sections.visitUs.hours.icon, 'w-5 h-5 text-gray-300 mt-0.5')}
+                    <div>
+                      <h4 className="font-semibold text-white mb-2 drop-shadow-md">{content.sections.visitUs.hours.title}</h4>
+                      <div className="space-y-1 text-sm text-white/90 drop-shadow-md">
+                        {content.sections.visitUs.hours.schedule.map((schedule, index) => (
+                          <div key={index} className="flex justify-between">
+                            <span>{schedule.days}</span>
+                            <span>{schedule.time}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </section>
+          </GlassSurface>
 
           {/* Mission Statement */}
-          <section className="bg-emerald-50 p-6 rounded-lg">
-            <h3 className="text-xl font-semibold text-emerald-800 mb-4 text-center">Our Mission</h3>
-            <p className="text-emerald-700 italic text-center text-lg leading-relaxed max-w-3xl mx-auto">
-              "To create memorable dining experiences that bring people together, 
-              celebrating the joy of good food, warm hospitality, and community connection. 
-              Every dish we serve is crafted with love and dedication to quality."
-            </p>
-          </section>
+          <GlassSurface
+            width="100%"
+            height="auto"
+            borderRadius={content.sections.ourMission.glassEffect.borderRadius}
+            displace={content.sections.ourMission.glassEffect.displace}
+            distortionScale={content.sections.ourMission.glassEffect.distortionScale}
+            redOffset={content.sections.ourMission.glassEffect.redOffset}
+            greenOffset={content.sections.ourMission.glassEffect.greenOffset}
+            blueOffset={content.sections.ourMission.glassEffect.blueOffset}
+            brightness={content.sections.ourMission.glassEffect.brightness}
+            opacity={content.sections.ourMission.glassEffect.opacity}
+            mixBlendMode={content.sections.ourMission.glassEffect.mixBlendMode}
+            className="p-6"
+          >
+            <div>
+              <h3 className={`text-xl font-semibold ${content.sections.ourMission.textColor} mb-4 text-center drop-shadow-lg`}>{content.sections.ourMission.title}</h3>
+              <p className={`${content.sections.ourMission.contentColor} italic text-center text-lg leading-relaxed max-w-3xl mx-auto drop-shadow-md`}>
+                "{content.sections.ourMission.content}"
+              </p>
+            </div>
+          </GlassSurface>
 
           {/* Back to Menu Button */}
           <section className="text-center pt-4">
             <Button
-              className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              className={content.backToMenuButton.className}
               onClick={onBack}
             >
-              Back to Menu
+              {content.backToMenuButton.text}
             </Button>
           </section>
         </div>
