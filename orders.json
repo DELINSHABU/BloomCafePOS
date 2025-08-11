@@ -2684,7 +2684,7 @@
         }
       ],
       "total": 110,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "3",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2703,7 +2703,7 @@
         }
       ],
       "total": 165,
-      "status": "preparing",
+      "status": "delivered",
       "tableNumber": "2",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2722,7 +2722,7 @@
         }
       ],
       "total": 630,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "3",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2741,7 +2741,7 @@
         }
       ],
       "total": 420,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "2",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2760,7 +2760,7 @@
         }
       ],
       "total": 165,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "3",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2779,7 +2779,7 @@
         }
       ],
       "total": 220,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "5",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2798,7 +2798,7 @@
         }
       ],
       "total": 220,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "8",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2817,7 +2817,7 @@
         }
       ],
       "total": 220,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "6",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2836,7 +2836,7 @@
         }
       ],
       "total": 165,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "4",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2855,7 +2855,7 @@
         }
       ],
       "total": 630,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "4",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2874,7 +2874,7 @@
         }
       ],
       "total": 165,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "8",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2893,7 +2893,7 @@
         }
       ],
       "total": 420,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "8",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2912,7 +2912,7 @@
         }
       ],
       "total": 165,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "8",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2931,7 +2931,7 @@
         }
       ],
       "total": 420,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "6",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -2950,13 +2950,133 @@
         }
       ],
       "total": 400000,
-      "status": "preparing",
+      "status": "ready",
       "tableNumber": "8",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
       "timestamp": "2025-08-06T18:52:38.396Z",
       "staffMember": "Tom Anderson"
+    },
+    {
+      "id": "staff-7t69f2wsx",
+      "items": [
+        {
+          "id": "combo-1753528480652",
+          "name": "Simple Breakfast ",
+          "description": "3 APPAM + EGG CURRY",
+          "price": 55,
+          "quantity": 1
+        }
+      ],
+      "total": 55,
+      "status": "ready",
+      "tableNumber": "6",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-07T15:25:01.187Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "order-qnb2d7jhj",
+      "items": [
+        {
+          "id": "combo-1753528480652",
+          "name": "Simple Breakfast ",
+          "description": "Combo Special",
+          "price": 55,
+          "quantity": 1
+        }
+      ],
+      "total": 55,
+      "status": "preparing",
+      "customerName": "Rahul Ravi",
+      "orderType": "delivery",
+      "timestamp": "2025-08-08T12:21:09.075Z",
+      "deliveryAddress": {
+        "label": "Home",
+        "streetAddress": "lower karikom",
+        "city": "kollam",
+        "state": "keralal",
+        "zipCode": "691531",
+        "phoneNumber": "09633766791"
+      }
+    },
+    {
+      "id": "order-p733r6mj8",
+      "items": [
+        {
+          "id": "combo-1753536315159",
+          "name": "Alfaham special Combo ",
+          "description": "Combo Special",
+          "price": 210,
+          "quantity": 2
+        }
+      ],
+      "total": 420,
+      "status": "preparing",
+      "customerName": "Sonu sasi",
+      "orderType": "delivery",
+      "timestamp": "2025-08-08T16:06:10.216Z",
+      "customerPhone": "9633766791",
+      "deliveryAddress": {
+        "label": "Home",
+        "streetAddress": "kazhakottam",
+        "city": "tvm",
+        "state": "kerala",
+        "zipCode": "691531",
+        "phoneNumber": "09633766791"
+      }
+    },
+    {
+      "id": "order-n4iiox1pf",
+      "items": [
+        {
+          "id": "combo-1753528480652",
+          "name": "Simple Breakfast ",
+          "description": "Combo Special",
+          "price": 55,
+          "quantity": 1
+        }
+      ],
+      "total": 55,
+      "status": "preparing",
+      "customerName": "Rahul Ravi",
+      "orderType": "delivery",
+      "timestamp": "2025-08-10T11:18:00.963Z",
+      "deliveryAddress": {
+        "label": "Home",
+        "streetAddress": "lower karikom",
+        "city": "kollam",
+        "state": "keralal",
+        "zipCode": "691531",
+        "phoneNumber": "09633766791"
+      }
+    },
+    {
+      "id": "order-oxyueo6hv",
+      "items": [
+        {
+          "id": "combo-1754376219924",
+          "name": "Item01+item02",
+          "description": "Test text 03",
+          "price": 300,
+          "quantity": 1
+        }
+      ],
+      "total": 300,
+      "status": "pending",
+      "customerName": "Rahul Ravi",
+      "orderType": "delivery",
+      "timestamp": "2025-08-11T18:54:16.180Z",
+      "deliveryAddress": {
+        "label": "Home",
+        "streetAddress": "lower karikom",
+        "city": "kollam",
+        "state": "keralal",
+        "zipCode": "691531",
+        "phoneNumber": "09633766791"
+      }
     }
   ],
-  "lastUpdated": "2025-08-07T06:34:24.243Z"
+  "lastUpdated": "2025-08-11T18:54:16.189Z"
 }

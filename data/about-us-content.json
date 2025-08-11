@@ -4,7 +4,7 @@
     "logoAlt": "Bloom Garden Cafe Logo",
     "logoWidth": 650,
     "logoHeight": 650,
-    "tagline": "Where Every Meal Blooms with Flavor",
+    "tagline": "Where Every Meal Blooms with Flavor - Your Perfect Dining Destination",
     "backgroundVideo": "/backgroundOfAboutUs.mp4"
   },
   "sections": {
@@ -12,7 +12,7 @@
       "title": "Our Story",
       "icon": "Heart",
       "iconColor": "text-red-400",
-      "content": "Established in 2020, Bloom Garden Cafe has been serving the community with fresh, locally-sourced ingredients and authentic flavors. Our passion for culinary excellence and warm hospitality has made us a beloved destination for food lovers seeking both comfort and innovation.",
+      "content": "Established in 2020, Bloom Garden Cafe has flourished as a beacon of culinary excellence in our community. Born from a passion for authentic flavors and warm hospitality, we've created a space where every meal tells a story. Our commitment to fresh, locally-sourced ingredients and innovative recipes has made us a beloved destination for food enthusiasts seeking both comfort and adventure in every bite.",
       "glassEffect": {
         "borderRadius": 24,
         "displace": 5,
@@ -33,26 +33,38 @@
         {
           "icon": "Coffee",
           "iconColor": "text-emerald-400",
-          "title": "Fresh Ingredients",
-          "description": "We source our ingredients daily from local farms and suppliers"
+          "title": "Premium Quality Ingredients",
+          "description": "Daily sourced fresh ingredients from trusted local farms and premium suppliers, ensuring every dish meets our high standards"
         },
         {
           "icon": "Users",
-          "iconColor": "text-emerald-400",
-          "title": "Expert Chefs",
-          "description": "Our experienced culinary team crafts each dish with care"
+          "iconColor": "text-blue-400",
+          "title": "Expert Culinary Team",
+          "description": "Our experienced chefs bring years of expertise, crafting each dish with passion, precision, and artistic presentation"
         },
         {
           "icon": "Award",
-          "iconColor": "text-emerald-400",
-          "title": "Award Winning",
-          "description": "Recognized for excellence in service and cuisine quality"
+          "iconColor": "text-purple-400",
+          "title": "Award-Winning Excellence",
+          "description": "Recognized for outstanding service quality, innovative menu offerings, and consistent customer satisfaction"
         },
         {
           "icon": "Heart",
-          "iconColor": "text-emerald-400",
-          "title": "Family Friendly",
-          "description": "A welcoming atmosphere perfect for families and friends"
+          "iconColor": "text-pink-400",
+          "title": "Family-Friendly Atmosphere",
+          "description": "A welcoming, inclusive environment perfect for families, friends, and special celebrations in our beautiful garden setting"
+        },
+        {
+          "icon": "MapPin",
+          "iconColor": "text-green-400",
+          "title": "Garden Ambiance",
+          "description": "Unique outdoor garden setting with lush greenery, creating a serene dining experience that connects you with nature"
+        },
+        {
+          "icon": "Clock",
+          "iconColor": "text-orange-400",
+          "title": "Extended Service Hours",
+          "description": "Open 7 days a week with flexible hours to accommodate breakfast, lunch, dinner, and late-night dining needs"
         }
       ],
       "glassEffect": {
@@ -67,46 +79,200 @@
         "mixBlendMode": "overlay"
       }
     },
+    "aboutUs": {
+      "title": "Complete Business Information",
+      "icon": "Users",
+      "iconColor": "text-emerald-400",
+      "sections": {
+        "applicantDetails": {
+          "title": "Applicant Details",
+          "details": {
+            "fullName": "Mr. Delin Augustine & Business Partners",
+            "businessName": "Bloom Garden Café",
+            "contact": {
+              "phone": "+91 70254 20663",
+              "email": "info@bloomgardencafe.com"
+            },
+            "residentialAddress": "Garden View Residency, Green Valley, Kerala 686543",
+            "businessAddress": "Main Street, Downtown Commercial District, Business Hub, Kerala 686001"
+          }
+        },
+        "businessOverview": {
+          "title": "Business Overview",
+          "establishmentType": "Premium Café / Casual Fine Dining / Quick Service / Cloud Kitchen / Takeaway Hub",
+          "theme": "Garden-to-Table Fusion Café featuring authentic ethnic delicacies, family-friendly atmosphere, youth-centric modern dining, and pet-friendly outdoor spaces",
+          "targetAudience": "College students, young professionals, families with children, tourists, working professionals, food enthusiasts, and celebration seekers"
+        },
+        "menuConcept": {
+          "title": "Menu Concept & Signature Offerings",
+          "description": "Our diverse menu celebrates the art of fusion cuisine, featuring premium broasted chicken preparations, authentic regional biryanis, artisanal desserts, innovative mocktails, and specialty coffee blends sourced from local plantations",
+          "signatureDishes": [
+            "Al Faham Grilled Chicken - Arabian spiced perfection",
+            "Bloom Special Biryani - Fragrant basmati with premium spices",
+            "Garden Fresh Mocktails - Seasonal fruit combinations",
+            "Artisan Coffee Blends - Locally sourced premium beans",
+            "Fusion Appetizer Platters - International flavors with local ingredients",
+            "Gourmet Dessert Collection - House-made sweet creations"
+          ],
+          "options": "Comprehensive menu including vegetarian specialties, premium non-vegetarian selections, vegan-friendly options, gluten-free alternatives, and customizable dishes to accommodate all dietary preferences"
+        },
+        "legalCompliance": {
+          "title": "Legal Compliance & Certifications",
+          "licenses": [
+            "FSSAI License (Food Safety & Standards Authority of India) - Current & Valid",
+            "Trade License & Municipality Operating Permit - Approved",
+            "GST Registration & Tax Compliance - Active",
+            "NOC from Fire Department - Safety Certified",
+            "Health & Sanitation Clearance - Department Approved",
+            "Police NOC for Late-Night Operations - Permitted",
+            "Staff Health Certificates & Hygiene Training - Updated",
+            "Environmental Clearance - Eco-Friendly Operations",
+            "Music & Entertainment License - Public Performance Rights"
+          ]
+        },
+        "businessModel": {
+          "title": "Business Model & Ownership Structure",
+          "structure": "Limited Liability Partnership (LLP) - Professional Management",
+          "partners": [
+            "Delin Augustine - Managing Partner & Creative Director (45%)",
+            "Business Partner 1 - Operations & Finance (35%)",
+            "Business Partner 2 - Marketing & Development (20%)"
+          ],
+          "stakeholders": "Community-focused local ownership with strong emphasis on sustainable business practices and local economic development"
+        },
+        "infrastructure": {
+          "title": "Infrastructure & Modern Facilities",
+          "seatingCapacity": "120 guests total - 80 indoor air-conditioned dining, 40 outdoor garden seating",
+          "facilities": [
+            "State-of-the-art commercial kitchen with international safety standards",
+            "Advanced cloud-based POS billing system with inventory management",
+            "Uninterrupted power supply with diesel generator backup",
+            "Dedicated customer parking for 30+ vehicles",
+            "High-speed WiFi connectivity throughout the premises",
+            "Professional sound system with ambient background music",
+            "Climate-controlled dining areas with modern HVAC systems",
+            "24/7 CCTV surveillance with security monitoring",
+            "Premium restroom facilities with modern amenities",
+            "Outdoor garden space with water features and landscaping",
+            "Private dining areas for special events and celebrations",
+            "Dedicated takeaway and delivery counter"
+          ]
+        },
+        "staffing": {
+          "title": "Professional Staffing Plan",
+          "totalEmployees": "25+ trained professionals across all departments",
+          "roles": [
+            "Executive Chef & Specialized Sous Chefs - Culinary Excellence",
+            "Experienced Servers & Customer Service Representatives",
+            "Restaurant Manager & Assistant Manager - Operations",
+            "Kitchen Support Staff & Food Preparation Team",
+            "Dedicated Delivery Personnel & Logistics Coordinators",
+            "Cleaning & Maintenance Staff - Hygiene Standards",
+            "Security Personnel - Customer Safety",
+            "Event Coordinators - Special Celebrations"
+          ],
+          "operations": "Multi-shift operations from 7:00 AM to 11:00 PM, covering breakfast, brunch, lunch, high-tea, dinner, and late-night service with specialized weekend and holiday staffing"
+        },
+        "marketingStrategy": {
+          "title": "Comprehensive Marketing Strategy",
+          "brandIdentity": "Premium Garden-to-Table café experience with modern aesthetics, sustainable practices, and authentic culinary traditions",
+          "socialMedia": "Active digital presence across Instagram, Facebook, Twitter, YouTube, and Google Business with regular content updates, customer engagement, and food photography",
+          "promotions": "Seasonal festival menus, customer loyalty programs, student and senior citizen discounts, family celebration packages, corporate catering services, and weekend special offers",
+          "partnerships": "Strategic integration with major delivery platforms - Swiggy, Zomato, Uber Eats, and direct online ordering system with mobile app development"
+        },
+        "safetyProtocols": {
+          "title": "Safety & Cleanliness Excellence",
+          "measures": [
+            "Enhanced COVID-19 safety protocols - sanitization, social distancing, and health monitoring",
+            "Comprehensive kitchen safety systems - fire suppression, ventilation, and equipment maintenance",
+            "Professional food storage with temperature monitoring and FIFO inventory rotation",
+            "Integrated waste management system - segregation, recycling, and eco-friendly disposal",
+            "Daily deep cleaning schedules with professional-grade sanitization equipment",
+            "Regular health monitoring and training for all staff members",
+            "Water purification systems for cooking and drinking purposes",
+            "Pest control management with regular professional inspections"
+          ]
+        },
+        "financials": {
+          "title": "Financial Investment Overview",
+          "capitalInvested": "₹45,00,000 - Complete setup including equipment, interior, and working capital",
+          "equipmentCost": "₹25,00,000 - Commercial kitchen, furniture, POS systems, and technology infrastructure",
+          "monthlyOperating": "₹5,50,000 - Staff salaries, utilities, supplies, rent, and operational expenses",
+          "expectedRevenue": "₹12,00,000 - Monthly revenue target based on market analysis and capacity",
+          "breakEven": "15-18 months projected with steady growth and customer base expansion"
+        },
+        "supportingDocs": {
+          "title": "Supporting Documentation",
+          "documents": [
+            "Aadhaar Cards & PAN Cards of all partners and key stakeholders",
+            "Property ownership documents and rental agreements with terms",
+            "Professional architectural blueprints and approved layout plans",
+            "Identity proofs, background verifications, and certificates of all staff members",
+            "Banking partnerships, financial statements, and investment documentation",
+            "Insurance policies - property, liability, and business continuity coverage",
+            "Vendor agreements and supplier partnership contracts",
+            "Quality certifications and professional training records"
+          ]
+        }
+      },
+      "closingStatement": "We are deeply committed to creating a safe, hygienic, and exceptionally customer-friendly environment while celebrating the pure joy and artistry of food. Our dedication extends to supporting local communities, promoting sustainable practices, and delivering memorable dining experiences. We respectfully request your support in processing our application for all necessary approvals and licenses to serve our community with excellence and integrity.",
+      "glassEffect": {
+        "borderRadius": 24,
+        "displace": 5,
+        "distortionScale": -50,
+        "redOffset": 5,
+        "greenOffset": 15,
+        "blueOffset": 25,
+        "brightness": 10,
+        "opacity": 0,
+        "mixBlendMode": "multiply"
+      }
+    },
     "visitUs": {
-      "title": "Visit Us",
+      "title": "Visit Our Garden Café",
       "icon": "MapPin",
       "iconColor": "text-blue-400",
       "location": {
         "icon": "MapPin",
-        "title": "Location",
+        "title": "Our Location",
         "address": [
-          "123 Garden Street",
-          "Downtown District",
-          "Bloom City, BC 12345"
+          "Bloom Garden Café",
+          "Main Street, Downtown District",
+          "Business Hub, Kerala 686001",
+          "Near City Center Mall & Metro Station"
         ]
       },
       "contact": {
         "phone": {
           "icon": "Phone",
-          "title": "Phone",
-          "number": "+1 (555) 123-CAFE"
+          "title": "Call Us",
+          "number": "+91 70254 20663"
         },
         "email": {
           "icon": "Mail",
-          "title": "Email",
+          "title": "Email Us",
           "address": "info@bloomgardencafe.com"
         }
       },
       "hours": {
         "icon": "Clock",
-        "title": "Opening Hours",
+        "title": "Operating Hours",
         "schedule": [
           {
-            "days": "Monday - Friday:",
-            "time": "7:00 AM - 9:00 PM"
+            "days": "Monday - Thursday:",
+            "time": "7:00 AM - 10:00 PM"
           },
           {
-            "days": "Saturday:",
-            "time": "8:00 AM - 10:00 PM"
+            "days": "Friday - Saturday:",
+            "time": "7:00 AM - 11:00 PM"
           },
           {
             "days": "Sunday:",
-            "time": "9:00 AM - 8:00 PM"
+            "time": "8:00 AM - 10:00 PM"
+          },
+          {
+            "days": "Special Events:",
+            "time": "Extended hours available"
           }
         ]
       },
@@ -123,8 +289,8 @@
       }
     },
     "ourMission": {
-      "title": "Our Mission",
-      "content": "To create memorable dining experiences that bring people together, celebrating the joy of good food, warm hospitality, and community connection. Every dish we serve is crafted with love and dedication to quality.",
+      "title": "Our Mission & Values",
+      "content": "To create extraordinary dining experiences that bring people together through the universal language of exceptional food. We are committed to celebrating culinary artistry, fostering community connections, and promoting sustainable practices. Every dish we serve is a testament to our dedication to quality, creativity, and the genuine hospitality that makes every guest feel like family.",
       "textColor": "text-yellow-200",
       "contentColor": "text-yellow-100/90",
       "glassEffect": {
@@ -141,9 +307,9 @@
     }
   },
   "backToMenuButton": {
-    "text": "Back to Menu",
-    "className": "bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+    "text": "Explore Our Menu",
+    "className": "bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
   },
-  "lastUpdated": "2025-08-07T08:30:16.068Z",
+  "lastUpdated": "2025-08-09T14:30:16.000Z",
   "updatedBy": "Delin.dev"
 }

@@ -1,0 +1,76 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "type": "image",
+      "url": "/placeholder.svg?height=400&width=600",
+      "thumbnail": "/placeholder.svg?height=200&width=300",
+      "title": "Signature Al Faham Dish",
+      "description": "Our famous grilled chicken with special spices",
+      "category": "food",
+      "uploadedAt": "2024-01-15T10:30:00Z",
+      "uploadedBy": "admin@bloomcafe.com",
+      "featured": true,
+      "tags": ["chicken", "grilled", "signature", "main course"]
+    },
+    {
+      "id": "2",
+      "type": "image",
+      "url": "/placeholder.svg?height=400&width=600",
+      "thumbnail": "/placeholder.svg?height=200&width=300",
+      "title": "Garden Ambiance",
+      "description": "Beautiful outdoor seating area surrounded by lush greenery",
+      "category": "ambiance",
+      "uploadedAt": "2024-01-14T15:45:00Z",
+      "uploadedBy": "admin@bloomcafe.com",
+      "featured": true,
+      "tags": ["garden", "outdoor", "seating", "ambiance"]
+    },
+    {
+      "id": "3",
+      "type": "video",
+      "url": "/placeholder-video.mp4",
+      "thumbnail": "/placeholder.svg?height=200&width=300",
+      "title": "Chef's Special Preparation",
+      "description": "Watch our head chef prepare the signature biryani",
+      "category": "cooking",
+      "uploadedAt": "2024-01-13T12:20:00Z",
+      "uploadedBy": "admin@bloomcafe.com",
+      "featured": false,
+      "duration": 45,
+      "tags": ["biryani", "chef", "cooking", "preparation"]
+    }
+  ],
+  "categories": [
+    {
+      "id": "food",
+      "name": "Food & Dishes",
+      "description": "Showcase of our delicious menu items",
+      "color": "#ff6b35"
+    },
+    {
+      "id": "ambiance",
+      "name": "Restaurant Ambiance",
+      "description": "Interior and exterior views of our beautiful space",
+      "color": "#4ecdc4"
+    },
+    {
+      "id": "events",
+      "name": "Events & Celebrations",
+      "description": "Special events and celebrations hosted at our cafe",
+      "color": "#45b7d1"
+    },
+    {
+      "id": "cooking",
+      "name": "Cooking Process",
+      "description": "Behind-the-scenes cooking and food preparation",
+      "color": "#f9ca24"
+    },
+    {
+      "id": "staff",
+      "name": "Our Team",
+      "description": "Meet our wonderful staff and team members",
+      "color": "#6c5ce7"
+    }
+  ]
+}

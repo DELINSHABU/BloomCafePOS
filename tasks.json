@@ -1,6 +1,19 @@
 {
   "tasks": [
     {
+      "id": "task-1754655364175",
+      "title": "9uh9u[",
+      "description": "iuiu[ui[[i",
+      "assignedTo": "John Smith",
+      "assignedBy": "Delin Developer",
+      "status": "pending",
+      "priority": "high",
+      "dueDate": "2025-08-09",
+      "createdAt": "2025-08-08T12:16:04.175Z",
+      "updatedAt": "2025-08-08T12:16:04.175Z",
+      "category": "cleaning"
+    },
+    {
       "id": "task-1754505299344",
       "title": "Clean the Bathroom",
       "description": "asdf asdf",
@@ -118,5 +131,5 @@
       "updatedAt": "2025-08-07T06:40:18.973Z"
     }
   ],
-  "lastUpdated": "2025-08-07T06:40:18.973Z"
+  "lastUpdated": "2025-08-08T12:16:04.183Z"
 }

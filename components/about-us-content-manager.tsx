@@ -58,6 +58,84 @@ interface AboutUsContent {
       }>;
       glassEffect: any;
     };
+    aboutUs: {
+      title: string;
+      icon: string;
+      iconColor: string;
+      sections: {
+        applicantDetails: {
+          title: string;
+          details: {
+            fullName: string;
+            businessName: string;
+            contact: {
+              phone: string;
+              email: string;
+            };
+            residentialAddress: string;
+            businessAddress: string;
+          };
+        };
+        businessOverview: {
+          title: string;
+          establishmentType: string;
+          theme: string;
+          targetAudience: string;
+        };
+        menuConcept: {
+          title: string;
+          description: string;
+          signatureDishes: string[];
+          options: string;
+        };
+        legalCompliance: {
+          title: string;
+          licenses: string[];
+        };
+        businessModel: {
+          title: string;
+          structure: string;
+          partners: string[];
+          stakeholders: string;
+        };
+        infrastructure: {
+          title: string;
+          seatingCapacity: string;
+          facilities: string[];
+        };
+        staffing: {
+          title: string;
+          totalEmployees: string;
+          roles: string[];
+          operations: string;
+        };
+        marketingStrategy: {
+          title: string;
+          brandIdentity: string;
+          socialMedia: string;
+          promotions: string;
+          partnerships: string;
+        };
+        safetyProtocols: {
+          title: string;
+          measures: string[];
+        };
+        financials: {
+          title: string;
+          capitalInvested: string;
+          equipmentCost: string;
+          monthlyOperating: string;
+          expectedRevenue: string;
+          breakEven: string;
+        };
+        supportingDocs: {
+          title: string;
+          documents: string[];
+        };
+      };
+      closingStatement: string;
+      glassEffect: any;
+    };
     visitUs: {
       title: string;
       icon: string;
@@ -322,12 +400,13 @@ export default function AboutUsContentManager({ currentUser }: AboutUsContentMan
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="header">Header</TabsTrigger>
           <TabsTrigger value="story">Our Story</TabsTrigger>
-          <TabsTrigger value="special">What Makes Us Special</TabsTrigger>
+          <TabsTrigger value="special">Features</TabsTrigger>
+          <TabsTrigger value="business">Business Info</TabsTrigger>
           <TabsTrigger value="visit">Visit Us</TabsTrigger>
-          <TabsTrigger value="mission">Our Mission</TabsTrigger>
+          <TabsTrigger value="mission">Mission</TabsTrigger>
         </TabsList>
 
         {/* Header Tab */}
@@ -579,6 +658,412 @@ export default function AboutUsContentManager({ currentUser }: AboutUsContentMan
               </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        {/* Business Information Tab */}
+        <TabsContent value="business" className="mt-6">
+          <div className="space-y-6">
+            {/* About Us Section Header */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Business Information Section</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <Label>Section Title</Label>
+                    <Input
+                      value={content.sections.aboutUs.title}
+                      onChange={(e) => updateContent('sections.aboutUs.title', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Icon</Label>
+                    <Select
+                      value={content.sections.aboutUs.icon}
+                      onValueChange={(value) => updateContent('sections.aboutUs.icon', value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {iconOptions.map((icon) => (
+                          <SelectItem key={icon.value} value={icon.value}>
+                            {icon.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label>Icon Color</Label>
+                    <Select
+                      value={content.sections.aboutUs.iconColor}
+                      onValueChange={(value) => updateContent('sections.aboutUs.iconColor', value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {colorOptions.map((color) => (
+                          <SelectItem key={color.value} value={color.value}>
+                            {color.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <div>
+                  <Label>Closing Statement</Label>
+                  <Textarea
+                    rows={3}
+                    value={content.sections.aboutUs.closingStatement}
+                    onChange={(e) => updateContent('sections.aboutUs.closingStatement', e.target.value)}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Applicant Details */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Applicant Details</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label>Full Name</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.applicantDetails.details.fullName}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.applicantDetails.details.fullName', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Business Name</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.applicantDetails.details.businessName}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.applicantDetails.details.businessName', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Phone</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.applicantDetails.details.contact.phone}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.applicantDetails.details.contact.phone', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Email</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.applicantDetails.details.contact.email}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.applicantDetails.details.contact.email', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Residential Address</Label>
+                    <Textarea
+                      rows={2}
+                      value={content.sections.aboutUs.sections.applicantDetails.details.residentialAddress}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.applicantDetails.details.residentialAddress', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Business Address</Label>
+                    <Textarea
+                      rows={2}
+                      value={content.sections.aboutUs.sections.applicantDetails.details.businessAddress}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.applicantDetails.details.businessAddress', e.target.value)}
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Business Overview */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Business Overview</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Establishment Type</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.businessOverview.establishmentType}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.businessOverview.establishmentType', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Theme & Concept</Label>
+                  <Textarea
+                    rows={2}
+                    value={content.sections.aboutUs.sections.businessOverview.theme}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.businessOverview.theme', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Target Audience</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.businessOverview.targetAudience}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.businessOverview.targetAudience', e.target.value)}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Menu Concept */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Menu Concept</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Description</Label>
+                  <Textarea
+                    rows={3}
+                    value={content.sections.aboutUs.sections.menuConcept.description}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.menuConcept.description', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Signature Dishes (one per line)</Label>
+                  <Textarea
+                    rows={4}
+                    value={content.sections.aboutUs.sections.menuConcept.signatureDishes.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.menuConcept.signatureDishes', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+                <div>
+                  <Label>Options Available</Label>
+                  <Textarea
+                    rows={2}
+                    value={content.sections.aboutUs.sections.menuConcept.options}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.menuConcept.options', e.target.value)}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Legal Compliance */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Legal Compliance</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <Label>Licenses (one per line)</Label>
+                  <Textarea
+                    rows={6}
+                    value={content.sections.aboutUs.sections.legalCompliance.licenses.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.legalCompliance.licenses', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Business Model */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Business Model & Ownership</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Business Structure</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.businessModel.structure}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.businessModel.structure', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Partners (one per line)</Label>
+                  <Textarea
+                    rows={3}
+                    value={content.sections.aboutUs.sections.businessModel.partners.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.businessModel.partners', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+                <div>
+                  <Label>Stakeholders</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.businessModel.stakeholders}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.businessModel.stakeholders', e.target.value)}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Infrastructure */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Infrastructure & Facilities</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Seating Capacity</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.infrastructure.seatingCapacity}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.infrastructure.seatingCapacity', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Facilities (one per line)</Label>
+                  <Textarea
+                    rows={8}
+                    value={content.sections.aboutUs.sections.infrastructure.facilities.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.infrastructure.facilities', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Staffing */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Staffing Plan</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Total Employees</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.staffing.totalEmployees}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.staffing.totalEmployees', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Staff Roles (one per line)</Label>
+                  <Textarea
+                    rows={6}
+                    value={content.sections.aboutUs.sections.staffing.roles.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.staffing.roles', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+                <div>
+                  <Label>Operations</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.staffing.operations}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.staffing.operations', e.target.value)}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Marketing Strategy */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Marketing Strategy</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Brand Identity</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.marketingStrategy.brandIdentity}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.marketingStrategy.brandIdentity', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Social Media</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.marketingStrategy.socialMedia}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.marketingStrategy.socialMedia', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Promotions</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.marketingStrategy.promotions}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.marketingStrategy.promotions', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Partnerships</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.marketingStrategy.partnerships}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.marketingStrategy.partnerships', e.target.value)}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Safety Protocols */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Safety & Cleanliness Protocols</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <Label>Safety Measures (one per line)</Label>
+                  <Textarea
+                    rows={6}
+                    value={content.sections.aboutUs.sections.safetyProtocols.measures.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.safetyProtocols.measures', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Financials */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Financial Overview</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label>Capital Invested</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.financials.capitalInvested}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.financials.capitalInvested', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Equipment Cost</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.financials.equipmentCost}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.financials.equipmentCost', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Monthly Operating Cost</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.financials.monthlyOperating}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.financials.monthlyOperating', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Expected Revenue</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.financials.expectedRevenue}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.financials.expectedRevenue', e.target.value)}
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <Label>Break-even Timeline</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.financials.breakEven}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.financials.breakEven', e.target.value)}
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Supporting Documents */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Supporting Documents</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <Label>Documents (one per line)</Label>
+                  <Textarea
+                    rows={6}
+                    value={content.sections.aboutUs.sections.supportingDocs.documents.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.supportingDocs.documents', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
 
         {/* Visit Us Tab */}

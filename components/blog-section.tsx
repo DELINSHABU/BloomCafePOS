@@ -16,6 +16,7 @@ import {
   ChevronRight
 } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import GlassSurface from './GlassSurface'
 
 interface BlogPost {
@@ -337,13 +338,15 @@ export default function BlogSection({ limit = 3, showFeatured = false }: BlogSec
         {/* View All Posts Button */}
         {posts.length >= limit && (
           <div className="text-center mt-6">
-            <Button
-              className="bg-white/20 hover:bg-white/30 text-white border-white/30 px-8 py-3 text-sm font-semibold rounded-xl transition-all group"
-              variant="outline"
-            >
-              View All Blog Posts
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            <Link href="/blog">
+              <Button
+                className="bg-white/20 hover:bg-white/30 text-white border-white/30 px-8 py-3 text-sm font-semibold rounded-xl transition-all group"
+                variant="outline"
+              >
+                View All Blog Posts
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </div>
         )}
       </div>

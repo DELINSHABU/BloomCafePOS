@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2025-08-07T06:34:24.244Z",
+  "lastUpdated": "2025-08-11T18:54:16.190Z",
   "fullRecord": {
-    "totalOrders": 130,
-    "totalRevenue": 1367135,
+    "totalOrders": 135,
+    "totalRevenue": 1368020,
     "orders": [
       {
         "id": "order-fw5qwd54l",
@@ -2688,7 +2688,7 @@
           }
         ],
         "total": 110,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "3",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2707,7 +2707,7 @@
           }
         ],
         "total": 165,
-        "status": "preparing",
+        "status": "delivered",
         "tableNumber": "2",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2726,7 +2726,7 @@
           }
         ],
         "total": 630,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "3",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2745,7 +2745,7 @@
           }
         ],
         "total": 420,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "2",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2764,7 +2764,7 @@
           }
         ],
         "total": 165,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "3",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2783,7 +2783,7 @@
           }
         ],
         "total": 220,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "5",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2802,7 +2802,7 @@
           }
         ],
         "total": 220,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2821,7 +2821,7 @@
           }
         ],
         "total": 220,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "6",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2840,7 +2840,7 @@
           }
         ],
         "total": 165,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "4",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2859,7 +2859,7 @@
           }
         ],
         "total": 630,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "4",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2878,7 +2878,7 @@
           }
         ],
         "total": 165,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2897,7 +2897,7 @@
           }
         ],
         "total": 420,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2916,7 +2916,7 @@
           }
         ],
         "total": 165,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2935,7 +2935,7 @@
           }
         ],
         "total": 420,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "6",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2954,12 +2954,132 @@
           }
         ],
         "total": 400000,
-        "status": "preparing",
+        "status": "ready",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
         "timestamp": "2025-08-06T18:52:38.396Z",
         "staffMember": "Tom Anderson"
+      },
+      {
+        "id": "staff-7t69f2wsx",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "3 APPAM + EGG CURRY",
+            "price": 55,
+            "quantity": 1
+          }
+        ],
+        "total": 55,
+        "status": "ready",
+        "tableNumber": "6",
+        "customerName": "Walk-in Customer",
+        "orderType": "dine-in",
+        "timestamp": "2025-08-07T15:25:01.187Z",
+        "staffMember": "John Smith"
+      },
+      {
+        "id": "order-qnb2d7jhj",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "Combo Special",
+            "price": 55,
+            "quantity": 1
+          }
+        ],
+        "total": 55,
+        "status": "preparing",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-08T12:21:09.075Z",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "lower karikom",
+          "city": "kollam",
+          "state": "keralal",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
+      },
+      {
+        "id": "order-p733r6mj8",
+        "items": [
+          {
+            "id": "combo-1753536315159",
+            "name": "Alfaham special Combo ",
+            "description": "Combo Special",
+            "price": 210,
+            "quantity": 2
+          }
+        ],
+        "total": 420,
+        "status": "preparing",
+        "customerName": "Sonu sasi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-08T16:06:10.216Z",
+        "customerPhone": "9633766791",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "kazhakottam",
+          "city": "tvm",
+          "state": "kerala",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
+      },
+      {
+        "id": "order-n4iiox1pf",
+        "items": [
+          {
+            "id": "combo-1753528480652",
+            "name": "Simple Breakfast ",
+            "description": "Combo Special",
+            "price": 55,
+            "quantity": 1
+          }
+        ],
+        "total": 55,
+        "status": "preparing",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-10T11:18:00.963Z",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "lower karikom",
+          "city": "kollam",
+          "state": "keralal",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
+      },
+      {
+        "id": "order-oxyueo6hv",
+        "items": [
+          {
+            "id": "combo-1754376219924",
+            "name": "Item01+item02",
+            "description": "Test text 03",
+            "price": 300,
+            "quantity": 1
+          }
+        ],
+        "total": 300,
+        "status": "pending",
+        "customerName": "Rahul Ravi",
+        "orderType": "delivery",
+        "timestamp": "2025-08-11T18:54:16.180Z",
+        "deliveryAddress": {
+          "label": "Home",
+          "streetAddress": "lower karikom",
+          "city": "kollam",
+          "state": "keralal",
+          "zipCode": "691531",
+          "phoneNumber": "09633766791"
+        }
       }
     ]
   },
@@ -2977,22 +3097,22 @@
     },
     {
       "month": "August",
-      "orders": 71,
-      "revenue": 1348525,
-      "john": 10,
-      "emily": 12,
-      "mike": 15,
-      "sarah": 8,
-      "david": 11,
-      "customer": 42
+      "orders": 76,
+      "revenue": 1349410,
+      "john": 11,
+      "emily": 13,
+      "mike": 16,
+      "sarah": 9,
+      "david": 12,
+      "customer": 45
     }
   ],
   "revenueAnalytics": {
-    "totalRevenue": 1367135,
+    "totalRevenue": 1368020,
     "revenueByStaff": {
-      "Customer Orders": 17070,
+      "Customer Orders": 17900,
       "Emily Davis": 9845,
-      "John Smith": 517745,
+      "John Smith": 517800,
       "Sarah Johnson": 404715,
       "Mike Wilson": 5450,
       "David Brown": 2185,
@@ -3005,8 +3125,8 @@
         "revenue": 18610
       },
       "August": {
-        "orders": 71,
-        "revenue": 1348525
+        "orders": 76,
+        "revenue": 1349410
       }
     },
     "revenueByDay": {
@@ -3016,9 +3136,13 @@
       "2025-07-27": 630,
       "2025-07-30": 740,
       "2025-08-05": 940505,
-      "2025-08-06": 408020
+      "2025-08-06": 408020,
+      "2025-08-07": 55,
+      "2025-08-08": 475,
+      "2025-08-10": 55,
+      "2025-08-11": 300
     },
-    "averageOrderValue": 10516
+    "averageOrderValue": 10133
   },
   "dailyAnalytics": {
     "morning": {
@@ -3032,12 +3156,12 @@
       }
     },
     "noon": {
-      "orders": 54,
-      "revenue": 22475,
+      "orders": 56,
+      "revenue": 22585,
       "staffBreakdown": {
         "Customer Orders": {
-          "orders": 38,
-          "revenue": 12590
+          "orders": 40,
+          "revenue": 12700
         },
         "Emily Davis": {
           "orders": 3,
@@ -3066,12 +3190,12 @@
       }
     },
     "night": {
-      "orders": 34,
-      "revenue": 932935,
+      "orders": 36,
+      "revenue": 933410,
       "staffBreakdown": {
         "Customer Orders": {
-          "orders": 11,
-          "revenue": 2805
+          "orders": 12,
+          "revenue": 3225
         },
         "Lisa Garcia": {
           "orders": 2,
@@ -3086,8 +3210,8 @@
           "revenue": 3240
         },
         "John Smith": {
-          "orders": 3,
-          "revenue": 516320
+          "orders": 4,
+          "revenue": 516375
         },
         "Sarah Johnson": {
           "orders": 12,
@@ -3096,8 +3220,8 @@
       }
     },
     "fullDay": {
-      "orders": 170,
-      "revenue": 1778220,
+      "orders": 176,
+      "revenue": 1779405,
       "staffBreakdown": {
         "John Smith": {
           "orders": 5,
@@ -3128,8 +3252,8 @@
           "revenue": 2250
         },
         "Customer Orders": {
-          "orders": 5,
-          "revenue": 1035
+          "orders": 6,
+          "revenue": 1335
         }
       }
     }
@@ -3137,17 +3261,24 @@
   "popularItems": [
     {
       "name": "Alfaham special Combo ",
-      "totalQuantity": 121,
-      "totalRevenue": 25410,
-      "orderCount": 40,
+      "totalQuantity": 123,
+      "totalRevenue": 25830,
+      "orderCount": 41,
       "averagePrice": 210
     },
     {
       "name": "Simple Breakfast ",
-      "totalQuantity": 92,
-      "totalRevenue": 5060,
-      "orderCount": 33,
+      "totalQuantity": 95,
+      "totalRevenue": 5225,
+      "orderCount": 36,
       "averagePrice": 55
+    },
+    {
+      "name": "Item01+item02",
+      "totalQuantity": 51,
+      "totalRevenue": 15300,
+      "orderCount": 10,
+      "averagePrice": 300
     },
     {
       "name": "APPAM",
@@ -3155,13 +3286,6 @@
       "totalRevenue": 500,
       "orderCount": 18,
       "averagePrice": 10
-    },
-    {
-      "name": "Item01+item02",
-      "totalQuantity": 50,
-      "totalRevenue": 15000,
-      "orderCount": 9,
-      "averagePrice": 300
     },
     {
       "name": "Large Amout",

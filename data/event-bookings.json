@@ -1,0 +1,25 @@
+{
+  "bookings": [
+    {
+      "id": "booking-1754749996603-4ewc0d9wk",
+      "name": "Delin",
+      "phone": "09633766791",
+      "email": "delinshabu.b@gmail.com",
+      "eventType": "Anniversary Dinner",
+      "eventDate": "2025-08-09",
+      "eventTime": "22:05",
+      "guestCount": 10,
+      "specialRequests": "Sample test 01",
+      "status": "pending",
+      "createdAt": "2025-08-09T14:33:16.603Z",
+      "updatedAt": "2025-08-09T14:33:16.603Z"
+    }
+  ],
+  "stats": {
+    "totalBookings": 1,
+    "pendingBookings": 1,
+    "confirmedBookings": 0,
+    "completedBookings": 0
+  },
+  "lastUpdated": "2025-08-09T14:33:16.603Z"
+}
