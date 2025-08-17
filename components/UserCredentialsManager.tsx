@@ -10,7 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { Eye, EyeOff, Edit, Trash2, Plus, Users, Shield, Crown, UserCheck } from "lucide-react";
+import { Eye, EyeOff, Edit, Trash2, Plus, Users, Shield, Crown, UserCheck, Settings, ChefHat } from "lucide-react";
 
 interface User {
   id: number;
@@ -175,6 +175,10 @@ export default function UserCredentialsManager({ currentUser }: UserCredentialsM
         return <Crown className="w-4 h-4 text-purple-600" />;
       case 'admin':
         return <Shield className="w-4 h-4 text-blue-600" />;
+      case 'manager':
+        return <Settings className="w-4 h-4 text-orange-600" />;
+      case 'cook':
+        return <ChefHat className="w-4 h-4 text-red-600" />;
       case 'waiter':
         return <UserCheck className="w-4 h-4 text-green-600" />;
       default:
@@ -188,6 +192,10 @@ export default function UserCredentialsManager({ currentUser }: UserCredentialsM
         return 'bg-purple-100 text-purple-700 border-purple-200';
       case 'admin':
         return 'bg-blue-100 text-blue-700 border-blue-200';
+      case 'manager':
+        return 'bg-orange-100 text-orange-700 border-orange-200';
+      case 'cook':
+        return 'bg-red-100 text-red-700 border-red-200';
       case 'waiter':
         return 'bg-green-100 text-green-700 border-green-200';
       default:
@@ -276,6 +284,8 @@ export default function UserCredentialsManager({ currentUser }: UserCredentialsM
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="waiter">Waiter</SelectItem>
+                    <SelectItem value="cook">Cook</SelectItem>
+                    <SelectItem value="manager">Manager</SelectItem>
                     <SelectItem value="admin">Admin</SelectItem>
                     <SelectItem value="superadmin">Super Admin</SelectItem>
                   </SelectContent>
@@ -420,6 +430,8 @@ export default function UserCredentialsManager({ currentUser }: UserCredentialsM
                                   </SelectTrigger>
                                   <SelectContent>
                                     <SelectItem value="waiter">Waiter</SelectItem>
+                                    <SelectItem value="cook">Cook</SelectItem>
+                                    <SelectItem value="manager">Manager</SelectItem>
                                     <SelectItem value="admin">Admin</SelectItem>
                                     <SelectItem value="superadmin">Super Admin</SelectItem>
                                   </SelectContent>

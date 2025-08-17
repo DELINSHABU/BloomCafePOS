@@ -12,7 +12,7 @@
       "title": "Our Story",
       "icon": "Heart",
       "iconColor": "text-red-400",
-      "content": "Established in 2020, Bloom Garden Cafe has flourished as a beacon of culinary excellence in our community. Born from a passion for authentic flavors and warm hospitality, we've created a space where every meal tells a story. Our commitment to fresh, locally-sourced ingredients and innovative recipes has made us a beloved destination for food enthusiasts seeking both comfort and adventure in every bite.",
+      "content": "At our core, we're a cafe with a mission: to prove that exceptional food and a healthy planet can thrive together. Our space is more than just a destination; it's a living model of sustainability.\n\nOur commitment begins with our infrastructure. We operate on **100% solar power** and utilize a **biogas recycling system** to convert our waste into clean energy. This foundation allows us to minimize our environmental footprint without compromising quality.\n\nBeyond our building, our dedication to a **green future** is reflected in our surroundings. Our cafe is a lush, natural extension of our philosophy, featuring a diverse array of plants, including fruits we cultivate ourselves for our menu. We are deeply connected to our community, prioritizing partnerships with **local farmers** who provide the majority of our raw materials.\n\nOur culinary promise is simple: to deliver an authentic and flavorful experience. By using genuine spices and time-honored techniques, we ensure every dish is crafted with care. When you choose to dine with us, you are not just enjoying a meal—you are supporting a sustainable vision and joining a community dedicated to making a positive impact.",
       "glassEffect": {
         "borderRadius": 24,
         "displace": 5,
@@ -310,6 +310,6 @@
     "text": "Explore Our Menu",
     "className": "bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
   },
-  "lastUpdated": "2025-08-09T14:30:16.000Z",
+  "lastUpdated": "2025-08-16T10:52:04.257Z",
   "updatedBy": "Delin.dev"
 }

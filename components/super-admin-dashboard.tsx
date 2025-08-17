@@ -17,6 +17,7 @@ import {
   Percent,
   ClipboardList,
   FileText,
+  Package,
 } from "lucide-react";
 import { SimpleThemeToggle } from "@/components/theme-toggle";
 import WaiterDashboard from "@/components/waiter-dashboard";
@@ -27,8 +28,9 @@ import OrderStatisticsDashboard from "@/components/order-statistics-dashboard";
 import OffersManager from "@/components/offers-manager";
 import UserCredentialsManager from "@/components/UserCredentialsManager";
 import TaskAssignmentManager from "@/components/task-assignment-manager";
-import AboutUsContentManager from "./about-us-content-manager";
+import AboutUsContentManagerComponent from "./about-us-content-manager";
 import BlogManager from "./blog-manager";
+import InventoryManager from "./inventory-manager";
 
 interface SuperAdminDashboardProps {
   onNavigate?: (page: any) => void;
@@ -140,7 +142,7 @@ export default function SuperAdminDashboard({
 
         {/* Navigation Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-4 sm:grid-cols-10 bg-gray-400 dark:bg-gray-800 gap-1 p-2 min-h-[100px] sm:min-h-[50px]">
+        <TabsList className="grid w-full grid-cols-4 sm:grid-cols-11 bg-gray-400 dark:bg-gray-800 gap-1 p-2 min-h-[100px] sm:min-h-[50px]">
             <TabsTrigger
               value="overview"
               className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
@@ -202,6 +204,13 @@ export default function SuperAdminDashboard({
               className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
             >
               📝 Blog
+            </TabsTrigger>
+            <TabsTrigger
+              value="inventory"
+              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
+            >
+              <Package className="w-3 h-3 mr-1 sm:mr-2" />
+              Inventory
             </TabsTrigger>
           </TabsList>
 
@@ -402,6 +411,27 @@ export default function SuperAdminDashboard({
                 </CardContent>
               </Card>
 
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Package className="w-5 h-5 text-cyan-600" />
+                    Inventory Management
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Manage restaurant inventory including ingredients, supplies,
+                    stock levels, suppliers, and automatic low-stock alerts.
+                  </p>
+                  <Button
+                    onClick={() => setActiveTab("inventory")}
+                    className="w-full bg-cyan-600 hover:bg-cyan-700"
+                  >
+                    Manage Inventory
+                  </Button>
+                </CardContent>
+              </Card>
+
               <Card className="lg:col-span-2 xl:col-span-1">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -510,13 +540,19 @@ export default function SuperAdminDashboard({
 
           <TabsContent value="about-us" className="mt-6">
             <div className="bg-white rounded-lg border p-6">
-              <AboutUsContentManager currentUser={currentUser} />
+              <AboutUsContentManagerComponent currentUser={currentUser} />
             </div>
           </TabsContent>
 
           <TabsContent value="blog" className="mt-6">
             <div className="bg-white rounded-lg border p-6">
               <BlogManager currentUser={currentUser} />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="inventory" className="mt-6">
+            <div className="bg-white rounded-lg border p-6">
+              <InventoryManager currentUser={currentUser} />
             </div>
           </TabsContent>
         </Tabs>

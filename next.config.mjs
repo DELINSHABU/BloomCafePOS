@@ -12,6 +12,9 @@ const nextConfig = {
   experimental: {
     reactCompiler: false,
   },
+  compiler: {
+    reactRemoveProperties: false,
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {

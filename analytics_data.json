@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-08-11T18:54:16.190Z",
+  "lastUpdated": "2025-08-16T03:04:34.016Z",
   "fullRecord": {
     "totalOrders": 135,
     "totalRevenue": 1368020,
@@ -2688,7 +2688,7 @@
           }
         ],
         "total": 110,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "3",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2726,7 +2726,7 @@
           }
         ],
         "total": 630,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "3",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2745,7 +2745,7 @@
           }
         ],
         "total": 420,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "2",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2764,7 +2764,7 @@
           }
         ],
         "total": 165,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "3",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2783,7 +2783,7 @@
           }
         ],
         "total": 220,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "5",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2802,7 +2802,7 @@
           }
         ],
         "total": 220,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2821,7 +2821,7 @@
           }
         ],
         "total": 220,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "6",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2840,7 +2840,7 @@
           }
         ],
         "total": 165,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "4",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2859,7 +2859,7 @@
           }
         ],
         "total": 630,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "4",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2878,7 +2878,7 @@
           }
         ],
         "total": 165,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2897,7 +2897,7 @@
           }
         ],
         "total": 420,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2916,7 +2916,7 @@
           }
         ],
         "total": 165,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2935,7 +2935,7 @@
           }
         ],
         "total": 420,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "6",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2954,7 +2954,7 @@
           }
         ],
         "total": 400000,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "8",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2973,7 +2973,7 @@
           }
         ],
         "total": 55,
-        "status": "ready",
+        "status": "delivered",
         "tableNumber": "6",
         "customerName": "Walk-in Customer",
         "orderType": "dine-in",
@@ -2992,7 +2992,7 @@
           }
         ],
         "total": 55,
-        "status": "preparing",
+        "status": "delivered",
         "customerName": "Rahul Ravi",
         "orderType": "delivery",
         "timestamp": "2025-08-08T12:21:09.075Z",
@@ -3017,7 +3017,7 @@
           }
         ],
         "total": 420,
-        "status": "preparing",
+        "status": "delivered",
         "customerName": "Sonu sasi",
         "orderType": "delivery",
         "timestamp": "2025-08-08T16:06:10.216Z",
@@ -3043,7 +3043,7 @@
           }
         ],
         "total": 55,
-        "status": "preparing",
+        "status": "delivered",
         "customerName": "Rahul Ravi",
         "orderType": "delivery",
         "timestamp": "2025-08-10T11:18:00.963Z",
@@ -3068,7 +3068,7 @@
           }
         ],
         "total": 300,
-        "status": "pending",
+        "status": "delivered",
         "customerName": "Rahul Ravi",
         "orderType": "delivery",
         "timestamp": "2025-08-11T18:54:16.180Z",

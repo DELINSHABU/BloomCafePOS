@@ -532,7 +532,7 @@ function AboutUsContentManagerComponent({ currentUser }: AboutUsContentManagerPr
                   label="Story Content (Markdown Supported)"
                   value={content.sections.ourStory.content}
                   onChange={(value) => updateContent('sections.ourStory.content', value)}
-                  placeholder={"Tell your cafe's story using Markdown formatting...\n\nExample:\n**Welcome to Bloom Garden Cafe!**\n\nOur journey began with a simple vision: *to create a space where every meal blooms with flavor*.\n\n- Fresh, locally-sourced ingredients\n- Artisanal coffee blends\n- Garden-to-table freshness\n\n&gt; \"A place where food meets passion\""}
+                  placeholder="Tell your cafe's story using Markdown formatting...\n\nExample:\n**Welcome to Bloom Garden Cafe!**\n\nOur journey began with a simple vision: *to create a space where every meal blooms with flavor*.\n\n- Fresh, locally-sourced ingredients\n- Artisanal coffee blends\n- Garden-to-table freshness\n\n> "A place where food meets passion""
                   rows={12}
                   maxHeight="600px"
                   className="mt-4"
@@ -847,6 +847,226 @@ function AboutUsContentManagerComponent({ currentUser }: AboutUsContentManagerPr
                 </div>
               </CardContent>
             </Card>
+
+            {/* Legal Compliance */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Legal Compliance</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <Label>Licenses (one per line)</Label>
+                  <Textarea
+                    rows={6}
+                    value={content.sections.aboutUs.sections.legalCompliance.licenses.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.legalCompliance.licenses', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Business Model */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Business Model & Ownership</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Business Structure</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.businessModel.structure}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.businessModel.structure', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Partners (one per line)</Label>
+                  <Textarea
+                    rows={3}
+                    value={content.sections.aboutUs.sections.businessModel.partners.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.businessModel.partners', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+                <div>
+                  <Label>Stakeholders</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.businessModel.stakeholders}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.businessModel.stakeholders', e.target.value)}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Infrastructure */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Infrastructure & Facilities</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Seating Capacity</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.infrastructure.seatingCapacity}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.infrastructure.seatingCapacity', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Facilities (one per line)</Label>
+                  <Textarea
+                    rows={8}
+                    value={content.sections.aboutUs.sections.infrastructure.facilities.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.infrastructure.facilities', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Staffing */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Staffing Plan</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Total Employees</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.staffing.totalEmployees}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.staffing.totalEmployees', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Staff Roles (one per line)</Label>
+                  <Textarea
+                    rows={6}
+                    value={content.sections.aboutUs.sections.staffing.roles.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.staffing.roles', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+                <div>
+                  <Label>Operations</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.staffing.operations}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.staffing.operations', e.target.value)}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Marketing Strategy */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Marketing Strategy</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Brand Identity</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.marketingStrategy.brandIdentity}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.marketingStrategy.brandIdentity', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Social Media</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.marketingStrategy.socialMedia}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.marketingStrategy.socialMedia', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Promotions</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.marketingStrategy.promotions}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.marketingStrategy.promotions', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label>Partnerships</Label>
+                  <Input
+                    value={content.sections.aboutUs.sections.marketingStrategy.partnerships}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.marketingStrategy.partnerships', e.target.value)}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Safety Protocols */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Safety & Cleanliness Protocols</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <Label>Safety Measures (one per line)</Label>
+                  <Textarea
+                    rows={6}
+                    value={content.sections.aboutUs.sections.safetyProtocols.measures.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.safetyProtocols.measures', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Financials */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Financial Overview</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label>Capital Invested</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.financials.capitalInvested}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.financials.capitalInvested', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Equipment Cost</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.financials.equipmentCost}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.financials.equipmentCost', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Monthly Operating Cost</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.financials.monthlyOperating}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.financials.monthlyOperating', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label>Expected Revenue</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.financials.expectedRevenue}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.financials.expectedRevenue', e.target.value)}
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <Label>Break-even Timeline</Label>
+                    <Input
+                      value={content.sections.aboutUs.sections.financials.breakEven}
+                      onChange={(e) => updateContent('sections.aboutUs.sections.financials.breakEven', e.target.value)}
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Supporting Documents */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Supporting Documents</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <Label>Documents (one per line)</Label>
+                  <Textarea
+                    rows={6}
+                    value={content.sections.aboutUs.sections.supportingDocs.documents.join('\n')}
+                    onChange={(e) => updateContent('sections.aboutUs.sections.supportingDocs.documents', e.target.value.split('\n').filter(line => line.trim()))}
+                  />
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </TabsContent>
 
@@ -906,33 +1126,39 @@ function AboutUsContentManagerComponent({ currentUser }: AboutUsContentManagerPr
 
               {/* Location */}
               <div>
-                <h3 className="text-lg font-semibold mb-3">Location Information</h3>
-                <div className="space-y-3">
-                  <div>
-                    <Label>Address (one line per field)</Label>
-                    <Textarea
-                      rows={3}
-                      value={content.sections.visitUs.location.address.join('\n')}
-                      onChange={(e) => updateContent('sections.visitUs.location.address', e.target.value.split('\n').filter(line => line.trim()))}
+                <h3 className="text-lg font-semibold mb-2">Location</h3>
+                <div className="space-y-2">
+                  {content.sections.visitUs.location.address.map((line, index) => (
+                    <Input
+                      key={index}
+                      value={line}
+                      onChange={(e) => {
+                        const newAddress = [...content.sections.visitUs.location.address];
+                        newAddress[index] = e.target.value;
+                        updateContent('sections.visitUs.location.address', newAddress);
+                      }}
+                      placeholder={`Address Line ${index + 1}`}
                     />
-                  </div>
+                  ))}
                 </div>
               </div>
 
               {/* Contact */}
               <div>
-                <h3 className="text-lg font-semibold mb-3">Contact Information</h3>
+                <h3 className="text-lg font-semibold mb-2">Contact</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label>Phone Number</Label>
+                    <Label htmlFor="phone">Phone Number</Label>
                     <Input
+                      id="phone"
                       value={content.sections.visitUs.contact.phone.number}
                       onChange={(e) => updateContent('sections.visitUs.contact.phone.number', e.target.value)}
                     />
                   </div>
                   <div>
-                    <Label>Email Address</Label>
+                    <Label htmlFor="email">Email Address</Label>
                     <Input
+                      id="email"
                       value={content.sections.visitUs.contact.email.address}
                       onChange={(e) => updateContent('sections.visitUs.contact.email.address', e.target.value)}
                     />
@@ -942,7 +1168,7 @@ function AboutUsContentManagerComponent({ currentUser }: AboutUsContentManagerPr
 
               {/* Hours */}
               <div>
-                <h3 className="text-lg font-semibold mb-3">Operating Hours</h3>
+                <h3 className="text-lg font-semibold mb-2">Opening Hours</h3>
                 <div className="space-y-3">
                   {content.sections.visitUs.hours.schedule.map((schedule, index) => (
                     <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-3">

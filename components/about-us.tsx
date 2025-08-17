@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import {
+import { 
   MapPin,
   Phone,
   Mail,
@@ -22,8 +22,12 @@ import {
   PartyPopper,
   Calendar,
   Gift,
-  Sparkles
+  Sparkles,
+  Briefcase
 } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -206,6 +210,7 @@ const IconMap: { [key: string]: React.ComponentType<{ className?: string }> } = 
   Calendar,
   Gift,
   Sparkles,
+  Briefcase,
 };
 
 // Review interfaces
@@ -319,6 +324,21 @@ export default function AboutUs({ onBack }: AboutUsProps) {
   });
   const [bookingSubmitting, setBookingSubmitting] = useState(false);
   const [bookingMessage, setBookingMessage] = useState('');
+
+  // Staff hiring form state
+  const [showStaffHiringForm, setShowStaffHiringForm] = useState(false);
+  const [staffHiringForm, setStaffHiringForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    position: 'Server',
+    experience: '',
+    availability: '',
+    resume: '',
+    additionalInfo: ''
+  });
+  const [staffHiringSubmitting, setStaffHiringSubmitting] = useState(false);
+  const [staffHiringMessage, setStaffHiringMessage] = useState('');
 
   useEffect(() => {
     loadContent();
@@ -452,6 +472,52 @@ export default function AboutUs({ onBack }: AboutUsProps) {
     }
   };
 
+  const handleSubmitStaffHiring = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!staffHiringForm.name.trim() || !staffHiringForm.phone.trim() || !staffHiringForm.email.trim()) {
+      setStaffHiringMessage('Please fill in all required fields.');
+      return;
+    }
+
+    setStaffHiringSubmitting(true);
+    setStaffHiringMessage('');
+
+    try {
+      const response = await fetch('/api/staff-applications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(staffHiringForm),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setStaffHiringMessage('💼 Job application submitted successfully! We will review your application and contact you soon.');
+        setStaffHiringForm({
+          name: '',
+          phone: '',
+          email: '',
+          position: 'Server',
+          experience: '',
+          availability: '',
+          resume: '',
+          additionalInfo: ''
+        });
+        setShowStaffHiringForm(false);
+      } else {
+        const errorData = await response.json();
+        setStaffHiringMessage(errorData.error || 'Failed to submit application');
+      }
+    } catch (error) {
+      console.error('Error submitting staff application:', error);
+      setStaffHiringMessage('Failed to submit application. Please try again.');
+    } finally {
+      setStaffHiringSubmitting(false);
+    }
+  };
+
   const renderIcon = (iconName: string, className: string = '') => {
     const IconComponent = IconMap[iconName];
     return IconComponent ? <IconComponent className={className} /> : <Heart className={className} />;
@@ -550,9 +616,35 @@ export default function AboutUs({ onBack }: AboutUsProps) {
                 {renderIcon(content.sections.ourStory.icon, `w-5 h-5 ${content.sections.ourStory.iconColor}`)}
                 {content.sections.ourStory.title}
               </h3>
-              <p className="text-white/90 text-base lg:text-lg xl:text-xl leading-relaxed max-w-5xl mx-auto drop-shadow-md">
-                {content.sections.ourStory.content}
-              </p>
+              <div className="text-white/90 text-base lg:text-lg xl:text-xl leading-relaxed max-w-5xl mx-auto drop-shadow-md prose prose-white prose-invert max-w-none">
+                {content.sections.ourStory.content ? (
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]}
+                    components={{
+                      p: ({ children, ...props }) => <p className="text-white/90 mb-4 leading-relaxed" {...props}>{children}</p>,
+                      strong: ({ children, ...props }) => <strong className="text-white font-bold" {...props}>{children}</strong>,
+                      em: ({ children, ...props }) => <em className="text-white/80 italic" {...props}>{children}</em>,
+                      h1: ({ children, ...props }) => <h1 className="text-white text-2xl font-bold mb-4" {...props}>{children}</h1>,
+                      h2: ({ children, ...props }) => <h2 className="text-white text-xl font-bold mb-3" {...props}>{children}</h2>,
+                      h3: ({ children, ...props }) => <h3 className="text-white text-lg font-bold mb-2" {...props}>{children}</h3>,
+                      ul: ({ children, ...props }) => <ul className="text-white/90 list-disc list-inside mb-4 space-y-2" {...props}>{children}</ul>,
+                      ol: ({ children, ...props }) => <ol className="text-white/90 list-decimal list-inside mb-4 space-y-2" {...props}>{children}</ol>,
+                      li: ({ children, ...props }) => <li className="text-white/90 mb-1" {...props}>{children}</li>,
+                      a: ({ children, href, ...props }) => <a href={href} className="text-blue-300 hover:text-blue-200 underline transition-colors" {...props}>{children}</a>,
+                      blockquote: ({ children, ...props }) => <blockquote className="border-l-4 border-white/30 pl-4 italic text-white/80 my-4 bg-white/5 py-2 rounded-r" {...props}>{children}</blockquote>,
+                      code: ({ children, ...props }) => <code className="bg-white/20 px-2 py-1 rounded text-white font-mono text-sm" {...props}>{children}</code>,
+                      pre: ({ children, ...props }) => <pre className="bg-white/20 p-4 rounded overflow-x-auto" {...props}>{children}</pre>,
+                      hr: ({ ...props }) => <hr className="border-white/30 my-6" {...props} />,
+                      img: ({ src, alt, ...props }) => <img src={src} alt={alt} className="max-w-full h-auto rounded" {...props} />
+                    }}
+                  >
+                    {content.sections.ourStory.content}
+                  </ReactMarkdown>
+                ) : (
+                  <p className="text-white/90 mb-4 leading-relaxed">Loading story content...</p>
+                )}
+              </div>
             </div>
           </GlassSurface>
 
@@ -1189,6 +1281,268 @@ export default function AboutUs({ onBack }: AboutUsProps) {
                 <div className="flex items-center gap-3 text-white/90">
                   <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
                   <span className="text-sm">Professional event coordination</span>
+                </div>
+              </div>
+            </div>
+          </GlassSurface>
+
+          {/* Staff Hiring Section */}
+          <GlassSurface
+            width="100%"
+            height="auto"
+            borderRadius={24}
+            displace={5}
+            distortionScale={-50}
+            redOffset={5}
+            greenOffset={15}
+            blueOffset={25}
+            brightness={10}
+            opacity={0}
+            mixBlendMode="screen"
+            className="p-8"
+          >
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-white mb-4 flex items-center justify-center gap-2 drop-shadow-lg">
+                <Briefcase className="w-6 h-6 text-orange-400 animate-bounce" />
+                Join Our Team
+                <Briefcase className="w-6 h-6 text-orange-400 animate-bounce" style={{ animationDelay: "0.5s" }} />
+              </h3>
+              
+              <p className="text-white/90 text-lg mb-6 max-w-3xl mx-auto drop-shadow-md">
+                Be part of the Bloom Garden Cafe family! We're always looking for passionate, dedicated individuals 
+                to join our team and help create memorable dining experiences for our guests.
+              </p>
+
+              {/* Available Positions */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
+                <div className="bg-white/10 backdrop-blur-md border border-orange-400/30 rounded-lg p-4 hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                  <div className="flex items-center justify-center mb-3">
+                    <Users className="w-8 h-8 text-blue-400 animate-pulse" />
+                  </div>
+                  <h4 className="font-semibold text-white mb-2">Servers & Waitstaff</h4>
+                  <p className="text-white/80 text-sm">Friendly service with a smile, taking orders and ensuring customer satisfaction</p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-md border border-orange-400/30 rounded-lg p-4 hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                  <div className="flex items-center justify-center mb-3">
+                    <Coffee className="w-8 h-8 text-yellow-400 animate-pulse" />
+                  </div>
+                  <h4 className="font-semibold text-white mb-2">Kitchen Staff</h4>
+                  <p className="text-white/80 text-sm">Passionate cooks and food preparation specialists to create our signature dishes</p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-md border border-orange-400/30 rounded-lg p-4 hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                  <div className="flex items-center justify-center mb-3">
+                    <Award className="w-8 h-8 text-green-400 animate-pulse" />
+                  </div>
+                  <h4 className="font-semibold text-white mb-2">Management</h4>
+                  <p className="text-white/80 text-sm">Leadership roles for experienced professionals in restaurant operations</p>
+                </div>
+              </div>
+
+              {/* Floating decorative elements */}
+              <div className="relative mb-8">
+                <div className="absolute -top-4 left-1/4 animate-float">
+                  <Sparkles className="w-4 h-4 text-orange-400 animate-twinkle" />
+                </div>
+                <div className="absolute -top-2 right-1/3 animate-float" style={{ animationDelay: "1s" }}>
+                  <Sparkles className="w-3 h-3 text-yellow-400 animate-twinkle" />
+                </div>
+                <div className="absolute -bottom-2 left-1/3 animate-float" style={{ animationDelay: "2s" }}>
+                  <Sparkles className="w-5 h-5 text-blue-400 animate-twinkle" />
+                </div>
+
+                <div className="bg-gradient-to-r from-orange-500/20 via-yellow-500/20 to-blue-500/20 rounded-2xl p-6 backdrop-blur-md border border-white/30">
+                  <h4 className="text-xl font-semibold text-white mb-3 flex items-center justify-center gap-2">
+                    <Briefcase className="w-5 h-5 text-orange-400" />
+                    Apply Today!
+                  </h4>
+                  <p className="text-white/90 mb-4">
+                    Submit your application and join our growing team of hospitality professionals!
+                  </p>
+                  
+                  {/* Staff Application Form Toggle */}
+                  <div className="text-center mb-4">
+                    <Button
+                      onClick={() => setShowStaffHiringForm(!showStaffHiringForm)}
+                      className="bg-orange-600/80 hover:bg-orange-600/90 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 backdrop-blur-md border border-orange-500/50"
+                    >
+                      <Briefcase className="w-4 h-4 mr-2" />
+                      {showStaffHiringForm ? 'Close Form' : 'Apply Now'}
+                    </Button>
+                    {staffHiringMessage && (
+                      <p className={`mt-2 text-sm ${
+                        staffHiringMessage.includes('successfully') 
+                          ? 'text-green-400' 
+                          : 'text-red-400'
+                      }`}>
+                        {staffHiringMessage}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Staff Application Form */}
+                  {showStaffHiringForm && (
+                    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6 mb-4">
+                      <h5 className="text-white font-semibold mb-4 text-center">Application Details</h5>
+                      <form onSubmit={handleSubmitStaffHiring} className="space-y-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <Input
+                              placeholder="Full Name*"
+                              value={staffHiringForm.name}
+                              onChange={(e) => setStaffHiringForm({ ...staffHiringForm, name: e.target.value })}
+                              className="bg-white/10 border-white/30 text-white placeholder-white/70 backdrop-blur-md"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <Input
+                              placeholder="Phone Number*"
+                              type="tel"
+                              value={staffHiringForm.phone}
+                              onChange={(e) => setStaffHiringForm({ ...staffHiringForm, phone: e.target.value })}
+                              className="bg-white/10 border-white/30 text-white placeholder-white/70 backdrop-blur-md"
+                              required
+                            />
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <Input
+                            placeholder="Email Address*"
+                            type="email"
+                            value={staffHiringForm.email}
+                            onChange={(e) => setStaffHiringForm({ ...staffHiringForm, email: e.target.value })}
+                            className="bg-white/10 border-white/30 text-white placeholder-white/70 backdrop-blur-md"
+                            required
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <select
+                              value={staffHiringForm.position}
+                              onChange={(e) => setStaffHiringForm({ ...staffHiringForm, position: e.target.value })}
+                              className="w-full px-3 py-2 bg-white/10 border border-white/30 text-white placeholder-white/70 backdrop-blur-md rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400/50"
+                              required
+                            >
+                              <option value="Server" className="bg-gray-800 text-white">Server/Waitstaff</option>
+                              <option value="Kitchen Staff" className="bg-gray-800 text-white">Kitchen Staff</option>
+                              <option value="Barista" className="bg-gray-800 text-white">Barista</option>
+                              <option value="Host/Hostess" className="bg-gray-800 text-white">Host/Hostess</option>
+                              <option value="Manager" className="bg-gray-800 text-white">Manager</option>
+                              <option value="Chef" className="bg-gray-800 text-white">Chef</option>
+                              <option value="Cleaner" className="bg-gray-800 text-white">Cleaner</option>
+                              <option value="Other" className="bg-gray-800 text-white">Other</option>
+                            </select>
+                          </div>
+                          <div>
+                            <Input
+                              placeholder="Years of Experience"
+                              value={staffHiringForm.experience}
+                              onChange={(e) => setStaffHiringForm({ ...staffHiringForm, experience: e.target.value })}
+                              className="bg-white/10 border-white/30 text-white placeholder-white/70 backdrop-blur-md"
+                            />
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <Input
+                            placeholder="Availability (e.g., Full-time, Part-time, Weekends)"
+                            value={staffHiringForm.availability}
+                            onChange={(e) => setStaffHiringForm({ ...staffHiringForm, availability: e.target.value })}
+                            className="bg-white/10 border-white/30 text-white placeholder-white/70 backdrop-blur-md"
+                          />
+                        </div>
+                        
+                        <div>
+                          <Input
+                            placeholder="Resume/CV Link (optional)"
+                            type="url"
+                            value={staffHiringForm.resume}
+                            onChange={(e) => setStaffHiringForm({ ...staffHiringForm, resume: e.target.value })}
+                            className="bg-white/10 border-white/30 text-white placeholder-white/70 backdrop-blur-md"
+                          />
+                        </div>
+                        
+                        <div>
+                          <Textarea
+                            placeholder="Tell us why you'd like to work with us and what makes you a great fit..."
+                            value={staffHiringForm.additionalInfo}
+                            onChange={(e) => setStaffHiringForm({ ...staffHiringForm, additionalInfo: e.target.value })}
+                            className="bg-white/10 border-white/30 text-white placeholder-white/70 backdrop-blur-md min-h-[100px] resize-none"
+                            maxLength={1000}
+                          />
+                          <p className="text-right text-white/50 text-xs mt-1">
+                            {staffHiringForm.additionalInfo.length}/1000
+                          </p>
+                        </div>
+                        
+                        <Button
+                          type="submit"
+                          disabled={staffHiringSubmitting}
+                          className="w-full bg-orange-600/80 hover:bg-orange-600/90 text-white font-semibold rounded-xl backdrop-blur-md border border-orange-500/50"
+                        >
+                          {staffHiringSubmitting ? (
+                            <>
+                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                              Submitting...
+                            </>
+                          ) : (
+                            <>
+                              <Send className="w-4 h-4 mr-2" />
+                              Submit Application
+                            </>
+                          )}
+                        </Button>
+                      </form>
+                    </div>
+                  )}
+
+                  {/* WhatsApp Contact Button - Alternative */}
+                  <div className="text-center">
+                    <p className="text-white/80 text-sm mb-3">Or contact us directly:</p>
+                    <a
+                      href="https://wa.me/917025420663?text=Hi%2C%20I'm%20interested%20in%20job%20opportunities%20at%20Bloom%20Garden%20Cafe.%20Could%20you%20please%20share%20information%20about%20current%20openings%3F"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-green-600/80 hover:bg-green-600/90 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 backdrop-blur-md border border-green-500/50 text-sm"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.690z"/>
+                      </svg>
+                      WhatsApp: +91 70254 20663
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                  
+                  <div className="mt-4 text-white/70 text-sm">
+                    <p className="flex items-center justify-center gap-2">
+                      <Clock className="w-4 h-4" />
+                      We review applications regularly and contact qualified candidates
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Benefits List */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto text-left">
+                <div className="flex items-center gap-3 text-white/90">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm">Competitive salary & tips</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/90">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm">Flexible scheduling</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/90">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm">Staff meal discounts</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/90">
+                  <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm">Growth opportunities</span>
                 </div>
               </div>
             </div>
