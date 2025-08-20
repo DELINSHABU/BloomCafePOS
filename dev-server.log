@@ -1,0 +1,60 @@
+
+> my-v0-project@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.2.4
+   - Local:        http://localhost:3000
+   - Network:      http://10.183.159.2:3000
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ⨯ reactCompiler
+
+ ✓ Starting...
+ ✓ Ready in 2.4s
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 7s (977 modules)
+ GET /api/orders 404 in 7561ms
+ ○ Compiling /api/orders ...
+ ✓ Compiled /api/orders in 1060ms (996 modules)
+📋 JSON FILE ACCESS: orders data accessed from orders.json -> GET()
+📋 JSON FILE ACCESS: orders.json accessed from api/orders/route.ts -> readOrdersData()
+ GET /api/orders 200 in 839ms
+ ✓ Compiled in 324ms (375 modules)
+ ✓ Compiled in 224ms (375 modules)
+ ✓ Compiled in 212ms (375 modules)
+ ✓ Compiled in 213ms (375 modules)
+ ✓ Compiled in 210ms (375 modules)
+ ✓ Compiled in 214ms (375 modules)
+ ✓ Compiled in 213ms (375 modules)
+ ✓ Compiled in 211ms (375 modules)
+ ✓ Compiled in 201ms (375 modules)
+ ✓ Compiled in 211ms (375 modules)
+ ⨯ SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>) {
+  page: '/api/orders'
+}
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 2s (1326 modules)
+ ✓ Compiled in 226ms (617 modules)
+ GET /api/orders 500 in 2419ms
+ ✓ Compiled in 338ms (617 modules)
+ ✓ Compiled in 224ms (617 modules)
+📋 JSON FILE ACCESS: orders data accessed from orders.json -> GET()
+📋 JSON FILE ACCESS: orders.json accessed from api/orders/route.ts -> readOrdersData()
+ GET /api/orders 200 in 85ms
+ ✓ Compiled in 322ms (617 modules)
+ ✓ Compiled in 221ms (617 modules)
+ ✓ Compiled in 218ms (617 modules)
+ ✓ Compiled in 235ms (617 modules)
+ ✓ Compiled in 228ms (617 modules)
+ ✓ Compiled in 216ms (617 modules)
+ ✓ Compiled in 213ms (617 modules)
+ ✓ Compiled in 214ms (617 modules)
+ ✓ Compiled in 222ms (617 modules)
+ ✓ Compiled in 225ms (617 modules)
+ ✓ Compiled in 286ms (617 modules)
+ ✓ Compiled in 216ms (617 modules)
+ ✓ Compiled in 216ms (617 modules)
+ ✓ Compiled in 216ms (617 modules)
+ ✓ Compiled in 217ms (617 modules)
+[?25h

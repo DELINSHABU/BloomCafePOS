@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { adminDb, firebaseAvailable } from '@/lib/firebase-admin'
 import fs from 'fs'
 import path from 'path'
 
 const ORDERS_FILE = path.join(process.cwd(), 'orders.json')
 const ANALYTICS_FILE = path.join(process.cwd(), 'analytics_data.json')
+const USE_FIREBASE = true // Set to true to use Firebase, false for JSON fallback
 
 // Helper function to read orders data from JSON
 function readOrdersData() {
@@ -177,25 +179,244 @@ async function updateAnalyticsData() {
   }
 }
 
-// GET - Fetch all orders from JSON
-export async function GET() {
+// Cache to store recent orders data
+let ordersCache = {
+  data: null as any,
+  timestamp: 0,
+  ttl: 5 * 60 * 1000 // 5 minutes TTL
+}
+
+// Helper function to get orders from Firebase with pagination and caching
+async function getOrdersFromFirebase(limit: number = 50, startAfter?: any) {
   try {
-    console.log('📋 JSON FILE ACCESS: orders data accessed from orders.json -> GET()');
+    // Check cache first
+    const now = Date.now()
+    if (ordersCache.data && (now - ordersCache.timestamp) < ordersCache.ttl) {
+      console.log('📋 Using cached orders data')
+      return {
+        success: true,
+        orders: ordersCache.data,
+        timestamp: new Date().toISOString(),
+        source: 'firebase-cache',
+        fromCache: true
+      }
+    }
+
+    console.log(`🔥 Fetching ${limit} orders from Firebase Firestore`)
+    const ordersCollection = adminDb.collection('orders')
     
-    const ordersData = readOrdersData()
+    let query = ordersCollection
+      .orderBy('timestamp', 'desc')
+      .limit(limit)
     
-    return NextResponse.json({ 
-      success: true, 
-      orders: ordersData.orders || [],
-      timestamp: new Date().toISOString()
+    // Add pagination if startAfter is provided
+    if (startAfter) {
+      query = query.startAfter(startAfter)
+    }
+    
+    const snapshot = await query.get()
+    
+    if (snapshot.empty) {
+      console.log('📭 No orders found in Firebase')
+      return {
+        success: true,
+        orders: [],
+        timestamp: new Date().toISOString(),
+        source: 'firebase',
+        hasMore: false
+      }
+    }
+    
+    const orders: any[] = []
+    snapshot.forEach(doc => {
+      const data = doc.data()
+      orders.push({
+        id: doc.id,
+        ...data,
+        timestamp: data.timestamp?.toDate ? data.timestamp.toDate().toISOString() : data.timestamp
+      })
     })
+    
+    // Cache the results
+    ordersCache = {
+      data: orders,
+      timestamp: now,
+      ttl: 5 * 60 * 1000 // 5 minutes
+    }
+    
+    // Check if there are more documents
+    const hasMore = snapshot.size === limit
+    
+    return {
+      success: true,
+      orders,
+      timestamp: new Date().toISOString(),
+      source: 'firebase',
+      hasMore,
+      lastDocument: hasMore ? snapshot.docs[snapshot.docs.length - 1] : null,
+      totalFetched: orders.length
+    }
+  } catch (error: any) {
+    console.error('🚨 Firebase quota/error:', error)
+    
+    // Handle specific quota exceeded error
+    if (error.code === 8 || error.details?.includes('Quota exceeded')) {
+      throw new Error('QUOTA_EXCEEDED')
+    }
+    
+    throw error
+  }
+}
+
+// Helper function to get orders count without fetching documents (more efficient)
+async function getOrdersCount() {
+  try {
+    const ordersCollection = adminDb.collection('orders')
+    // Use aggregation query which is more quota-efficient
+    const countQuery = ordersCollection.count()
+    const countSnapshot = await countQuery.get()
+    return countSnapshot.data().count
   } catch (error) {
-    console.error('Error fetching orders from JSON:', error)
-    return NextResponse.json({ 
-      success: false, 
-      error: 'Failed to fetch orders',
-      orders: []
-    }, { status: 500 })
+    console.warn('Could not get count, falling back to estimate')
+    return null
+  }
+}
+
+// Helper function to get recent orders only (last 24 hours)
+async function getRecentOrdersFromFirebase(hours: number = 24) {
+  try {
+    const hoursAgo = new Date()
+    hoursAgo.setHours(hoursAgo.getHours() - hours)
+    
+    console.log(`🔥 Fetching orders from last ${hours} hours from Firebase`)
+    const ordersCollection = adminDb.collection('orders')
+    
+    const snapshot = await ordersCollection
+      .where('timestamp', '>=', hoursAgo)
+      .orderBy('timestamp', 'desc')
+      .limit(100) // Reasonable limit
+      .get()
+    
+    const orders: any[] = []
+    snapshot.forEach(doc => {
+      const data = doc.data()
+      orders.push({
+        id: doc.id,
+        ...data,
+        timestamp: data.timestamp?.toDate ? data.timestamp.toDate().toISOString() : data.timestamp
+      })
+    })
+    
+    return {
+      success: true,
+      orders,
+      timestamp: new Date().toISOString(),
+      source: 'firebase-recent',
+      period: `${hours}h`
+    }
+  } catch (error: any) {
+    if (error.code === 8 || error.details?.includes('Quota exceeded')) {
+      throw new Error('QUOTA_EXCEEDED')
+    }
+    throw error
+  }
+}
+
+// GET - Fetch all orders with query parameter support
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const limit = parseInt(searchParams.get('limit') || '50')
+    const recentOnly = searchParams.get('recent') === 'true'
+    const hours = parseInt(searchParams.get('hours') || '24')
+    
+    if (USE_FIREBASE && firebaseAvailable) {
+      try {
+        let ordersData
+        
+        if (recentOnly) {
+          // Fetch only recent orders to save quota
+          console.log(`🔥 Fetching recent orders (${hours}h) from Firebase to save quota`)
+          ordersData = await getRecentOrdersFromFirebase(hours)
+        } else {
+          // Fetch with pagination
+          console.log(`🔥 Fetching ${limit} orders from Firebase with pagination`)
+          ordersData = await getOrdersFromFirebase(limit)
+        }
+        
+        return NextResponse.json(ordersData)
+        
+      } catch (firebaseError: any) {
+        console.error('🚨 Firebase error:', firebaseError)
+        
+        // Handle quota exceeded specifically
+        if (firebaseError.message === 'QUOTA_EXCEEDED') {
+          console.log('⚡ Firebase quota exceeded, switching to JSON fallback')
+          const ordersData = readOrdersData()
+          
+          return NextResponse.json({ 
+            success: true, 
+            orders: ordersData.orders || [],
+            timestamp: new Date().toISOString(),
+            source: 'json',
+            fallback: true,
+            reason: 'quota_exceeded',
+            message: 'Firebase quota exceeded, using local data'
+          })
+        }
+        
+        throw firebaseError // Re-throw other errors
+      }
+    } else {
+      console.log('📋 JSON FILE ACCESS: orders data accessed from orders.json -> GET()');
+      
+      const ordersData = readOrdersData()
+      let orders = ordersData.orders || []
+      
+      // Apply filters for JSON data too
+      if (recentOnly) {
+        const hoursAgo = new Date()
+        hoursAgo.setHours(hoursAgo.getHours() - hours)
+        orders = orders.filter((order: any) => new Date(order.timestamp) >= hoursAgo)
+      }
+      
+      // Apply limit
+      if (limit && limit > 0) {
+        orders = orders.slice(0, limit)
+      }
+      
+      return NextResponse.json({ 
+        success: true, 
+        orders,
+        timestamp: new Date().toISOString(),
+        source: 'json',
+        totalFetched: orders.length,
+        filtered: recentOnly
+      })
+    }
+  } catch (error) {
+    console.error('❌ Error fetching orders:', error)
+    
+    // Final fallback to JSON if everything else fails
+    try {
+      console.log('⚠️ All methods failed, attempting JSON fallback')
+      const ordersData = readOrdersData()
+      return NextResponse.json({ 
+        success: true, 
+        orders: ordersData.orders || [],
+        timestamp: new Date().toISOString(),
+        source: 'json',
+        fallback: true,
+        error: 'Firebase unavailable'
+      })
+    } catch (jsonError) {
+      console.error('❌ JSON fallback also failed:', jsonError)
+      return NextResponse.json({ 
+        success: false, 
+        error: 'All data sources failed',
+        orders: []
+      }, { status: 500 })
+    }
   }
 }
 

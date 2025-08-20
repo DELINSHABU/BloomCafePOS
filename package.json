@@ -4,10 +4,11 @@
     "private": true,
     "scripts": {
         "build": "next build",
-        "dev": "next dev ",
+        "dev": "next dev --port 3001",
         "lint": "next lint",
         "start": "next start",
         "migrate:menu": "node scripts/migrate-menu-to-firebase.js",
+        "migrate:all": "node scripts/migrate-all-data.js",
         "migrate:firestore": "node scripts/migrate-to-firestore.js",
         "migrate:verify": "node scripts/migrate-to-firestore.js --verify",
         "migrate:backup": "node scripts/migrate-to-firestore.js --backup",

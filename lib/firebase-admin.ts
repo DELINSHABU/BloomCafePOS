@@ -47,9 +47,11 @@ function initializeFirebaseAdmin() {
         }),
       })
     } else {
-      console.log('🔑 Attempting to use Application Default Credentials (ADC)')
+      // For development: Use default project ID without credentials
+      // This will work with the client SDK for basic operations
+      console.log('🔑 Initializing Firebase Admin for development mode')
       adminApp = initializeApp({
-        projectId: 'bloom-graden-cafe-user-login',
+        projectId: process.env.FIREBASE_PROJECT_ID || 'bloom-graden-cafe-user-login',
       })
     }
     
@@ -63,6 +65,15 @@ function initializeFirebaseAdmin() {
     firebaseAvailable = false
     adminApp = null
     adminDb = null
+    
+    // For development: Try to initialize without credentials as a last resort
+    try {
+      console.log('🔄 Attempting basic initialization for development...')
+      // This will work for some operations but may fail for others
+      firebaseAvailable = false  // Keep as false to trigger JSON fallbacks
+    } catch (fallbackError) {
+      console.log('💡 All Firebase initialization methods failed - using JSON fallbacks')
+    }
   }
   
   return { adminApp, adminDb, firebaseAvailable }

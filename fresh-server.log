@@ -1,0 +1,42 @@
+
+> my-v0-project@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.2.4
+   - Local:        http://localhost:3000
+   - Network:      http://10.183.159.2:3000
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ⨯ reactCompiler
+
+ ✓ Starting...
+ ✓ Ready in 2.4s
+ ○ Compiling /api/menu ...
+ ✓ Compiled /api/menu in 1274ms (413 modules)
+🔑 Firebase credentials found, initializing with service account
+✅ Firebase Admin SDK initialized successfully
+🔥 Fetching menu data from Firebase Firestore
+ GET /api/menu 200 in 2807ms
+🔥 Fetching menu data from Firebase Firestore
+ GET /api/menu 200 in 1176ms
+🔥 Fetching menu data from Firebase Firestore
+ GET /api/menu 200 in 424ms
+ ○ Compiling /api/orders ...
+ ✓ Compiled /api/orders in 541ms (415 modules)
+📋 JSON FILE ACCESS: orders data accessed from orders.json -> GET()
+📋 JSON FILE ACCESS: orders.json accessed from api/orders/route.ts -> readOrdersData()
+ GET /api/orders 200 in 595ms
+ ✓ Compiled /api/inventory in 284ms (417 modules)
+ GET /api/inventory 200 in 332ms
+ ✓ Compiled /api/blog-posts in 158ms (419 modules)
+ GET /api/blog-posts 200 in 183ms
+ ✓ Compiled /api/customer-reviews in 111ms (421 modules)
+ GET /api/customer-reviews 200 in 131ms
+ ✓ Compiled /api/tasks in 152ms (423 modules)
+📋 JSON FILE ACCESS: tasks data accessed from tasks.json -> GET()
+📋 JSON FILE ACCESS: tasks.json accessed from api/tasks/route.ts -> readTasksData()
+ GET /api/tasks 200 in 174ms
+ ✓ Compiled in 15ms
+ ✓ Compiled /api/orders in 226ms (137 modules)
+🔥 Fetching orders data from Firebase Firestore
+ GET /api/orders 200 in 1150ms
