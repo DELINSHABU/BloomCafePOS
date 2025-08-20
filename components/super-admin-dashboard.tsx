@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -31,6 +31,8 @@ import TaskAssignmentManager from "@/components/task-assignment-manager";
 import AboutUsContentManagerComponent from "./about-us-content-manager";
 import BlogManager from "./blog-manager";
 import InventoryManager from "./inventory-manager";
+import RolePermissionManager from "./role-permission-manager";
+import { useRolePermissions } from "@/hooks/useRolePermissions";
 
 interface SuperAdminDashboardProps {
   onNavigate?: (page: any) => void;
@@ -43,7 +45,31 @@ export default function SuperAdminDashboard({
   currentUser,
   onLogout,
 }: SuperAdminDashboardProps) {
-  const [activeTab, setActiveTab] = useState("overview");
+  const { hasPermission, getDefaultTab, getAllowedTabs, permissions } = useRolePermissions();
+  const userRole = currentUser?.role || 'waiter';
+  const allowedTabs = getAllowedTabs(userRole);
+  const defaultTab = getDefaultTab(userRole);
+  
+  const [activeTab, setActiveTab] = useState(defaultTab || "overview");
+  
+  // Debug logging
+  console.log('Current user:', currentUser);
+  console.log('User role:', userRole);
+  console.log('Permissions loaded:', permissions);
+  console.log('Allowed tabs:', allowedTabs);
+  console.log('Default tab:', defaultTab);
+  console.log('Active tab:', activeTab);
+  
+  // Count actual visible tabs
+  const visibleTabsCount = allowedTabs.length;
+  console.log('Number of visible tabs for', userRole, ':', visibleTabsCount);
+
+  // Update active tab if current one is not allowed for the role
+  React.useEffect(() => {
+    if (!hasPermission(userRole, activeTab) && allowedTabs.length > 0) {
+      setActiveTab(allowedTabs[0]);
+    }
+  }, [userRole, activeTab, hasPermission, allowedTabs]);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -85,6 +111,34 @@ export default function SuperAdminDashboard({
       </div>
 
       <div className="p-4 sm:p-6">
+        {/* Debug Info Panel - Temporary for testing */}
+        {process.env.NODE_ENV === 'development' && (
+          <Card className="mb-6 border-yellow-300 bg-yellow-50">
+            <CardHeader>
+              <CardTitle className="text-yellow-800">🐛 Debug Information</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p><strong>User:</strong> {currentUser?.name || 'None'}</p>
+                  <p><strong>Role:</strong> {userRole}</p>
+                  <p><strong>Active Tab:</strong> {activeTab}</p>
+                  <p><strong>Default Tab:</strong> {defaultTab}</p>
+                </div>
+                <div>
+                  <p><strong>Visible Tabs ({visibleTabsCount}):</strong></p>
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {allowedTabs.map(tab => (
+                      <Badge key={tab} variant="outline" className="text-xs">{tab}</Badge>
+                    ))}
+                  </div>
+                  <p className="mt-2"><strong>Permissions Loaded:</strong> {Object.keys(permissions).length > 0 ? '✅' : '❌'}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+        
         {/* Quick Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <Card className="border-l-4 border-l-purple-500">
@@ -142,76 +196,90 @@ export default function SuperAdminDashboard({
 
         {/* Navigation Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-4 sm:grid-cols-11 bg-gray-400 dark:bg-gray-800 gap-1 p-2 min-h-[100px] sm:min-h-[50px]">
-            <TabsTrigger
-              value="overview"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              Overview
-            </TabsTrigger>
-            <TabsTrigger
-              value="specials"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              Today's Special
-            </TabsTrigger>
-            <TabsTrigger
-              value="offers"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              Offers
-            </TabsTrigger>
-            <TabsTrigger
-              value="waiter"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              Waiter View
-            </TabsTrigger>
-            <TabsTrigger
-              value="admin"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              Admin View
-            </TabsTrigger>
-            <TabsTrigger
-              value="qr"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              QR Codes
-            </TabsTrigger>
-            <TabsTrigger
-              value="users"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              User Credentials
-            </TabsTrigger>
-            <TabsTrigger
-              value="tasks"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              <ClipboardList className="w-3 h-3 mr-1 sm:mr-2" />
-              Tasks
-            </TabsTrigger>
-            <TabsTrigger
-              value="about-us"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              <FileText className="w-3 h-3 mr-1 sm:mr-2" />
-              About Us
-            </TabsTrigger>
-            <TabsTrigger
-              value="blog"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              📝 Blog
-            </TabsTrigger>
-            <TabsTrigger
-              value="inventory"
-              className="data-[state=inactive]:text-white text-xs sm:text-sm px-1 sm:px-3"
-            >
-              <Package className="w-3 h-3 mr-1 sm:mr-2" />
-              Inventory
-            </TabsTrigger>
+          <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-2 mb-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
+              {/* Create array of visible tabs and render them responsively */}
+              {[
+                { key: 'overview', label: 'Overview', icon: null },
+                { key: 'specials', label: "Today's Special", icon: null },
+                { key: 'offers', label: 'Offers', icon: null },
+                { key: 'waiter', label: 'Waiter View', icon: null },
+                { key: 'admin', label: 'Admin View', icon: null },
+                { key: 'qr', label: 'QR Codes', icon: null },
+                { key: 'users', label: 'User Credentials', icon: null },
+                { key: 'tasks', label: 'Tasks', icon: <ClipboardList className="w-3 h-3 mr-1" /> },
+                { key: 'about-us', label: 'About Us', icon: <FileText className="w-3 h-3 mr-1" /> },
+                { key: 'blog', label: 'Blog', icon: null },
+                { key: 'inventory', label: 'Inventory', icon: <Package className="w-3 h-3 mr-1" /> },
+                { key: 'management-overview', label: 'Management', icon: <Settings className="w-3 h-3 mr-1" /> },
+                { key: 'workflow', label: 'Workflow', icon: <ClipboardList className="w-3 h-3 mr-1" /> },
+                { key: 'editing-panel', label: 'Editing Panel', icon: <FileText className="w-3 h-3 mr-1" /> }
+              ]
+                .filter(tab => hasPermission(userRole, tab.key))
+                .map(tab => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setActiveTab(tab.key)}
+                    className={`
+                      flex items-center justify-center px-2 py-2 text-xs sm:text-sm rounded-md transition-colors duration-200
+                      ${activeTab === tab.key 
+                        ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm font-medium' 
+                        : 'text-gray-600 dark:text-gray-300 hover:bg-white/50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white'
+                      }
+                    `}
+                  >
+                    {tab.icon}
+                    <span className="truncate">{tab.label}</span>
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+
+          {/* Hidden TabsList for compatibility with existing TabsContent */}
+          <TabsList className="hidden">
+            {hasPermission(userRole, "overview") && (
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+            )}
+            {hasPermission(userRole, "specials") && (
+              <TabsTrigger value="specials">Today's Special</TabsTrigger>
+            )}
+            {hasPermission(userRole, "offers") && (
+              <TabsTrigger value="offers">Offers</TabsTrigger>
+            )}
+            {hasPermission(userRole, "waiter") && (
+              <TabsTrigger value="waiter">Waiter View</TabsTrigger>
+            )}
+            {hasPermission(userRole, "admin") && (
+              <TabsTrigger value="admin">Admin View</TabsTrigger>
+            )}
+            {hasPermission(userRole, "qr") && (
+              <TabsTrigger value="qr">QR Codes</TabsTrigger>
+            )}
+            {hasPermission(userRole, "users") && (
+              <TabsTrigger value="users">User Credentials</TabsTrigger>
+            )}
+            {hasPermission(userRole, "tasks") && (
+              <TabsTrigger value="tasks">Tasks</TabsTrigger>
+            )}
+            {hasPermission(userRole, "about-us") && (
+              <TabsTrigger value="about-us">About Us</TabsTrigger>
+            )}
+            {hasPermission(userRole, "blog") && (
+              <TabsTrigger value="blog">Blog</TabsTrigger>
+            )}
+            {hasPermission(userRole, "inventory") && (
+              <TabsTrigger value="inventory">Inventory</TabsTrigger>
+            )}
+            {hasPermission(userRole, "management-overview") && (
+              <TabsTrigger value="management-overview">Management Overview</TabsTrigger>
+            )}
+            {hasPermission(userRole, "workflow") && (
+              <TabsTrigger value="workflow">Managing Workflow</TabsTrigger>
+            )}
+            {hasPermission(userRole, "editing-panel") && (
+              <TabsTrigger value="editing-panel">Editing Panel</TabsTrigger>
+            )}
           </TabsList>
 
           <TabsContent value="overview" className="mt-6">
@@ -553,6 +621,232 @@ export default function SuperAdminDashboard({
           <TabsContent value="inventory" className="mt-6">
             <div className="bg-white rounded-lg border p-6">
               <InventoryManager currentUser={currentUser} />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="management-overview" className="mt-6">
+            <div className="bg-white rounded-lg border p-6">
+              <div className="space-y-6">
+                <div className="border-b pb-4">
+                  <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <Settings className="w-6 h-6 text-blue-600" />
+                    Management Overview
+                  </h2>
+                  <p className="text-gray-600 mt-2">
+                    Comprehensive view of all system management functions and controls.
+                  </p>
+                </div>
+
+                {/* Overview Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <Card className="border-l-4 border-l-blue-500">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-blue-600">
+                        <Users className="w-5 h-5" />
+                        Staff Management
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-600 mb-4">
+                        Monitor staff activities, assign roles, and manage user permissions across the system.
+                      </p>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span>Active Users:</span>
+                          <span className="font-semibold text-blue-600">8</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>Pending Tasks:</span>
+                          <span className="font-semibold text-orange-600">3</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-l-4 border-l-emerald-500">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-emerald-600">
+                        <Package className="w-5 h-5" />
+                        System Resources
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-600 mb-4">
+                        Overview of system resources, inventory levels, and operational status.
+                      </p>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span>System Health:</span>
+                          <Badge className="bg-emerald-100 text-emerald-700">Excellent</Badge>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>Storage Used:</span>
+                          <span className="font-semibold text-emerald-600">72%</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-l-4 border-l-purple-500">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-purple-600">
+                        <Star className="w-5 h-5" />
+                        Performance Metrics
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-600 mb-4">
+                        Key performance indicators and system efficiency metrics.
+                      </p>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span>Orders Today:</span>
+                          <span className="font-semibold text-purple-600">127</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>Avg Response:</span>
+                          <span className="font-semibold text-purple-600">2.3s</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Quick Actions */}
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <h3 className="text-lg font-semibold mb-4">Quick Management Actions</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <Button onClick={() => setActiveTab("users")} className="bg-blue-600 hover:bg-blue-700">
+                      <Users className="w-4 h-4 mr-2" />
+                      Manage Users
+                    </Button>
+                    <Button onClick={() => setActiveTab("tasks")} className="bg-teal-600 hover:bg-teal-700">
+                      <ClipboardList className="w-4 h-4 mr-2" />
+                      View Tasks
+                    </Button>
+                    <Button onClick={() => setActiveTab("inventory")} className="bg-cyan-600 hover:bg-cyan-700">
+                      <Package className="w-4 h-4 mr-2" />
+                      Check Inventory
+                    </Button>
+                    <Button onClick={() => setActiveTab("admin")} className="bg-emerald-600 hover:bg-emerald-700">
+                      <Settings className="w-4 h-4 mr-2" />
+                      Admin Panel
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="workflow" className="mt-6">
+            <div className="bg-white rounded-lg border p-6">
+              <div className="space-y-6">
+                <div className="border-b pb-4">
+                  <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <ClipboardList className="w-6 h-6 text-teal-600" />
+                    Managing Workflow
+                  </h2>
+                  <p className="text-gray-600 mt-2">
+                    Monitor and manage operational workflows, task assignments, and process optimization.
+                  </p>
+                </div>
+
+                {/* Workflow Status */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <ClipboardList className="w-5 h-5 text-teal-600" />
+                        Active Workflows
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                          <div>
+                            <p className="font-medium text-blue-800">Order Processing</p>
+                            <p className="text-sm text-blue-600">15 orders in queue</p>
+                          </div>
+                          <Badge className="bg-blue-100 text-blue-700">Active</Badge>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
+                          <div>
+                            <p className="font-medium text-emerald-800">Kitchen Preparation</p>
+                            <p className="text-sm text-emerald-600">8 items cooking</p>
+                          </div>
+                          <Badge className="bg-emerald-100 text-emerald-700">Running</Badge>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
+                          <div>
+                            <p className="font-medium text-orange-800">Delivery Queue</p>
+                            <p className="text-sm text-orange-600">5 orders ready</p>
+                          </div>
+                          <Badge className="bg-orange-100 text-orange-700">Pending</Badge>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Users className="w-5 h-5 text-purple-600" />
+                        Staff Workflow
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                          <div>
+                            <p className="font-medium text-purple-800">Waiters On Duty</p>
+                            <p className="text-sm text-purple-600">4 active, 2 break</p>
+                          </div>
+                          <Badge className="bg-purple-100 text-purple-700">6 Total</Badge>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-indigo-50 rounded-lg">
+                          <div>
+                            <p className="font-medium text-indigo-800">Kitchen Staff</p>
+                            <p className="text-sm text-indigo-600">3 active</p>
+                          </div>
+                          <Badge className="bg-indigo-100 text-indigo-700">Available</Badge>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                          <div>
+                            <p className="font-medium text-slate-800">Management</p>
+                            <p className="text-sm text-slate-600">2 supervisors</p>
+                          </div>
+                          <Badge className="bg-slate-100 text-slate-700">Online</Badge>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Workflow Controls */}
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <h3 className="text-lg font-semibold mb-4">Workflow Management Tools</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <Button onClick={() => setActiveTab("tasks")} className="bg-teal-600 hover:bg-teal-700">
+                      <ClipboardList className="w-4 h-4 mr-2" />
+                      Assign Tasks
+                    </Button>
+                    <Button onClick={() => setActiveTab("users")} className="bg-purple-600 hover:bg-purple-700">
+                      <Users className="w-4 h-4 mr-2" />
+                      Staff Schedule
+                    </Button>
+                    <Button onClick={() => setActiveTab("admin")} className="bg-emerald-600 hover:bg-emerald-700">
+                      <Settings className="w-4 h-4 mr-2" />
+                      Process Settings
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="editing-panel" className="mt-6">
+            <div className="bg-white rounded-lg border p-6">
+              <RolePermissionManager />
             </div>
           </TabsContent>
         </Tabs>

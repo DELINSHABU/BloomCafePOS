@@ -11,19 +11,20 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth'
-import {
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-  addDoc,
-  Timestamp,
-} from 'firebase/firestore'
-import { auth, db } from './firebase'
+// Firestore imports temporarily disabled - using auth only
+// import {
+//   doc,
+//   getDoc,
+//   setDoc,
+//   updateDoc,
+//   collection,
+//   query,
+//   where,
+//   getDocs,
+//   addDoc,
+//   Timestamp,
+// } from 'firebase/firestore'
+import { auth } from './firebase'
 
 export interface CustomerAddress {
   id: string
@@ -106,22 +107,25 @@ export function CustomerAuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const loadUserProfile = async (uid: string) => {
-    try {
-      const profileDoc = await getDoc(doc(db, 'customers', uid))
-      if (profileDoc.exists()) {
-        const data = profileDoc.data()
-        setProfile({
-          ...data,
-          createdAt: data.createdAt?.toDate() || new Date(),
-          updatedAt: data.updatedAt?.toDate() || new Date(),
-        } as CustomerProfile)
+    // Profile functionality disabled - Firestore not available
+    console.log('⚠️ Profile loading disabled (Firestore not available)')
+    // Create a basic profile from auth user data only
+    if (user) {
+      const basicProfile: CustomerProfile = {
+        uid: user.uid,
+        email: user.email || '',
+        displayName: user.displayName || 'Customer',
+        phoneNumber: user.phoneNumber || undefined,
+        addresses: [],
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
-    } catch (error) {
-      console.error('Error loading user profile:', error)
+      setProfile(basicProfile)
     }
   }
 
   const createUserProfile = async (user: User, displayName: string) => {
+    console.log('⚠️ Profile creation disabled (Firestore not available)')
     const profileData: CustomerProfile = {
       uid: user.uid,
       email: user.email!,
@@ -132,22 +136,7 @@ export function CustomerAuthProvider({ children }: { children: ReactNode }) {
       updatedAt: new Date(),
     }
 
-    // Create Firestore document data, filtering out undefined values
-    const firestoreData: any = {
-      uid: profileData.uid,
-      email: profileData.email,
-      displayName: profileData.displayName,
-      addresses: profileData.addresses,
-      createdAt: Timestamp.fromDate(profileData.createdAt),
-      updatedAt: Timestamp.fromDate(profileData.updatedAt),
-    }
-
-    // Only add phoneNumber if it's not undefined
-    if (profileData.phoneNumber) {
-      firestoreData.phoneNumber = profileData.phoneNumber
-    }
-
-    await setDoc(doc(db, 'customers', user.uid), firestoreData)
+    // Set profile in local state only (no Firestore)
     setProfile(profileData)
   }
 
@@ -206,30 +195,10 @@ export function CustomerAuthProvider({ children }: { children: ReactNode }) {
       const user = result.user
       console.log('✅ Google sign-in successful:', user.email)
 
-      // Check if profile exists, if not create one
-      console.log('🔍 Checking if user profile exists in Firestore...')
-      try {
-        const profileDoc = await getDoc(doc(db, 'customers', user.uid))
-        if (!profileDoc.exists()) {
-          console.log('📝 Creating new user profile...')
-          await createUserProfile(user, user.displayName || 'Customer')
-          console.log('✅ User profile created successfully')
-        } else {
-          console.log('✅ User profile already exists')
-        }
-      } catch (firestoreError: any) {
-        console.error('❌ Firestore error:', firestoreError)
-        console.error('❌ Error code:', firestoreError.code)
-        console.error('❌ Error message:', firestoreError.message)
-        
-        if (firestoreError.code === 'unavailable') {
-          throw new Error('Database is currently unavailable. Please check if Firestore is enabled in Firebase Console.')
-        } else if (firestoreError.code === 'permission-denied') {
-          throw new Error('Permission denied. Please check Firestore security rules.')
-        } else {
-          throw new Error(`Database error: ${firestoreError.message}`)
-        }
-      }
+      // Create basic profile from auth data (no Firestore)
+      console.log('📝 Creating basic user profile...')
+      await createUserProfile(user, user.displayName || 'Customer')
+      console.log('✅ Basic user profile created successfully')
     } catch (error: any) {
       console.error('❌ Google login error:', error)
       throw new Error(error.message)
@@ -248,25 +217,11 @@ export function CustomerAuthProvider({ children }: { children: ReactNode }) {
   const updateUserProfile = async (data: Partial<CustomerProfile>) => {
     if (!user || !profile) throw new Error('User not authenticated')
 
+    console.log('⚠️ Profile update disabled (Firestore not available) - using local state only')
     try {
       const updatedProfile = { ...profile, ...data, updatedAt: new Date() }
       
-      // Create Firestore update data, filtering out undefined values
-      const firestoreUpdateData: any = {
-        uid: updatedProfile.uid,
-        email: updatedProfile.email,
-        displayName: updatedProfile.displayName,
-        addresses: updatedProfile.addresses,
-        createdAt: Timestamp.fromDate(updatedProfile.createdAt),
-        updatedAt: Timestamp.fromDate(updatedProfile.updatedAt),
-      }
-
-      // Only add phoneNumber if it's not undefined
-      if (updatedProfile.phoneNumber !== undefined) {
-        firestoreUpdateData.phoneNumber = updatedProfile.phoneNumber
-      }
-
-      await updateDoc(doc(db, 'customers', user.uid), firestoreUpdateData)
+      // Update local state only (no Firestore)
       setProfile(updatedProfile)
     } catch (error: any) {
       throw new Error(error.message)
@@ -351,48 +306,14 @@ export function CustomerAuthProvider({ children }: { children: ReactNode }) {
   }
 
   const createOrder = async (orderData: Omit<CustomerOrder, 'id' | 'customerId' | 'timestamp'>) => {
-    if (!user || !profile) throw new Error('User not authenticated')
-
-    try {
-      const order: Omit<CustomerOrder, 'id'> = {
-        ...orderData,
-        customerId: user.uid,
-        timestamp: new Date(),
-      }
-
-      const docRef = await addDoc(collection(db, 'orders'), {
-        ...order,
-        timestamp: Timestamp.fromDate(order.timestamp),
-        estimatedDeliveryTime: order.estimatedDeliveryTime 
-          ? Timestamp.fromDate(order.estimatedDeliveryTime)
-          : null,
-      })
-
-      return docRef.id
-    } catch (error: any) {
-      throw new Error(error.message)
-    }
+    console.log('⚠️ Order creation disabled (Firestore not available)')
+    throw new Error('Order functionality is currently disabled. Please contact the restaurant directly to place your order.')
   }
 
   const getOrderHistory = async (): Promise<CustomerOrder[]> => {
-    if (!user) throw new Error('User not authenticated')
-
-    try {
-      const q = query(
-        collection(db, 'orders'),
-        where('customerId', '==', user.uid)
-      )
-      const querySnapshot = await getDocs(q)
-      
-      return querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-        timestamp: doc.data().timestamp?.toDate() || new Date(),
-        estimatedDeliveryTime: doc.data().estimatedDeliveryTime?.toDate() || undefined,
-      })) as CustomerOrder[]
-    } catch (error: any) {
-      throw new Error(error.message)
-    }
+    console.log('⚠️ Order history disabled (Firestore not available)')
+    // Return empty array - order history functionality disabled
+    return []
   }
 
   const value = {

@@ -148,8 +148,59 @@ const STAFF_COLORS = {
 
 // Analytics data loading function
 const loadAnalyticsData = async (): Promise<AnalyticsData> => {
-  const response = await fetch('/api/analytics');
-  return await response.json();
+  console.log('📋 FETCHING: Analytics data from JSON file');
+  const response = await fetch('/api/orders');
+  const data = await response.json();
+  
+  console.log('📊 JSON RESPONSE SUMMARY:', {
+    success: data.success,
+    source: data.source || 'json',
+    totalOrders: data.fullRecord?.totalOrders,
+    totalRevenue: data.revenueAnalytics?.totalRevenue,
+    popularItems: data.popularItems?.length
+  });
+  
+  // Log detailed JSON data to console
+  console.log('📋 JSON FULL RECORD:', data.fullRecord);
+  console.log('📈 JSON ORDERS OVER TIME:', data.ordersOverTime);
+  console.log('💰 JSON REVENUE ANALYTICS:', data.revenueAnalytics);
+  console.log('⏰ JSON DAILY ANALYTICS:', data.dailyAnalytics);
+  console.log('🍽️ JSON POPULAR ITEMS:', data.popularItems);
+  
+  // Log specific order details if available
+  if (data.fullRecord?.orders?.length > 0) {
+    console.log('📋 JSON SAMPLE ORDERS (first 3):');
+    data.fullRecord.orders.slice(0, 3).forEach((order: any, index: number) => {
+      console.log(`   Order ${index + 1}:`, {
+        id: order.id,
+        timestamp: order.timestamp,
+        total: order.total,
+        staffMember: order.staffMember,
+        items: order.items?.length || 0,
+        customerInfo: order.customerInfo?.name || 'Anonymous'
+      });
+    });
+  }
+  
+  // Log staff performance breakdown
+  if (data.revenueAnalytics?.revenueByStaff) {
+    console.log('👥 JSON STAFF REVENUE BREAKDOWN:');
+    Object.entries(data.revenueAnalytics.revenueByStaff).forEach(([staff, revenue]) => {
+      console.log(`   ${staff}: ₹${revenue}`);
+    });
+  }
+  
+  // Log daily analytics breakdown
+  console.log('📊 JSON DAILY PERIODS BREAKDOWN:');
+  Object.entries(data.dailyAnalytics).forEach(([period, stats]: [string, any]) => {
+    console.log(`   ${period.toUpperCase()}:`, {
+      orders: stats.orders,
+      revenue: stats.revenue,
+      staffCount: Object.keys(stats.staffBreakdown).length
+    });
+  });
+  
+  return data;
 };
 
 // Inventory data loading function

@@ -3076,7 +3076,284 @@
         "zipCode": "691531",
         "phoneNumber": "09633766791"
       }
+    },
+    {
+      "id": "order-sar0h14yf",
+      "items": [
+        {
+          "id": "combo-1753528480652",
+          "name": "Simple Breakfast ",
+          "description": "Combo Special",
+          "price": 55,
+          "quantity": 3
+        },
+        {
+          "id": "combo-1753536315159",
+          "name": "Alfaham special Combo ",
+          "description": "Combo Special",
+          "price": 210,
+          "quantity": 1
+        }
+      ],
+      "total": 375,
+      "status": "delivered",
+      "customerName": "Rahul Ravi",
+      "orderType": "delivery",
+      "timestamp": "2025-08-18T14:08:52.117Z",
+      "deliveryAddress": {
+        "label": "Home",
+        "streetAddress": "lower karikom",
+        "city": "kollam",
+        "state": "keralal",
+        "zipCode": "691531",
+        "phoneNumber": "09633766791"
+      }
+    },
+    {
+      "id": "order-yymnzv722",
+      "items": [
+        {
+          "id": "combo-1753536315159",
+          "name": "Alfaham special Combo ",
+          "description": "Combo Special",
+          "price": 210,
+          "quantity": 1
+        }
+      ],
+      "total": 210,
+      "status": "delivered",
+      "tableNumber": "",
+      "customerName": "Rahul Ravi",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-18T14:09:14.969Z"
+    },
+    {
+      "id": "staff-4dow9zvhp",
+      "items": [
+        {
+          "id": "combo-1753528480652",
+          "name": "Simple Breakfast ",
+          "description": "3 APPAM + EGG CURRY",
+          "price": 55,
+          "quantity": 2
+        }
+      ],
+      "total": 110,
+      "status": "delivered",
+      "tableNumber": "5",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-18T14:09:58.092Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "staff-fj0881cbx",
+      "items": [
+        {
+          "id": "combo-1753536315159",
+          "name": "Alfaham special Combo ",
+          "description": "Half Alfaham + 3  KUBBOS",
+          "price": 210,
+          "quantity": 2
+        }
+      ],
+      "total": 420,
+      "status": "delivered",
+      "tableNumber": "7",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-18T14:10:10.575Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "staff-qy1utkq21",
+      "items": [
+        {
+          "id": "combo-1754376219924",
+          "name": "Item01+item02",
+          "description": "Test text 03",
+          "price": 300,
+          "quantity": 2
+        }
+      ],
+      "total": 600,
+      "status": "delivered",
+      "tableNumber": "8",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-18T14:10:40.170Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "staff-vawjn0nt9",
+      "items": [
+        {
+          "id": "combo-1753528480652",
+          "name": "Simple Breakfast ",
+          "description": "3 APPAM + EGG CURRY",
+          "price": 55,
+          "quantity": 2
+        }
+      ],
+      "total": 110,
+      "status": "delivered",
+      "tableNumber": "8",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-18T14:10:53.675Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "staff-p7z6dowg2",
+      "items": [
+        {
+          "id": "combo-1754402936233",
+          "name": "Large Amout",
+          "description": "Test text 04",
+          "price": 100000,
+          "quantity": 1
+        }
+      ],
+      "total": 100000,
+      "status": "delivered",
+      "tableNumber": "7",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-18T14:11:24.258Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "staff-te2ubsdgz",
+      "items": [
+        {
+          "id": "combo-1753536315159",
+          "name": "Alfaham special Combo ",
+          "description": "Half Alfaham + 3  KUBBOS",
+          "price": 210,
+          "quantity": 1
+        }
+      ],
+      "total": 210,
+      "status": "delivered",
+      "tableNumber": "2",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-18T15:14:57.249Z",
+      "staffMember": "Mike Wilson"
+    },
+    {
+      "id": "staff-cwm4dlokz",
+      "items": [
+        {
+          "id": "combo-1753536315159",
+          "name": "Alfaham special Combo ",
+          "description": "Half Alfaham + 3  KUBBOS",
+          "price": 210,
+          "quantity": 1
+        },
+        {
+          "id": "combo-1754376219924",
+          "name": "Item01+item02",
+          "description": "Test text 03",
+          "price": 300,
+          "quantity": 1
+        }
+      ],
+      "total": 510,
+      "status": "ready",
+      "tableNumber": "7",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-18T15:15:10.061Z",
+      "staffMember": "Mike Wilson"
+    },
+    {
+      "id": "staff-bapegp6yh",
+      "items": [
+        {
+          "id": "combo-1753528480652",
+          "name": "Simple Breakfast ",
+          "description": "3 APPAM + EGG CURRY",
+          "price": 55,
+          "quantity": 2
+        }
+      ],
+      "total": 110,
+      "status": "preparing",
+      "tableNumber": "8",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-18T15:15:29.507Z",
+      "staffMember": "Mike Wilson"
+    },
+    {
+      "id": "order-4wz9b2ysz",
+      "items": [
+        {
+          "id": "combo-1754376219924",
+          "name": "Item01+item02",
+          "description": "Combo Special",
+          "price": 300,
+          "quantity": 1
+        }
+      ],
+      "total": 300,
+      "status": "preparing",
+      "tableNumber": "",
+      "customerName": "Rahul Ravi",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-19T07:22:53.847Z"
+    },
+    {
+      "id": "order-surigep79",
+      "items": [
+        {
+          "id": "combo-1753536315159",
+          "name": "Alfaham special Combo ",
+          "description": "Combo Special",
+          "price": 210,
+          "quantity": 2
+        }
+      ],
+      "total": 420,
+      "status": "ready",
+      "customerName": "Rahul Ravi",
+      "orderType": "delivery",
+      "timestamp": "2025-08-19T07:23:11.205Z",
+      "deliveryAddress": {
+        "label": "Home",
+        "streetAddress": "lower karikom",
+        "city": "kollam",
+        "state": "keralal",
+        "zipCode": "691531",
+        "phoneNumber": "09633766791"
+      }
+    },
+    {
+      "id": "order-r185qg13x",
+      "items": [
+        {
+          "id": "combo-1753528480652",
+          "name": "Simple Breakfast ",
+          "description": "Combo Special",
+          "price": 55,
+          "quantity": 2
+        }
+      ],
+      "total": 110,
+      "status": "pending",
+      "customerName": "Rahul Ravi",
+      "orderType": "delivery",
+      "timestamp": "2025-08-19T07:45:59.342Z",
+      "deliveryAddress": {
+        "label": "Home",
+        "streetAddress": "lower karikom",
+        "city": "kollam",
+        "state": "keralal",
+        "zipCode": "691531",
+        "phoneNumber": "09633766791"
+      }
     }
   ],
-  "lastUpdated": "2025-08-16T03:04:34.014Z"
+  "lastUpdated": "2025-08-19T07:47:18.739Z"
 }

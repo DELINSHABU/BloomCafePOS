@@ -15,6 +15,7 @@ import {
   LogOut,
   User,
   X,
+  Printer,
 } from "lucide-react";
 import {
   AlertDialog,
@@ -195,6 +196,75 @@ export default function WaiterDashboard({
         return { show: false, level: "low", message: "" };
       default:
         return { show: false, level: "low", message: "" };
+    }
+  };
+
+  const handlePrintOrder = (order: any) => {
+    const printContent = `
+      ╔════════════════════════════════════════╗
+      ║              BLOOM GARDEN CAFE         ║
+      ║               ORDER RECEIPT            ║
+      ╚════════════════════════════════════════╝
+      
+      Order #: ${order.id.slice(-6)}
+      Date: ${formatTime(order.timestamp)}
+      Status: ${order.status.toUpperCase()}
+      ${order.orderType === 'dine-in' && order.tableNumber ? `Table: ${order.tableNumber}` : ''}
+      ${order.orderType === 'delivery' ? `\nCustomer: ${order.customerName || 'N/A'}` : ''}
+      ${order.orderType === 'delivery' && order.customerPhone ? `Phone: ${order.customerPhone}` : ''}
+      ${order.orderType === 'delivery' && order.deliveryAddress ? `\nDelivery Address:\n${order.deliveryAddress.streetAddress}\n${order.deliveryAddress.city}, ${order.deliveryAddress.state} ${order.deliveryAddress.zipCode}` : ''}
+      
+      ────────────────────────────────────────
+      ITEMS:
+      ────────────────────────────────────────
+      ${order.items.map((item: any) => 
+        `${item.quantity}x ${item.name.padEnd(25)} ₹${(item.price * item.quantity).toFixed(2)}`
+      ).join('\n      ')}
+      
+      ────────────────────────────────────────
+      TOTAL: ₹${order.total.toFixed(2)}
+      ────────────────────────────────────────
+      
+      ${order.staffMember ? `Served by: ${order.staffMember}` : ''}
+      
+      Thank you for dining with us!
+      
+      ════════════════════════════════════════
+    `;
+
+    // Create a new window for printing
+    const printWindow = window.open('', '_blank', 'width=400,height=600');
+    if (printWindow) {
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Order #${order.id.slice(-6)} - Print</title>
+            <style>
+              body {
+                font-family: 'Courier New', monospace;
+                font-size: 12px;
+                line-height: 1.4;
+                margin: 20px;
+                white-space: pre-wrap;
+              }
+              @media print {
+                body { margin: 0; }
+              }
+            </style>
+          </head>
+          <body>
+            ${printContent}
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.focus();
+      
+      // Auto print after a short delay
+      setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+      }, 250);
     }
   };
 
@@ -506,6 +576,19 @@ export default function WaiterDashboard({
                                   </AlertDialogFooter>
                                 </AlertDialogContent>
                               </AlertDialog>
+                            )}
+                            
+                            {/* Print button - available for all orders except cancelled */}
+                            {status !== "cancelled" && (
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => handlePrintOrder(order)}
+                                className="bg-blue-50 hover:bg-blue-100 border-blue-300 text-blue-700"
+                              >
+                                <Printer className="w-4 h-4 mr-1" />
+                                Print
+                              </Button>
                             )}
                             
                             {/* Progress button */}
