@@ -328,6 +328,24 @@ function AboutUsContentManagerComponent({ currentUser }: AboutUsContentManagerPr
     { value: 'text-orange-400', label: 'Orange' },
   ];
 
+  // Icon mapping for previews (same as in about-us.tsx)
+  const IconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
+    Heart,
+    Star,
+    MapPin,
+    Coffee,
+    Users,
+    Award,
+    Phone,
+    Mail,
+    Clock,
+  };
+
+  const renderIcon = (iconName: string, className: string = '') => {
+    const IconComponent = IconMap[iconName];
+    return IconComponent ? <IconComponent className={className} /> : <Heart className={className} />;
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center p-8">
@@ -514,12 +532,20 @@ function AboutUsContentManagerComponent({ currentUser }: AboutUsContentManagerPr
                     onValueChange={(value) => updateContent('sections.ourStory.iconColor', value)}
                   >
                     <SelectTrigger>
-                      <SelectValue />
+                      <SelectValue>
+                        <div className="flex items-center gap-2">
+                          {renderIcon(content.sections.ourStory.icon, `w-4 h-4 ${content.sections.ourStory.iconColor}`)}
+                          <span>{colorOptions.find(c => c.value === content.sections.ourStory.iconColor)?.label}</span>
+                        </div>
+                      </SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       {colorOptions.map((color) => (
                         <SelectItem key={color.value} value={color.value}>
-                          {color.label}
+                          <div className="flex items-center gap-2">
+                            {renderIcon(content.sections.ourStory.icon, `w-4 h-4 ${color.value}`)}
+                            <span>{color.label}</span>
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -583,12 +609,20 @@ function AboutUsContentManagerComponent({ currentUser }: AboutUsContentManagerPr
                     onValueChange={(value) => updateContent('sections.whatMakesUsSpecial.iconColor', value)}
                   >
                     <SelectTrigger>
-                      <SelectValue />
+                      <SelectValue>
+                        <div className="flex items-center gap-2">
+                          {renderIcon(content.sections.whatMakesUsSpecial.icon, `w-4 h-4 ${content.sections.whatMakesUsSpecial.iconColor}`)}
+                          <span>{colorOptions.find(c => c.value === content.sections.whatMakesUsSpecial.iconColor)?.label}</span>
+                        </div>
+                      </SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       {colorOptions.map((color) => (
                         <SelectItem key={color.value} value={color.value}>
-                          {color.label}
+                          <div className="flex items-center gap-2">
+                            {renderIcon(content.sections.whatMakesUsSpecial.icon, `w-4 h-4 ${color.value}`)}
+                            <span>{color.label}</span>
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -635,12 +669,20 @@ function AboutUsContentManagerComponent({ currentUser }: AboutUsContentManagerPr
                               onValueChange={(value) => updateFeature(index, 'iconColor', value)}
                             >
                               <SelectTrigger>
-                                <SelectValue />
+                                <SelectValue>
+                                  <div className="flex items-center gap-2">
+                                    {renderIcon(feature.icon, `w-4 h-4 ${feature.iconColor}`)}
+                                    <span>{colorOptions.find(c => c.value === feature.iconColor)?.label}</span>
+                                  </div>
+                                </SelectValue>
                               </SelectTrigger>
                               <SelectContent>
                                 {colorOptions.map((color) => (
                                   <SelectItem key={color.value} value={color.value}>
-                                    {color.label}
+                                    <div className="flex items-center gap-2">
+                                      {renderIcon(feature.icon, `w-4 h-4 ${color.value}`)}
+                                      <span>{color.label}</span>
+                                    </div>
                                   </SelectItem>
                                 ))}
                               </SelectContent>
@@ -706,12 +748,20 @@ function AboutUsContentManagerComponent({ currentUser }: AboutUsContentManagerPr
                       onValueChange={(value) => updateContent('sections.aboutUs.iconColor', value)}
                     >
                       <SelectTrigger>
-                        <SelectValue />
+                        <SelectValue>
+                          <div className="flex items-center gap-2">
+                            {renderIcon(content.sections.aboutUs.icon, `w-4 h-4 ${content.sections.aboutUs.iconColor}`)}
+                            <span>{colorOptions.find(c => c.value === content.sections.aboutUs.iconColor)?.label}</span>
+                          </div>
+                        </SelectValue>
                       </SelectTrigger>
                       <SelectContent>
                         {colorOptions.map((color) => (
                           <SelectItem key={color.value} value={color.value}>
-                            {color.label}
+                            <div className="flex items-center gap-2">
+                              {renderIcon(content.sections.aboutUs.icon, `w-4 h-4 ${color.value}`)}
+                              <span>{color.label}</span>
+                            </div>
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -891,12 +941,20 @@ function AboutUsContentManagerComponent({ currentUser }: AboutUsContentManagerPr
                     onValueChange={(value) => updateContent('sections.visitUs.iconColor', value)}
                   >
                     <SelectTrigger>
-                      <SelectValue />
+                      <SelectValue>
+                        <div className="flex items-center gap-2">
+                          {renderIcon(content.sections.visitUs.icon, `w-4 h-4 ${content.sections.visitUs.iconColor}`)}
+                          <span>{colorOptions.find(c => c.value === content.sections.visitUs.iconColor)?.label}</span>
+                        </div>
+                      </SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       {colorOptions.map((color) => (
                         <SelectItem key={color.value} value={color.value}>
-                          {color.label}
+                          <div className="flex items-center gap-2">
+                            {renderIcon(content.sections.visitUs.icon, `w-4 h-4 ${color.value}`)}
+                            <span>{color.label}</span>
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
