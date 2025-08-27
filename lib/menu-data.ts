@@ -1,4 +1,4 @@
-import menuData from '../menu.json'
+import menuData from '../jsonfiles/menu.json'
 
 export interface MenuItem {
   itemNo: string

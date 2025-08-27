@@ -9,7 +9,10 @@ interface OrderContextType {
   updateOrderStatus: (orderId: string, status: OrderStatus) => void
   cancelOrder: (orderId: string, reason: string, cancelledBy: string) => void
   getOrdersByStatus: (status: OrderStatus) => Order[]
-  syncOrders: () => void
+  syncOrders: () => Promise<void>
+  lastSyncTime: Date | null
+  syncStatus: 'connected' | 'syncing' | 'error'
+  ordersSource: 'json' | 'api' | 'unknown'
 }
 
 const OrderContext = createContext<OrderContextType | undefined>(undefined)
@@ -131,14 +134,26 @@ const cancelOrderInAPI = async (orderId: string, reason: string, cancelledBy: st
 export function OrderProvider({ children }: { children: ReactNode }) {
   const [orders, setOrders] = useState<Order[]>([])
   const [isInitialized, setIsInitialized] = useState(false)
+  const [lastSyncTime, setLastSyncTime] = useState<Date | null>(null)
+  const [syncStatus, setSyncStatus] = useState<'connected' | 'syncing' | 'error'>('connected')
+  const [ordersSource, setOrdersSource] = useState<'json' | 'api' | 'unknown'>('unknown')
 
   // Load orders from API on mount
   useEffect(() => {
     const loadOrders = async () => {
-      const apiOrders = await fetchOrdersFromAPI()
-      setOrders(apiOrders)
-      setIsInitialized(true)
-      console.log('OrderProvider initialized with', apiOrders.length, 'orders from API')
+      setSyncStatus('syncing')
+      try {
+        const apiOrders = await fetchOrdersFromAPI()
+        setOrders(apiOrders)
+        setOrdersSource('json')
+        setLastSyncTime(new Date())
+        setSyncStatus('connected')
+        setIsInitialized(true)
+        console.log('📋 OrderProvider initialized with', apiOrders.length, 'orders from JSON file')
+      } catch (error) {
+        setSyncStatus('error')
+        console.error('Failed to initialize orders:', error)
+      }
     }
     
     loadOrders()
@@ -243,7 +258,10 @@ export function OrderProvider({ children }: { children: ReactNode }) {
       updateOrderStatus,
       cancelOrder,
       getOrdersByStatus,
-      syncOrders
+      syncOrders,
+      lastSyncTime,
+      syncStatus,
+      ordersSource
     }}>
       {children}
     </OrderContext.Provider>

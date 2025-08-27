@@ -33,7 +33,7 @@ import { getActiveCombos } from "@/lib/combo-utils";
 import { useOrders } from "@/lib/order-context";
 import { useEffect } from "react";
 import type { Page, CartItem, Order } from "@/app/page";
-import staffCredentials from '@/staff-credentials.json';
+import staffCredentials from '@/jsonfiles/staff-credentials.json';
 import { StaffPasswordDrawer } from '@/components/StaffPasswordDrawer';
 
 interface StaffOrderPageProps {

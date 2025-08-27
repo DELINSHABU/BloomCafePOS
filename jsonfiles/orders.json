@@ -3260,7 +3260,7 @@
         }
       ],
       "total": 510,
-      "status": "ready",
+      "status": "delivered",
       "tableNumber": "7",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -3279,7 +3279,7 @@
         }
       ],
       "total": 110,
-      "status": "preparing",
+      "status": "delivered",
       "tableNumber": "8",
       "customerName": "Walk-in Customer",
       "orderType": "dine-in",
@@ -3298,7 +3298,7 @@
         }
       ],
       "total": 300,
-      "status": "preparing",
+      "status": "delivered",
       "tableNumber": "",
       "customerName": "Rahul Ravi",
       "orderType": "dine-in",
@@ -3316,7 +3316,7 @@
         }
       ],
       "total": 420,
-      "status": "ready",
+      "status": "delivered",
       "customerName": "Rahul Ravi",
       "orderType": "delivery",
       "timestamp": "2025-08-19T07:23:11.205Z",
@@ -3341,7 +3341,7 @@
         }
       ],
       "total": 110,
-      "status": "pending",
+      "status": "preparing",
       "customerName": "Rahul Ravi",
       "orderType": "delivery",
       "timestamp": "2025-08-19T07:45:59.342Z",
@@ -3353,7 +3353,297 @@
         "zipCode": "691531",
         "phoneNumber": "09633766791"
       }
+    },
+    {
+      "id": "order-mttcyhofh",
+      "items": [
+        {
+          "id": "combo-1753536315159",
+          "name": "Alfaham special Combo ",
+          "description": "Combo Special",
+          "price": 210,
+          "quantity": 1
+        }
+      ],
+      "total": 210,
+      "status": "delivered",
+      "customerName": "Rahul Ravi",
+      "orderType": "delivery",
+      "timestamp": "2025-08-25T13:29:50.219Z",
+      "customerPhone": "9633766791",
+      "deliveryAddress": {
+        "label": "Home",
+        "streetAddress": "lower karikom",
+        "city": "kollam",
+        "state": "keralal",
+        "zipCode": "691531",
+        "phoneNumber": "09633766791"
+      }
+    },
+    {
+      "id": "order-1756210045317",
+      "items": [
+        {
+          "id": "001",
+          "name": "APPAM",
+          "description": "Item #001",
+          "price": 10,
+          "quantity": 1
+        },
+        {
+          "id": "002",
+          "name": "DOSA",
+          "description": "Item #002",
+          "price": 10,
+          "quantity": 1
+        }
+      ],
+      "total": 21,
+      "status": "pending",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T12:08:06.859Z",
+      "staffMember": "Super Admin"
+    },
+    {
+      "id": "order_1756213037052_nuc07txvx",
+      "items": [
+        {
+          "id": "combo-1753528480652",
+          "name": "Simple Breakfast ",
+          "description": "3 APPAM + EGG CURRY",
+          "price": 55,
+          "quantity": 2
+        }
+      ],
+      "total": 110,
+      "status": "pending",
+      "tableNumber": "1",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T12:57:17.052Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "order_1756213046813_emzhtcdcf",
+      "items": [
+        {
+          "id": "combo-1753536315159",
+          "name": "Alfaham special Combo ",
+          "description": "Half Alfaham + 3  KUBBOS",
+          "price": 210,
+          "quantity": 1
+        }
+      ],
+      "total": 210,
+      "status": "pending",
+      "tableNumber": "2",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T12:57:26.813Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "order_1756213061387_57ds2xdus",
+      "items": [
+        {
+          "id": "combo-1753528480652",
+          "name": "Simple Breakfast ",
+          "description": "3 APPAM + EGG CURRY",
+          "price": 55,
+          "quantity": 2
+        }
+      ],
+      "total": 110,
+      "status": "pending",
+      "tableNumber": "3",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T12:57:41.387Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "order_1756213072080_snq67k6ke",
+      "items": [
+        {
+          "id": "combo-1753536315159",
+          "name": "Alfaham special Combo ",
+          "description": "Half Alfaham + 3  KUBBOS",
+          "price": 210,
+          "quantity": 2
+        }
+      ],
+      "total": 420,
+      "status": "pending",
+      "tableNumber": "6",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T12:57:52.080Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "order_1756213210127_86t9aw20k",
+      "items": [
+        {
+          "id": "combo-1753536315159",
+          "name": "Alfaham special Combo ",
+          "description": "Half Alfaham + 3  KUBBOS",
+          "price": 210,
+          "quantity": 2
+        }
+      ],
+      "total": 420,
+      "status": "pending",
+      "tableNumber": "8",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T13:00:10.127Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "order_1756214111010_2n1028wh7",
+      "items": [
+        {
+          "id": "combo-1753528480652",
+          "name": "Simple Breakfast ",
+          "description": "3 APPAM + EGG CURRY",
+          "price": 55,
+          "quantity": 2
+        }
+      ],
+      "total": 110,
+      "status": "pending",
+      "tableNumber": "1",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T13:15:11.010Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "order_1756217795849_sv86sxa1s",
+      "items": [
+        {
+          "id": "combo-1756217288136",
+          "name": "Al Faham Special Combo",
+          "description": "ALFAHAM (HALF) + 2Appam ",
+          "price": 210,
+          "quantity": 1
+        }
+      ],
+      "total": 210,
+      "status": "pending",
+      "tableNumber": "2",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T14:16:35.849Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "order_1756218128230_ym6dgpz37",
+      "items": [
+        {
+          "id": "combo-1756217288136",
+          "name": "Al Faham Special Combo",
+          "description": "ALFAHAM (HALF) + 2Appam ",
+          "price": 210,
+          "quantity": 1
+        }
+      ],
+      "total": 210,
+      "status": "pending",
+      "tableNumber": "1",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T14:22:08.230Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "order_1756218138832_2yies74sr",
+      "items": [
+        {
+          "id": "menu-001-10",
+          "name": "APPAM",
+          "description": "Item #001",
+          "price": 10,
+          "quantity": 1
+        },
+        {
+          "id": "menu-002-10",
+          "name": "DOSA",
+          "description": "Item #002",
+          "price": 10,
+          "quantity": 2
+        }
+      ],
+      "total": 30,
+      "status": "pending",
+      "tableNumber": "4",
+      "customerName": "Walk-in Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T14:22:18.832Z",
+      "staffMember": "John Smith"
+    },
+    {
+      "id": "order_1756218146314_gf8xk9g21",
+      "items": [
+        {
+          "id": "001-test",
+          "name": "APPAM",
+          "description": "Item #001",
+          "price": 10,
+          "quantity": 4
+        },
+        {
+          "id": "011-test",
+          "name": "EGG CURRY",
+          "description": "Item #011",
+          "price": 40,
+          "quantity": 1
+        }
+      ],
+      "total": 80,
+      "status": "pending",
+      "tableNumber": "5",
+      "customerName": "Test Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T14:22:26.314Z"
+    },
+    {
+      "id": "order_1756218155930_4d2m3h3rr",
+      "items": [
+        {
+          "id": "061-test",
+          "name": "CHICKEN BIRIYANI",
+          "description": "Item #061",
+          "price": 180,
+          "quantity": 1
+        }
+      ],
+      "total": 180,
+      "status": "preparing",
+      "tableNumber": "3",
+      "customerName": "Another Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T14:22:35.930Z"
+    },
+    {
+      "id": "order_1756218166480_zm1e3yvs7",
+      "items": [
+        {
+          "id": "080-test",
+          "name": "ALFAHAM (HALF)",
+          "description": "Item #080",
+          "price": 220,
+          "quantity": 1
+        }
+      ],
+      "total": 220,
+      "status": "ready",
+      "tableNumber": "7",
+      "customerName": "Ready Customer",
+      "orderType": "dine-in",
+      "timestamp": "2025-08-26T14:22:46.480Z"
     }
   ],
-  "lastUpdated": "2025-08-19T07:47:18.739Z"
+  "lastUpdated": "2025-08-26T14:22:46.480Z"
 }

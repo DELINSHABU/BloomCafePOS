@@ -1,30 +1,14 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import {
-  User,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  updateProfile,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from 'firebase/auth'
-// Firestore imports temporarily disabled - using auth only
-// import {
-//   doc,
-//   getDoc,
-//   setDoc,
-//   updateDoc,
-//   collection,
-//   query,
-//   where,
-//   getDocs,
-//   addDoc,
-//   Timestamp,
-// } from 'firebase/firestore'
-import { auth } from './firebase'
+
+// Firebase auth is disabled - using local auth simulation
+interface User {
+  uid: string
+  email: string | null
+  displayName: string | null
+  phoneNumber: string | null
+}
 
 export interface CustomerAddress {
   id: string
@@ -87,23 +71,12 @@ const CustomerAuthContext = createContext<CustomerAuthContextType | undefined>(u
 export function CustomerAuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [profile, setProfile] = useState<CustomerProfile | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  // Initialize Google Auth Provider
-  const googleProvider = new GoogleAuthProvider()
+  const [loading, setLoading] = useState(false) // Firebase auth disabled, no loading needed
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user)
-      if (user) {
-        await loadUserProfile(user.uid)
-      } else {
-        setProfile(null)
-      }
-      setLoading(false)
-    })
-
-    return unsubscribe
+    // Firebase auth is disabled - no auth state changes to listen to
+    console.log('🚫 Customer authentication is disabled (Firebase not available)')
+    setLoading(false)
   }, [])
 
   const loadUserProfile = async (uid: string) => {
@@ -141,77 +114,24 @@ export function CustomerAuthProvider({ children }: { children: ReactNode }) {
   }
 
   const login = async (email: string, password: string) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password)
-    } catch (error: any) {
-      // Handle specific Firebase auth errors with user-friendly messages
-      switch (error.code) {
-        case 'auth/invalid-credential':
-        case 'auth/wrong-password':
-        case 'auth/user-not-found':
-          throw new Error('Invalid credentials. Please check your email and password.')
-        case 'auth/invalid-email':
-          throw new Error('Please enter a valid email address.')
-        case 'auth/user-disabled':
-          throw new Error('This account has been disabled. Please contact support.')
-        case 'auth/too-many-requests':
-          throw new Error('Too many failed login attempts. Please try again later.')
-        case 'auth/network-request-failed':
-          throw new Error('Network error. Please check your connection and try again.')
-        default:
-          throw new Error('Login failed. Please try again.')
-      }
-    }
+    console.log('🚫 Authentication is disabled (Firebase not available)')
+    throw new Error('Authentication is currently disabled. Please contact the restaurant for assistance.')
   }
 
   const register = async (email: string, password: string, displayName: string) => {
-    try {
-      const { user: newUser } = await createUserWithEmailAndPassword(auth, email, password)
-      await updateProfile(newUser, { displayName })
-      await createUserProfile(newUser, displayName)
-    } catch (error: any) {
-      // Handle specific Firebase auth errors with user-friendly messages
-      switch (error.code) {
-        case 'auth/email-already-in-use':
-          throw new Error('An account with this email already exists. Please try logging in instead.')
-        case 'auth/invalid-email':
-          throw new Error('Please enter a valid email address.')
-        case 'auth/weak-password':
-          throw new Error('Password is too weak. Please choose a stronger password with at least 6 characters.')
-        case 'auth/operation-not-allowed':
-          throw new Error('Email registration is currently disabled. Please contact support.')
-        case 'auth/network-request-failed':
-          throw new Error('Network error. Please check your connection and try again.')
-        default:
-          throw new Error('Registration failed. Please try again.')
-      }
-    }
+    console.log('🚫 Registration is disabled (Firebase not available)')
+    throw new Error('User registration is currently disabled. Please contact the restaurant for assistance.')
   }
 
   const loginWithGoogle = async () => {
-    try {
-      console.log('🔥 Starting Google sign-in...')
-      const result = await signInWithPopup(auth, googleProvider)
-      const user = result.user
-      console.log('✅ Google sign-in successful:', user.email)
-
-      // Create basic profile from auth data (no Firestore)
-      console.log('📝 Creating basic user profile...')
-      await createUserProfile(user, user.displayName || 'Customer')
-      console.log('✅ Basic user profile created successfully')
-    } catch (error: any) {
-      console.error('❌ Google login error:', error)
-      throw new Error(error.message)
-    }
+    console.log('🚫 Google authentication is disabled (Firebase not available)')
+    throw new Error('Google authentication is currently disabled. Please contact the restaurant for assistance.')
   }
 
   const logout = async () => {
-    try {
-      await signOut(auth)
-      setProfile(null)
-    } catch (error: any) {
-      throw new Error(error.message)
-    }
+    console.log('🚫 Logout is disabled (Firebase not available)')
+    setUser(null)
+    setProfile(null)
   }
 
   const updateUserProfile = async (data: Partial<CustomerProfile>) => {

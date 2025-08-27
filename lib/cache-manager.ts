@@ -1,5 +1,5 @@
-// Cache management utilities for Firebase operations
-// This helps reduce Firebase quota consumption
+// Cache management utilities for data operations
+// This helps improve performance by reducing file I/O
 
 interface CacheEntry {
   data: any

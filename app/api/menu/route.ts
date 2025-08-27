@@ -1,54 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { adminDb } from '@/lib/firebase-admin'
-import { FieldValue } from 'firebase-admin/firestore'
-import fs from 'fs'
-import path from 'path'
-
-const MENU_FILE_PATH = path.join(process.cwd(), 'menu.json')
-const USE_FIREBASE = true // Set to true to use Firebase, false for JSON fallback
-
-// Helper functions for Firebase operations
-async function getMenuFromFirebase() {
-  const menuCollection = adminDb.collection('menu')
-  const snapshot = await menuCollection.orderBy('category').orderBy('itemNo').get()
-  
-  const categoryMap = new Map()
-  
-  snapshot.forEach(doc => {
-    const data = doc.data()
-    const category = data.category
-    
-    if (!categoryMap.has(category)) {
-      categoryMap.set(category, {
-        category,
-        products: []
-      })
-    }
-    
-    categoryMap.get(category).products.push({
-      itemNo: data.itemNo,
-      name: data.name,
-      rate: data.rate,
-      available: data.available || true
-    })
-  })
-  
-  return {
-    menu: Array.from(categoryMap.values()),
-    source: 'firebase',
-    lastUpdated: new Date().toISOString()
-  }
-}
-
-async function getMenuFromJSON() {
-  const fileContents = fs.readFileSync(MENU_FILE_PATH, 'utf8')
-  const menuData = JSON.parse(fileContents)
-  return {
-    ...menuData,
-    source: 'json',
-    lastUpdated: new Date().toISOString()
-  }
-}
+import { JsonDataService } from '@/lib/json-data-service'
 
 // GET - Fetch menu data
 export async function GET(request: NextRequest) {
@@ -57,74 +8,43 @@ export async function GET(request: NextRequest) {
     const category = searchParams.get('category')
     const itemNo = searchParams.get('itemNo')
     
-    if (USE_FIREBASE) {
-      console.log('🔥 Fetching menu data from Firebase Firestore')
-      
-      // If specific item requested
-      if (itemNo) {
-        const docRef = adminDb.collection('menu').doc(itemNo)
-        const doc = await docRef.get()
-        
-        if (!doc.exists) {
-          return NextResponse.json({ error: 'Item not found' }, { status: 404 })
-        }
-        
-        return NextResponse.json({
-          item: doc.data(),
-          source: 'firebase'
-        })
+    console.log('📋 Fetching menu data from JSON file')
+    
+    // If specific item requested
+    if (itemNo) {
+      const item = JsonDataService.getMenuItem(itemNo)
+      if (!item) {
+        return NextResponse.json({ error: 'Item not found' }, { status: 404 })
       }
       
-      // If specific category requested
-      if (category) {
-        const menuCollection = adminDb.collection('menu')
-        const snapshot = await menuCollection
-          .where('category', '==', category)
-          .orderBy('itemNo')
-          .get()
-        
-        const products = []
-        snapshot.forEach(doc => {
-          const data = doc.data()
-          products.push({
-            itemNo: data.itemNo,
-            name: data.name,
-            rate: data.rate,
-            available: data.available || true
-          })
-        })
-        
-        return NextResponse.json({
-          category,
-          products,
-          source: 'firebase'
-        })
-      }
-      
-      // Get all menu data
-      const menuData = await getMenuFromFirebase()
-      return NextResponse.json(menuData)
-      
-    } else {
-      console.log('📋 Fetching menu data from JSON file')
-      const menuData = await getMenuFromJSON()
-      return NextResponse.json(menuData)
+      return NextResponse.json({
+        item,
+        source: 'json'
+      })
     }
+    
+    // If specific category requested
+    if (category) {
+      const categoryData = JsonDataService.getMenuByCategory(category)
+      if (!categoryData) {
+        return NextResponse.json({ error: 'Category not found' }, { status: 404 })
+      }
+      
+      return NextResponse.json({
+        ...categoryData,
+        source: 'json'
+      })
+    }
+    
+    // Get all menu data
+    const menuData = JsonDataService.getMenu()
+    return NextResponse.json({
+      ...menuData,
+      source: 'json'
+    })
     
   } catch (error) {
     console.error('❌ Error fetching menu data:', error)
-    
-    // Fallback to JSON if Firebase fails
-    if (USE_FIREBASE) {
-      try {
-        console.log('⚠️ Firebase failed, falling back to JSON')
-        const menuData = await getMenuFromJSON()
-        return NextResponse.json({ ...menuData, fallback: true })
-      } catch (jsonError) {
-        console.error('❌ JSON fallback also failed:', jsonError)
-      }
-    }
-    
     return NextResponse.json(
       { error: 'Failed to fetch menu data', details: error.message },
       { status: 500 }
@@ -137,99 +57,74 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.json()
     
-    if (USE_FIREBASE) {
-      console.log('🔥 Creating menu item(s) in Firebase Firestore')
+    console.log('📋 Creating/updating menu data in JSON file')
+    
+    // Check if it's a single item or bulk upload
+    if (data.menu && Array.isArray(data.menu)) {
+      // Bulk upload - replace entire menu
+      const success = JsonDataService.saveMenu(data)
       
-      // Check if it's a single item or bulk upload
-      if (data.menu && Array.isArray(data.menu)) {
-        // Bulk upload - replace entire menu
-        const batch = adminDb.batch()
-        
-        // Clear existing data
-        const existingDocs = await adminDb.collection('menu').get()
-        existingDocs.docs.forEach(doc => {
-          batch.delete(doc.ref)
-        })
-        
-        let totalItems = 0
-        // Add new data
-        for (const category of data.menu) {
-          for (const product of category.products) {
-            const menuItem = {
-              itemNo: product.itemNo,
-              name: product.name.trim(),
-              rate: product.rate,
-              category: category.category,
-              available: product.available !== undefined ? product.available : true,
-              createdAt: new Date(),
-              updatedAt: new Date()
-            }
-            
-            const docRef = adminDb.collection('menu').doc(product.itemNo)
-            batch.set(docRef, menuItem)
-            totalItems++
-          }
-        }
-        
-        await batch.commit()
-        
-        return NextResponse.json({
-          success: true,
-          message: `Successfully uploaded ${totalItems} menu items`,
-          totalItems,
-          source: 'firebase'
-        })
-        
-      } else {
-        // Single item creation
-        const { itemNo, name, rate, category, available = true } = data
-        
-        if (!itemNo || !name || !rate || !category) {
-          return NextResponse.json(
-            { error: 'Missing required fields: itemNo, name, rate, category' },
-            { status: 400 }
-          )
-        }
-        
-        // Check if item already exists
-        const docRef = adminDb.collection('menu').doc(itemNo)
-        const existingDoc = await docRef.get()
-        
-        if (existingDoc.exists) {
-          return NextResponse.json(
-            { error: `Item with itemNo ${itemNo} already exists` },
-            { status: 409 }
-          )
-        }
-        
-        const menuItem = {
-          itemNo,
-          name: name.trim(),
-          rate,
-          category,
-          available,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        }
-        
-        await docRef.set(menuItem)
-        
-        return NextResponse.json({
-          success: true,
-          message: `Successfully created menu item ${name}`,
-          item: menuItem,
-          source: 'firebase'
-        })
+      if (!success) {
+        return NextResponse.json(
+          { error: 'Failed to save menu data' },
+          { status: 500 }
+        )
       }
       
-    } else {
-      // JSON fallback
-      console.log('📋 Updating menu data in JSON file')
-      fs.writeFileSync(MENU_FILE_PATH, JSON.stringify(data, null, 2))
+      let totalItems = 0
+      data.menu.forEach((category: any) => {
+        if (category.products) {
+          totalItems += category.products.length
+        }
+      })
       
       return NextResponse.json({
         success: true,
-        message: 'Menu updated successfully',
+        message: `Successfully uploaded ${totalItems} menu items`,
+        totalItems,
+        source: 'json'
+      })
+      
+    } else {
+      // Single item creation
+      const { itemNo, name, rate, category, available = true } = data
+      
+      if (!itemNo || !name || !rate || !category) {
+        return NextResponse.json(
+          { error: 'Missing required fields: itemNo, name, rate, category' },
+          { status: 400 }
+        )
+      }
+      
+      // Check if item already exists
+      const existingItem = JsonDataService.getMenuItem(itemNo)
+      if (existingItem) {
+        return NextResponse.json(
+          { error: `Item with itemNo ${itemNo} already exists` },
+          { status: 409 }
+        )
+      }
+      
+      const menuItem = {
+        itemNo,
+        name: name.trim(),
+        rate,
+        available
+      }
+      
+      const success = JsonDataService.addMenuItem({ ...menuItem, category })
+      
+      if (!success) {
+        return NextResponse.json(
+          { error: 'Failed to add menu item' },
+          { status: 500 }
+        )
+      }
+      
+      return NextResponse.json({
+        success: true,
+        message: `Successfully created menu item ${name}`,
+        item: menuItem,
         source: 'json'
       })
     }
@@ -256,47 +151,42 @@ export async function PUT(request: NextRequest) {
       )
     }
     
-    if (USE_FIREBASE) {
-      console.log(`🔥 Updating menu item ${itemNo} in Firebase Firestore`)
-      
-      const docRef = adminDb.collection('menu').doc(itemNo)
-      const doc = await docRef.get()
-      
-      if (!doc.exists) {
-        return NextResponse.json(
-          { error: `Item with itemNo ${itemNo} not found` },
-          { status: 404 }
-        )
-      }
-      
-      const updateData = {
-        updatedAt: new Date()
-      }
-      
-      // Only update provided fields
-      if (name !== undefined) updateData.name = name.trim()
-      if (rate !== undefined) updateData.rate = rate
-      if (category !== undefined) updateData.category = category
-      if (available !== undefined) updateData.available = available
-      
-      await docRef.update(updateData)
-      
-      // Get updated document
-      const updatedDoc = await docRef.get()
-      
-      return NextResponse.json({
-        success: true,
-        message: `Successfully updated menu item ${itemNo}`,
-        item: updatedDoc.data(),
-        source: 'firebase'
-      })
-      
-    } else {
+    console.log(`📋 Updating menu item ${itemNo} in JSON file`)
+    
+    // Check if item exists
+    const existingItem = JsonDataService.getMenuItem(itemNo)
+    if (!existingItem) {
       return NextResponse.json(
-        { error: 'PUT operation requires Firebase to be enabled' },
-        { status: 501 }
+        { error: `Item with itemNo ${itemNo} not found` },
+        { status: 404 }
       )
     }
+    
+    const updateData: any = {}
+    
+    // Only update provided fields
+    if (name !== undefined) updateData.name = name.trim()
+    if (rate !== undefined) updateData.rate = rate
+    if (available !== undefined) updateData.available = available
+    
+    const success = JsonDataService.updateMenuItem(itemNo, updateData)
+    
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Failed to update menu item' },
+        { status: 500 }
+      )
+    }
+    
+    // Get updated item
+    const updatedItem = JsonDataService.getMenuItem(itemNo)
+    
+    return NextResponse.json({
+      success: true,
+      message: `Successfully updated menu item ${itemNo}`,
+      item: updatedItem,
+      source: 'json'
+    })
     
   } catch (error) {
     console.error('❌ Error updating menu item:', error)
@@ -320,35 +210,32 @@ export async function DELETE(request: NextRequest) {
       )
     }
     
-    if (USE_FIREBASE) {
-      console.log(`🔥 Deleting menu item ${itemNo} from Firebase Firestore`)
-      
-      const docRef = adminDb.collection('menu').doc(itemNo)
-      const doc = await docRef.get()
-      
-      if (!doc.exists) {
-        return NextResponse.json(
-          { error: `Item with itemNo ${itemNo} not found` },
-          { status: 404 }
-        )
-      }
-      
-      const itemData = doc.data()
-      await docRef.delete()
-      
-      return NextResponse.json({
-        success: true,
-        message: `Successfully deleted menu item ${itemNo}`,
-        deletedItem: itemData,
-        source: 'firebase'
-      })
-      
-    } else {
+    console.log(`📋 Deleting menu item ${itemNo} from JSON file`)
+    
+    // Check if item exists and get data before deletion
+    const itemData = JsonDataService.getMenuItem(itemNo)
+    if (!itemData) {
       return NextResponse.json(
-        { error: 'DELETE operation requires Firebase to be enabled' },
-        { status: 501 }
+        { error: `Item with itemNo ${itemNo} not found` },
+        { status: 404 }
       )
     }
+    
+    const success = JsonDataService.deleteMenuItem(itemNo)
+    
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Failed to delete menu item' },
+        { status: 500 }
+      )
+    }
+    
+    return NextResponse.json({
+      success: true,
+      message: `Successfully deleted menu item ${itemNo}`,
+      deletedItem: itemData,
+      source: 'json'
+    })
     
   } catch (error) {
     console.error('❌ Error deleting menu item:', error)

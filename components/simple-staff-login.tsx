@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Eye, EyeOff, Lock, User, ArrowLeft } from 'lucide-react'
-import staffCredentials from '@/staff-credentials.json'
+import staffCredentials from '@/jsonfiles/staff-credentials.json'
 
 interface SimpleStaffLoginProps {
   onLogin: (user: { username: string; role: 'superadmin' | 'admin' | 'waiter'; name: string }) => void

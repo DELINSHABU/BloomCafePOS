@@ -52,6 +52,8 @@ export default function WaiterDashboard({
   const [isMounted, setIsMounted] = useState(false);
   const [cancellingOrderId, setCancellingOrderId] = useState<string | null>(null);
   const [cancellationReason, setCancellationReason] = useState("");
+  const [lastSyncTime, setLastSyncTime] = useState<Date | null>(null);
+  const [syncStatus, setSyncStatus] = useState<'connected' | 'syncing' | 'error'>('connected');
 
   useEffect(() => {
     setIsMounted(true);
@@ -524,89 +526,90 @@ export default function WaiterDashboard({
                           </div>
                         )}
                         
-                        <div className="flex justify-between items-center pt-2 border-t">
-                          <div className="font-bold">
-                            Total: ₹{order.total.toFixed(2)}
-                          </div>
-                          <div className="flex gap-2">
-                            {/* Cancel button for active orders */}
-                            {(status === "pending" || status === "preparing") && (
-                              <AlertDialog>
-                                <AlertDialogTrigger asChild>
-                                  <Button
-                                    size="sm"
-                                    variant="destructive"
-                                    onClick={() => setCancellingOrderId(order.id)}
-                                  >
-                                    <X className="w-4 h-4 mr-1" />
-                                    Cancel
-                                  </Button>
-                                </AlertDialogTrigger>
-                                <AlertDialogContent>
-                                  <AlertDialogHeader>
-                                    <AlertDialogTitle>Cancel Order #{order.id.slice(-6)}</AlertDialogTitle>
-                                    <AlertDialogDescription>
-                                      This action cannot be undone. Please provide a reason for cancelling this order.
-                                    </AlertDialogDescription>
-                                  </AlertDialogHeader>
-                                  <div className="space-y-4">
-                                    <div>
-                                      <Label htmlFor="cancellation-reason">Cancellation Reason *</Label>
-                                      <Textarea
-                                        id="cancellation-reason"
-                                        placeholder="Please enter the reason for cancelling this order..."
-                                        value={cancellationReason}
-                                        onChange={(e) => setCancellationReason(e.target.value)}
-                                        className="mt-2"
-                                        rows={3}
-                                      />
-                                    </div>
-                                  </div>
-                                  <AlertDialogFooter>
-                                    <AlertDialogCancel onClick={() => {
-                                      setCancellingOrderId(null);
-                                      setCancellationReason('');
-                                    }}>Cancel</AlertDialogCancel>
-                                    <AlertDialogAction
-                                      onClick={() => handleCancelOrder(order.id)}
-                                      className="bg-red-600 hover:bg-red-700"
+                        <div className="pt-2 border-t space-y-3">
+                          {/* First row: Total and action buttons */}
+                          <div className="flex justify-between items-center">
+                            <div className="font-bold">
+                              Total: ₹{order.total.toFixed(2)}
+                            </div>
+                            <div className="flex gap-2">
+                              {/* Cancel button for active orders */}
+                              {(status === "pending" || status === "preparing") && (
+                                <AlertDialog>
+                                  <AlertDialogTrigger asChild>
+                                    <Button
+                                      size="sm"
+                                      variant="destructive"
+                                      onClick={() => setCancellingOrderId(order.id)}
                                     >
-                                      Yes, Cancel Order
-                                    </AlertDialogAction>
-                                  </AlertDialogFooter>
-                                </AlertDialogContent>
-                              </AlertDialog>
-                            )}
-                            
-                            {/* Print button - available for all orders except cancelled */}
-                            {status !== "cancelled" && (
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => handlePrintOrder(order)}
-                                className="bg-blue-50 hover:bg-blue-100 border-blue-300 text-blue-700"
-                              >
-                                <Printer className="w-4 h-4 mr-1" />
-                                Print
-                              </Button>
-                            )}
-                            
-                            {/* Progress button */}
-                            {getNextStatus(status) && (
-                              <Button
-                                size="sm"
-                                onClick={() =>
-                                  updateOrderStatus(
-                                    order.id,
-                                    getNextStatus(status)!
-                                  )
-                                }
-                                className="bg-emerald-600 hover:bg-emerald-700"
-                              >
-                                Mark as {getNextStatus(status)}
-                              </Button>
-                            )}
+                                      <X className="w-4 h-4" />
+                                    </Button>
+                                  </AlertDialogTrigger>
+                                  <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                      <AlertDialogTitle>Cancel Order #{order.id.slice(-6)}</AlertDialogTitle>
+                                      <AlertDialogDescription>
+                                        This action cannot be undone. Please provide a reason for cancelling this order.
+                                      </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <div className="space-y-4">
+                                      <div>
+                                        <Label htmlFor="cancellation-reason">Cancellation Reason *</Label>
+                                        <Textarea
+                                          id="cancellation-reason"
+                                          placeholder="Please enter the reason for cancelling this order..."
+                                          value={cancellationReason}
+                                          onChange={(e) => setCancellationReason(e.target.value)}
+                                          className="mt-2"
+                                          rows={3}
+                                        />
+                                      </div>
+                                    </div>
+                                    <AlertDialogFooter>
+                                      <AlertDialogCancel onClick={() => {
+                                        setCancellingOrderId(null);
+                                        setCancellationReason('');
+                                      }}>Cancel</AlertDialogCancel>
+                                      <AlertDialogAction
+                                        onClick={() => handleCancelOrder(order.id)}
+                                        className="bg-red-600 hover:bg-red-700"
+                                      >
+                                        Yes, Cancel Order
+                                      </AlertDialogAction>
+                                    </AlertDialogFooter>
+                                  </AlertDialogContent>
+                                </AlertDialog>
+                              )}
+                              
+                              {/* Print button - available for all orders except cancelled */}
+                              {status !== "cancelled" && (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={() => handlePrintOrder(order)}
+                                  className="bg-blue-50 hover:bg-blue-100 border-blue-300 text-blue-700"
+                                >
+                                  <Printer className="w-4 h-4" />
+                                </Button>
+                              )}
+                            </div>
                           </div>
+                          
+                          {/* Second row: Progress button (full width) */}
+                          {getNextStatus(status) && (
+                            <Button
+                              size="sm"
+                              onClick={() =>
+                                updateOrderStatus(
+                                  order.id,
+                                  getNextStatus(status)!
+                                )
+                              }
+                              className="w-full bg-emerald-600 hover:bg-emerald-700"
+                            >
+                              Mark as {getNextStatus(status)}
+                            </Button>
+                          )}
                         </div>
                       </CardContent>
                     </Card>

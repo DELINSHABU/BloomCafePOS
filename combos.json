@@ -1,48 +1,21 @@
 {
   "combos": [
     {
-      "id": "1753528480652",
-      "name": "Simple Breakfast ",
-      "description": "3 APPAM + EGG CURRY",
+      "id": "1756217288136",
+      "name": "Al Faham Special Combo",
+      "description": "ALFAHAM (HALF) + 2Appam ",
       "items": [
         {
           "itemId": "001",
           "itemName": "APPAM",
-          "quantity": 3,
+          "quantity": 2,
           "originalPrice": 10
         },
-        {
-          "itemId": "011",
-          "itemName": "EGG CURRY",
-          "quantity": 1,
-          "originalPrice": 40
-        }
-      ],
-      "originalTotal": 70,
-      "comboPrice": 55,
-      "discountAmount": 15,
-      "discountPercentage": 21,
-      "isActive": true,
-      "category": "Combo Special",
-      "createdAt": "2025-07-26T11:14:40.652Z",
-      "updatedAt": "2025-07-26T11:14:40.652Z"
-    },
-    {
-      "id": "1753536315159",
-      "name": "Alfaham special Combo ",
-      "description": "Half Alfaham + 3  KUBBOS",
-      "items": [
         {
           "itemId": "080",
           "itemName": "ALFAHAM  (HALF)",
           "quantity": 1,
           "originalPrice": 220
-        },
-        {
-          "itemId": "046",
-          "itemName": "KUBBOS",
-          "quantity": 2,
-          "originalPrice": 10
         }
       ],
       "originalTotal": 240,
@@ -51,57 +24,9 @@
       "discountPercentage": 13,
       "isActive": true,
       "category": "Combo Special",
-      "createdAt": "2025-07-26T13:25:15.159Z",
-      "updatedAt": "2025-07-26T13:25:15.159Z"
-    },
-    {
-      "id": "1754376219924",
-      "name": "Item01+item02",
-      "description": "Test text 03",
-      "items": [
-        {
-          "itemId": "001",
-          "itemName": "APPAM",
-          "quantity": 4,
-          "originalPrice": 10
-        },
-        {
-          "itemId": "081",
-          "itemName": "ALFAHAM (FULL)",
-          "quantity": 1,
-          "originalPrice": 440
-        }
-      ],
-      "originalTotal": 480,
-      "comboPrice": 300,
-      "discountAmount": 180,
-      "discountPercentage": 38,
-      "isActive": true,
-      "category": "Combo Special",
-      "createdAt": "2025-08-05T06:43:39.924Z",
-      "updatedAt": "2025-08-05T06:43:39.924Z"
-    },
-    {
-      "id": "1754402936233",
-      "name": "Large Amout",
-      "description": "Test text 04",
-      "items": [
-        {
-          "itemId": "093",
-          "itemName": "HOT & SPICY ALFAHAM (FULL)",
-          "quantity": 212,
-          "originalPrice": 480
-        }
-      ],
-      "originalTotal": 101760,
-      "comboPrice": 100000,
-      "discountAmount": 1760,
-      "discountPercentage": 2,
-      "isActive": true,
-      "category": "Combo Special",
-      "createdAt": "2025-08-05T14:08:56.233Z",
-      "updatedAt": "2025-08-05T14:08:56.233Z"
+      "createdAt": "2025-08-26T14:08:08.136Z",
+      "updatedAt": "2025-08-26T14:08:08.136Z"
     }
   ],
-  "lastUpdated": "2025-08-05T14:08:56.233Z"
+  "lastUpdated": "2025-08-26T14:08:08.136Z"
 }

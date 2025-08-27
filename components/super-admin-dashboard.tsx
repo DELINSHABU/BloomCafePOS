@@ -18,6 +18,7 @@ import {
   ClipboardList,
   FileText,
   Package,
+  MapPin,
 } from "lucide-react";
 import { SimpleThemeToggle } from "@/components/theme-toggle";
 import WaiterDashboard from "@/components/waiter-dashboard";
@@ -32,6 +33,8 @@ import AboutUsContentManagerComponent from "./about-us-content-manager";
 import BlogManager from "./blog-manager";
 import InventoryManager from "./inventory-manager";
 import RolePermissionManager from "./role-permission-manager";
+import BillingDashboard from "@/components/billing-dashboard";
+import TableManagementDashboard from "@/components/table-management-dashboard";
 import { useRolePermissions } from "@/hooks/useRolePermissions";
 
 interface SuperAdminDashboardProps {
@@ -203,6 +206,8 @@ export default function SuperAdminDashboard({
                 { key: 'overview', label: 'Overview', icon: null },
                 { key: 'specials', label: "Today's Special", icon: null },
                 { key: 'offers', label: 'Offers', icon: null },
+                { key: 'billing', label: 'Billing POS', icon: <ShoppingCart className="w-3 h-3 mr-1" /> },
+                { key: 'tables', label: 'Table Management', icon: <MapPin className="w-3 h-3 mr-1" /> },
                 { key: 'waiter', label: 'Waiter View', icon: null },
                 { key: 'admin', label: 'Admin View', icon: null },
                 { key: 'qr', label: 'QR Codes', icon: null },
@@ -246,6 +251,9 @@ export default function SuperAdminDashboard({
             )}
             {hasPermission(userRole, "offers") && (
               <TabsTrigger value="offers">Offers</TabsTrigger>
+            )}
+            {hasPermission(userRole, "billing") && (
+              <TabsTrigger value="billing">Billing POS</TabsTrigger>
             )}
             {hasPermission(userRole, "waiter") && (
               <TabsTrigger value="waiter">Waiter View</TabsTrigger>
@@ -371,6 +379,48 @@ export default function SuperAdminDashboard({
                     className="w-full bg-red-600 hover:bg-red-700"
                   >
                     Manage Offers & Combos
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <ShoppingCart className="w-5 h-5 text-blue-600" />
+                    Billing POS System
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Complete Point of Sale system for processing orders, managing
+                    bills, accepting payments, and printing receipts.
+                  </p>
+                  <Button
+                    onClick={() => setActiveTab("billing")}
+                    className="w-full bg-blue-600 hover:bg-blue-700"
+                  >
+                    Open POS System
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-emerald-600" />
+                    Table Management
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Monitor and manage restaurant table status, reservations,
+                    and seating arrangements in real-time.
+                  </p>
+                  <Button
+                    onClick={() => setActiveTab("tables")}
+                    className="w-full bg-emerald-600 hover:bg-emerald-700"
+                  >
+                    Manage Tables
                   </Button>
                 </CardContent>
               </Card>
@@ -585,6 +635,26 @@ export default function SuperAdminDashboard({
           <TabsContent value="offers" className="mt-6">
             <div className="bg-white rounded-lg border">
               <OffersManager currentUser={currentUser} />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="billing" className="mt-6">
+            <div className="bg-white rounded-lg border">
+              <BillingDashboard
+                onNavigate={onNavigate}
+                currentUser={currentUser}
+                onLogout={onLogout}
+              />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="tables" className="mt-6">
+            <div className="bg-white rounded-lg border">
+              <TableManagementDashboard
+                onNavigate={onNavigate}
+                currentUser={currentUser}
+                onLogout={onLogout}
+              />
             </div>
           </TabsContent>
 

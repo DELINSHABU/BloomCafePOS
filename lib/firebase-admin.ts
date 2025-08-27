@@ -1,106 +1,18 @@
-import { initializeApp, getApps, App } from 'firebase-admin/app'
-import { getFirestore, Firestore } from 'firebase-admin/firestore'
-import { credential } from 'firebase-admin'
+// Firebase Admin has been disconnected - using JSON files for data storage
+// This file provides stub exports to prevent import errors
 
-let adminApp: App | null = null
-let adminDb: Firestore | null = null
-let firebaseAvailable = false
+console.log('📋 Firebase Admin disconnected - using JSON file storage')
 
-// Check if Firebase credentials are available
-function checkFirebaseCredentials(): boolean {
-  // Check for service account credentials in environment
-  if (process.env.FIREBASE_PROJECT_ID && 
-      process.env.FIREBASE_CLIENT_EMAIL && 
-      process.env.FIREBASE_PRIVATE_KEY) {
-    return true
-  }
-  
-  // Check for GOOGLE_APPLICATION_CREDENTIALS
-  if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-    return true
-  }
-  
-  // For development, we'll assume ADC might work, but handle gracefully
+// Stub exports to prevent import errors in existing code
+export const adminApp = null
+export const adminDb = null
+export const firebaseAvailable = false
+
+// Test Firebase connection (always returns false now)
+export async function testFirebaseConnection(): Promise<boolean> {
   return false
 }
 
-// Initialize Firebase Admin SDK with error handling
-function initializeFirebaseAdmin() {
-  if (getApps().length > 0) {
-    adminApp = getApps()[0]
-    adminDb = getFirestore(adminApp)
-    firebaseAvailable = true
-    return { adminApp, adminDb, firebaseAvailable }
-  }
-
-  try {
-    const hasCredentials = checkFirebaseCredentials()
-    
-    if (hasCredentials) {
-      console.log('🔑 Firebase credentials found, initializing with service account')
-      adminApp = initializeApp({
-        projectId: process.env.FIREBASE_PROJECT_ID || 'bloom-graden-cafe-user-login',
-        credential: credential.cert({
-          projectId: process.env.FIREBASE_PROJECT_ID || 'bloom-graden-cafe-user-login',
-          clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-          privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-        }),
-      })
-    } else {
-      // For development: Use default project ID without credentials
-      // This will work with the client SDK for basic operations
-      console.log('🔑 Initializing Firebase Admin for development mode')
-      adminApp = initializeApp({
-        projectId: process.env.FIREBASE_PROJECT_ID || 'bloom-graden-cafe-user-login',
-      })
-    }
-    
-    adminDb = getFirestore(adminApp)
-    firebaseAvailable = true
-    console.log('✅ Firebase Admin SDK initialized successfully')
-    
-  } catch (error) {
-    console.warn('⚠️ Firebase Admin SDK initialization failed:', error.message)
-    console.log('📋 Falling back to JSON file operations')
-    firebaseAvailable = false
-    adminApp = null
-    adminDb = null
-    
-    // For development: Try to initialize without credentials as a last resort
-    try {
-      console.log('🔄 Attempting basic initialization for development...')
-      // This will work for some operations but may fail for others
-      firebaseAvailable = false  // Keep as false to trigger JSON fallbacks
-    } catch (fallbackError) {
-      console.log('💡 All Firebase initialization methods failed - using JSON fallbacks')
-    }
-  }
-  
-  return { adminApp, adminDb, firebaseAvailable }
-}
-
-// Test Firebase connection
-export async function testFirebaseConnection(): Promise<boolean> {
-  if (!firebaseAvailable || !adminDb) {
-    return false
-  }
-  
-  try {
-    // Try a simple operation to test connection
-    await adminDb.collection('_test').limit(1).get()
-    return true
-  } catch (error) {
-    console.warn('⚠️ Firebase connection test failed:', error.message)
-    return false
-  }
-}
-
-// Initialize on import
-const { adminApp: app, adminDb: db, firebaseAvailable: available } = initializeFirebaseAdmin()
-
-export { 
-  app as adminApp, 
-  db as adminDb, 
-  available as firebaseAvailable
-}
+// Default export as null
+const app = null
 export default app

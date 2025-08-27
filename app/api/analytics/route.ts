@@ -1,27 +1,50 @@
 import { NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
-
-const ANALYTICS_FILE = path.join(process.cwd(), 'analytics_data.json')
+import { JsonDataService } from '@/lib/json-data-service'
 
 export async function GET() {
   try {
-    if (fs.existsSync(ANALYTICS_FILE)) {
-      console.log('📈 JSON FILE ACCESS: analytics_data.json accessed from api/analytics/route.ts -> GET()');
-      const data = fs.readFileSync(ANALYTICS_FILE, 'utf8')
-      const analyticsData = JSON.parse(data)
-      
-      return NextResponse.json(analyticsData)
-    } else {
-      return NextResponse.json(
-        { error: 'Analytics data not found' },
-        { status: 404 }
-      )
-    }
+    console.log('📈 Fetching analytics data from JSON file')
+    
+    // Get analytics data using JsonDataService
+    const analyticsData = JsonDataService.getAnalytics()
+    
+    return NextResponse.json(analyticsData)
+    
   } catch (error) {
     console.error('Error reading analytics data:', error)
     return NextResponse.json(
       { error: 'Failed to load analytics data' },
+      { status: 500 }
+    )
+  }
+}
+
+// POST - Trigger analytics update
+export async function POST() {
+  try {
+    console.log('📈 Updating analytics data')
+    
+    const success = JsonDataService.updateAnalytics()
+    
+    if (!success) {
+      throw new Error('Failed to update analytics')
+    }
+    
+    const analyticsData = JsonDataService.getAnalytics()
+    
+    return NextResponse.json({
+      success: true,
+      message: 'Analytics updated successfully',
+      analytics: analyticsData
+    })
+    
+  } catch (error) {
+    console.error('Error updating analytics data:', error)
+    return NextResponse.json(
+      { 
+        success: false,
+        error: 'Failed to update analytics data'
+      },
       { status: 500 }
     )
   }
